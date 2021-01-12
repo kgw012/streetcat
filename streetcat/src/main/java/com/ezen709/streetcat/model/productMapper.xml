@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen709.streetcat.model">
+	<select id="listProduct"   resultType="productDTO" parameterType="java.util.Map">
+		
+		select * from product  
+		where pnum between #{start} and #{end} 
+		order by  pnum desc
+		
+	</select>
+	
+	<select id="getCount" resultType="Integer">
+		select count(*) from product
+	</select>
+	
+		<insert id="insertProduct" parameterType="productDTO">
+		insert into product values (seq_pnum.nextval, 
+			#{pname}, #{shopname}, #{price}, #{type}, #{content},
+			#{plike}, #{image1}, #{image2})
+	</insert>
+	
+		<select id ="getProduct" resultType="productDTO" parameterType="Int">
+		select * from product where pnum= #{pnum}
+	</select>
+	
+	<update id ="updateProduct" parameterType="productDTO" >
+		update product set pname= #{pname}, shopname= #{shopname} , price= #{price} , 
+		content= #{content}, type=#{type} where pnum= #{pnum}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="int">
+		delete from product where pnum=#{pnum}
+	</delete>
+</mapper>

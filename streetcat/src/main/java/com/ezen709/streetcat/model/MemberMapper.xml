@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen709.streetcat.model">
+
+	<select id="listMember"   resultType="memberDTO">
+		select * from cat_user  
+	</select>
+	
+
+	<insert id="insertMember" parameterType="memberDTO">
+		insert into cat_user values (seq_unum.nextval, 
+			#{name}, #{id}, #{passwd}, #{email}, sysdate)
+	</insert>
+
+	<select id="findMember"	resultType="memberDTO" parameterType="java.util.Map">
+		${sql}
+	</select>
+
+
+</mapper>
