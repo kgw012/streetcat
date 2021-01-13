@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.service.MemberMapper;
@@ -32,10 +34,10 @@ public class MemberController {
 		public String memberInsert_Ok(@ModelAttribute MemberDTO dto) {
 			
 			int res = memberMapper.insertMember(dto);
-			return "redirect:home.do";
+			return "redirect:home.do"; //수정예정 로그인한 회원이 가야할 메인화면
 		}
 		
-		@RequestMapping(value="/list.do", method=RequestMethod.GET)
+		@RequestMapping(value="/admin_list.do", method=RequestMethod.GET)
 		public ModelAndView memberList(HttpServletRequest req) {
 			String mode = req.getParameter("mode");
 			List<MemberDTO> listMember =memberMapper.listMember();
@@ -43,7 +45,7 @@ public class MemberController {
 				mode = "all";
 			}
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("member/list");
+			mav.setViewName("admin/admin_list");
 			mav.addObject("mode", mode);
 			mav.addObject("listMember", listMember);
 			return mav;
@@ -62,5 +64,18 @@ public class MemberController {
 			mav.addObject("listMember", listMember);
 			return mav;
 			
+		}
+		
+		@RequestMapping(value="/upgrade.do",method=RequestMethod.GET)
+		public ModelAndView upgradeForm(@RequestParam int unum)	{
+			MemberDTO dto = memberMapper.getMember(unum);
+			ModelAndView mav = new ModelAndView("admin/upgrade","getMember", dto);
+			
+			return mav;
+		}
+		@RequestMapping(value="/upgrade.do",method=RequestMethod.POST)
+		public String upgradePro(MemberDTO dto)	{
+			int res = memberMapper.upgradeMember(dto);
+			return "redirect:admin_list.do";
 		}
 }

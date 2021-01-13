@@ -17,6 +17,13 @@
 	<select id="findMember"	resultType="memberDTO" parameterType="java.util.Map">
 		${sql}
 	</select>
+	
+	<select id="getMember" resultType="memberDTO" parameterType="int">
+		select * from cat_user where unum = #{unum}
+	</select>
 
+	<update id="upgradeMember" parameterType="int">
+		update cat_user set grade = #{grade} where unum= #{unum}
+	</update>
 
 </mapper>

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.ezen709.streetcat.model.MemberDTO;
 
 
@@ -43,4 +44,20 @@ public class MemberMapper {
 		
 		return sqlSession.selectList("findMember", map);
 	}
+	
+	public MemberDTO getMember(int num) {
+	     
+	      MemberDTO dto = sqlSession.selectOne("getMember", num);
+	      return dto;
+	   }
+	
+	
+	public int  upgradeMember(MemberDTO dto) {
+		
+		
+		int res = sqlSession.update("upgradeMember",dto);
+		
+		return res;
+	}
+	
 }

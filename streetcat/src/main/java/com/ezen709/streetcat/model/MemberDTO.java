@@ -7,6 +7,14 @@ public class MemberDTO {
 	private String passwd;
 	private String email;
 	private String joindate;
+	private int grade;
+	
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	public int getUnum() {
 		return unum;
 	}

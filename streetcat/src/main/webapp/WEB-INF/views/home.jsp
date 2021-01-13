@@ -32,6 +32,7 @@
 				<th><a href="cat_list.do">길냥이 검색</a></th>
 				<th><a href="catstreet_qna.do">Q&A</a></th>
 				<th><a href="product_list.do">상품추천</a></th>
+				<th><a href="admin_list.do">관리자 회원목록(삭제예정)</a></th>  
 			</tr>
 		</thead>
 		<tbody>
