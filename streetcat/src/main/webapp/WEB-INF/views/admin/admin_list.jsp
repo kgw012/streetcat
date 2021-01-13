@@ -71,7 +71,7 @@
 			
 			</td>
 			<td align="center"><a href="upgrade.do?unum=${dto.unum}">수정</a> |
-			<a href="delete.do?unum=${dto.unum}">삭제</a></td>
+										<a href="delete.do?unum=${dto.unum}">삭제</a></td>
 				
 			</tr>	
 		</c:forEach>

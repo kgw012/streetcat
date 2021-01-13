@@ -25,5 +25,8 @@
 	<update id="upgradeMember" parameterType="int">
 		update cat_user set grade = #{grade} where unum= #{unum}
 	</update>
-
+	
+	<delete id="deleteMember" parameterType="int">
+		delete cat_user where unum= #{unum}
+	</delete>
 </mapper>

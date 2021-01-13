@@ -59,5 +59,10 @@ public class MemberMapper {
 		
 		return res;
 	}
-	
+	public int deleteMember(int unum, String check) {
+		if(!check.toString().equals("check")){
+			return -1;
+		}
+		return sqlSession.delete("deleteMember", unum);
+	}
 }

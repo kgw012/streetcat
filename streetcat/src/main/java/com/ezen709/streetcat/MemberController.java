@@ -59,7 +59,7 @@ public class MemberController {
 			List<MemberDTO> listMember = memberMapper.findMember(search, searchString);
 			
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("member/list");
+			mav.setViewName("admin/admin_list");
 			mav.addObject("mode", mode);
 			mav.addObject("listMember", listMember);
 			return mav;
@@ -78,4 +78,20 @@ public class MemberController {
 			int res = memberMapper.upgradeMember(dto);
 			return "redirect:admin_list.do";
 		}
+		
+		@RequestMapping(value="/delete.do",method=RequestMethod.GET)
+		public ModelAndView deleteForm(@RequestParam int unum)	{
+			
+			ModelAndView mav = new ModelAndView("admin/delete");
+			
+			return mav;
+		}
+		@RequestMapping(value="/delete.do",method=RequestMethod.POST)
+		public String deletePro(HttpServletRequest req)	{
+			int unum =Integer.parseInt(req.getParameter("unum"));
+			String check =req.getParameter("check");
+			int res = memberMapper.deleteMember(unum, check);
+			return "redirect:admin_list.do";
+		}
+		
 }
