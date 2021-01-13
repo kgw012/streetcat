@@ -11,7 +11,7 @@
 
 	<insert id="insertMember" parameterType="memberDTO">
 		insert into cat_user values (seq_unum.nextval, 
-			#{name}, #{id}, #{passwd}, #{email}, sysdate)
+			#{name}, #{id}, #{passwd}, #{email}, sysdate, 0)
 	</insert>
 
 	<select id="findMember"	resultType="memberDTO" parameterType="java.util.Map">

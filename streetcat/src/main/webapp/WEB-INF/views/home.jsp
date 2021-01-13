@@ -18,7 +18,7 @@
 	</div>
 	<div class="clearfix">
 	</div>	
-<h2>CatStreet</h2>
+<h2>Street Cat</h2>
 	<table>
 		<colgroup>
 			<col style="width:25%;" />

@@ -32,7 +32,7 @@ public class MemberController {
 		public String memberInsert_Ok(@ModelAttribute MemberDTO dto) {
 			
 			int res = memberMapper.insertMember(dto);
-			return "redirect:list.do";
+			return "redirect:home.do";
 		}
 		
 		@RequestMapping(value="/list.do", method=RequestMethod.GET)
