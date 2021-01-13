@@ -6,7 +6,7 @@
 <h4 align="right"><a href="cat_board_write.do?name=${sessioScope.name}">글 쓰 기</a></h4>
 
 <%int count=0; %>
- 	<c:if test="${cat_listBoard==null}">
+ 	<c:if test="${empty cat_listBoard}">
 	<h3>등록된 게시글이 없습니다</h3>
 	</c:if>
 	<table width="100%" align="center">
