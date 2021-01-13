@@ -24,8 +24,8 @@ public class ProductMapper {
 				return sqlSession.selectList("listProduct",map);
 						
 		}
-		public  int getCount() {
-			return sqlSession.selectOne("getCount");
+		public  int getCountProd() {
+			return sqlSession.selectOne("getCountProd");
 			
 	}
 		

@@ -11,7 +11,7 @@
 		
 	</select>
 	
-	<select id="getCount" resultType="Integer">
+	<select id="getCountProd" resultType="Integer">
 		select count(*) from product
 	</select>
 	

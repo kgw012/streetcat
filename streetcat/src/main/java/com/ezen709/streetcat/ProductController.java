@@ -41,7 +41,7 @@ public class ProductController {
 			int currentPage = Integer.parseInt(pageNum);
 			int startRow = pageSize * currentPage - (pageSize - 1);
 			int endRow = pageSize * currentPage;
-			int count = productMapper.getCount();
+			int count = productMapper.getCountProd();
 			if (endRow>count) endRow = count;
 			
 			int startNum = count - ((currentPage-1) * pageSize);
