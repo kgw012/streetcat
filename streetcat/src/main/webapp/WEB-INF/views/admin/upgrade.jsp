@@ -2,7 +2,9 @@
     pageEncoding="EUC-KR" %>
 <!-- upgrade.jsp -->
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 
+<%@include file ="top.jsp" %>
 
 
 <form name="f" method="POST" action="upgrade.do">
@@ -60,7 +62,7 @@
 
 
 
-
+<%@include file ="bottom.jsp" %>
 
 
 
