@@ -13,7 +13,7 @@
 			<a href="member_login.do">로그인</a>
 		</div>
 		<span>
-			<a href="member_join.do">회원가입</a>
+			<a href="member.do">회원가입</a>
 		</span>
 	</div>
 	<div class="clearfix">
