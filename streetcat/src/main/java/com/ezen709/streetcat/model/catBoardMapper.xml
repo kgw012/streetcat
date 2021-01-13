@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen709.streetcat.model">
+	<select id="cat_listBoard" resultType="CatBoardDTO" parameterType="java.util.Map">
+		select * from (select rownum rn, A.* from (select * from cat_board order by bnum desc)A)
+		where rn between #{start} and #{end}
+	</select>
+	<select id="getCount" resultType="Integer">
+		select count(*) from cat_board
+	</select>
+	<insert id="cat_insertBoard" parameterType="CatBoardDTO">
+	  insert into cat_board values (seq_bnum.nextval,
+			#{writer}, #{subject}, #{content},sysdate,0, 0,
+			#{image1,jdbcType=VARCHAR},#{image2,jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},#{image4,jdbcType=VARCHAR},#{image5,jdbcType=VARCHAR},#{location}, #{name}, #{feature},#{type},0,0)
+	</insert>
+	<select id="cat_list"  resultType="CatDTO" parameterType="java.util.Map">
+		select * from cat where location = #{location}
+	</select>
+	<select id="getCat"  resultType="CatDTO" parameterType="Integer">
+		select * from cat where cnum = #{cnum}
+	</select>
+	<select id="getBoard"  resultType="CatBoardDTO" parameterType="Integer">
+		select * from cat_board where bnum = #{bnum}
+	</select>
+	<insert id="cat_insertComment" parameterType="CatBoardCommentDTO">
+	  insert into cat_board_comment values(seq_comment_num.nextval,#{bnum},0,sysdate,#{content},#{re_step}, #{re_level})
+	</insert>
+	<select id="cat_boardComment" resultType="CatBoardCommentDTO" parameterType="java.util.Map">
+	  select * from (select rownum rn, A.* from (select * from cat_board_comment order by re_step asc)A) where rn between #{start} and #{end} and bnum = #{bnum}
+	</select>
+	<select id="getComment"  resultType="CatBoardCommentDTO" parameterType="Integer">
+		select * from cat_board_comment where comment_num = #{num}
+	</select>
+	<update id="plusRe_step" parameterType="java.util.Map">
+		${sql}
+	</update>
+    <select id="getCommentCount" resultType="Integer">
+		select count(*) from cat_board_comment where bnum = #{bnum}
+	</select>
+	<update id="updateCommentCount" parameterType="java.util.Map">
+	    update cat_board set commentcount = #{count} where bnum = #{bnum}
+	</update>
+	<insert id="boardLike" parameterType="CatBoardLikeDTO">
+	  insert into cat_board_ulike values(#{bnum},#{id})
+	</insert>
+	<delete id="boardUnLike" parameterType="Integer">
+          delete from cat_board_like where bnum = #{bnum}
+    </delete>
+    <delete id="boardCommentDelete" parameterType="Integer">
+     delete from cat_board_comment where bnum = #{bnum}
+    </delete>
+    <delete id="boardDelete" parameterType="Integer">
+     delete from cat_board where bnum = #{bnum}
+    </delete>
+    <update id="boardEdit" parameterType="CatBoardDTO">
+     update cat_board set subject = #{subject} content = #{content} location = #{location} name = #{name} feature = #{feature} where bnum = #{bnum}
+    </update>
+    <select id="nextBoard" parameterType="Integer" resultType="Integer">
+     select min(bnum) bnum from cat_board where <![CDATA[bnum > #{bnum}]]>
+    </select>
+    <select id="beforeBoard" parameterType="Integer" resultType="Integer">
+     select max(bnum) bnum from cat_board where <![CDATA[bnum < #{bnum}]]>
+    </select>
+</mapper>
