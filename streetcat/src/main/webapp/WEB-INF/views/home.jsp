@@ -29,7 +29,7 @@
 		<thead>
 			<tr>
 				<th><a href="catstreet_info.do">길냥이 정보 게시판</a></th>
-				<th><a href="catstreet_search.do">길냥이 검색</a></th>
+				<th><a href="cat_list.do">길냥이 검색</a></th>
 				<th><a href="catstreet_qna.do">Q&A</a></th>
 				<th><a href="product_list.do">상품추천</a></th>
 			</tr>
