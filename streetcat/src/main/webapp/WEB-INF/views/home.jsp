@@ -3,56 +3,64 @@
 <!-- home.jsp-->
 
 <html>
+
 <head>
 <meta charset="UTF-8">
 	<title>CatStreet</title>
 </head>
+ <h3></h3>
 <body>
-	<div class="login_area">
-		<div class="login_button">
-			<a href="member_login.do">로그인</a>
-		</div>
-		<span>
-			<a href="member.do">회원가입</a>
-		</span>
-	</div>
-	<div class="clearfix">
-	</div>	
-<h2>Street Cat</h2>
-	<table>
+<h2 align="center">Street Cat</h2>
+	<table width="100%">
+	
 		<colgroup>
 			<col style="width:25%;" />
 			<col style="width:25%;" />
 			<col style="width:25%;" />
 			<col style="width:25%;" />
 		</colgroup>
-		<thead>
+		
 			<tr>
 				<th><a href="cat_board.do">길냥이 일반 게시판</a></th>
 				<th><a href="cat_list.do">길냥이 검색</a></th>
 				<th><a href="catstreet_qna.do">Q&A</a></th>
 				<th><a href="product_list.do">상품추천</a></th>
-				<th><a href="admin_list.do">관리자 회원목록(삭제예정)</a></th>  
+				
 			</tr>
-		</thead>
-		<tbody>
+			</table>
+			<br>
+			<table width="100%">
+	        <tr>
+	        <td valign="top">
+	        <c:if test="${sessionScope.id==null}">
+	        <br><br><br><br>
+	                 회원 로그인<br>
+	        <form name="f" action="member_login.do" method="post">
+	        <input type="text" name="id"><br>
+	        <input type="text" name="password"><br>
+	        <input type="submit" value="로그인">
+	        <button type="button" onclick="window.open('member.do','회원가입', 'width=570, height=350, resizable = no, scrollbars = no')">회원가입</button>
+	        </form>
+	        </c:if>
+	        </td>
 			<c:choose>
 				<c:when test="${empty boardList }" >
-					<tr><td colspan="4" align="center"> <img src="./resources/image/cat.jpg" width="900" height="600"></td></tr>
+					<td colspan="4" align="center"> <img src="./resources/image/cat.jpg" width="900" height="600"></td>
 				</c:when> 
 				<c:when test="${!empty boardList}">
 					<c:forEach var="list" items="${boardList}">
-						<tr>
+						
 							<td><c:out value="${list.name}"/></td>
 							<td><c:out value="${list.title}"/></td>
 							<td><c:out value="${list.reg_id}"/></td>
 							<td><c:out value="${list.view_cnt}"/></td>
 							<td><c:out value="${list.reg_dt}"/></td>
-						</tr>
+						
 					</c:forEach>
 				</c:when>
 			</c:choose>
-		</tbody>
+		</tr>
 	</table>
+	<li><a href="admin_list.do">관리자 회원목록(삭제예정)</a></li>  
 </body>
 </html>
