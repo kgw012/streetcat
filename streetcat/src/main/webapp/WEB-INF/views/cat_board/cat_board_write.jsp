@@ -30,7 +30,7 @@
  <select name="type">
  <option value="all">전체공개</option>
  <option value="member">회원공개</option>
- <option value="public">비공개</option>
+ <option value="private">비공개</option>
  </select>
  </td>
  </tr>

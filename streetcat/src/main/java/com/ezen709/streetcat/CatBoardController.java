@@ -33,31 +33,7 @@ public class CatBoardController {
 	private CatBoardMapper catBoardMapper;
 	@Resource(name="uploadPath")
 	private String uploadPath;
-	
-	@RequestMapping("/test_fileUpload.do")
-	public String fileUpload(){
-		return "testFileUpload";
-	}
-	@RequestMapping("/test_fileUpload_ok.do")
-	public void fileUpload_Ok(HttpServletRequest req){
-		String filename="";
-		int filesize=0;
-		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-		MultipartFile file = mr.getFile("filename");
-		File target = new File(uploadPath,file.getOriginalFilename());
-		if(file.getSize() > 0) {
-			try {
-				file.transferTo(target);
-				filename = file.getOriginalFilename();
-				filesize = (int)file.getSize();
-			}catch (IOException e) {
-			e.printStackTrace();
-			}
-		}
-		System.out.println("filename = " + filename);
-		System.out.println("filensize = " + filesize + "bytes");
-	}
-	
+
 	@RequestMapping("/home.do")
 	public String index() {
 		return "home";

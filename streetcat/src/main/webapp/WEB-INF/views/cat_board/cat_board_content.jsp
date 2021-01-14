@@ -23,6 +23,14 @@
      alert("처음/마지막글 입니다")
 	 window.history.back()
 	 <%}%>
+	 <c:if test="${getBoard.type == 'member'&&sessionScope.name==null}">
+	 alert("회원공개 게시물입니다")
+	 window.history.back()
+	 </c:if>
+	 <c:if test="${getBoard.type == 'private'&&sessionScope.name!=getBoard.writer}">
+	 alert("비공개 게시물입니다")
+	 window.history.back()
+	 </c:if>
     </script>
     
 <c:if test="${getBoard.writer==sessionScope.name}">
