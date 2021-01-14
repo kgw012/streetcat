@@ -24,6 +24,7 @@ import com.ezen709.streetcat.model.CatBoardCommentDTO;
 import com.ezen709.streetcat.model.CatBoardDTO;
 import com.ezen709.streetcat.model.CatBoardLikeDTO;
 import com.ezen709.streetcat.model.CatDTO;
+import com.ezen709.streetcat.model.FindCatBoardDTO;
 import com.ezen709.streetcat.service.CatBoardMapper;
 
 @Controller
@@ -301,6 +302,39 @@ public class CatBoardController {
 		req.setAttribute("bnum", bnum);
 		req.setAttribute("getBoard", getBoard);
 		return "cat_board/cat_board_edit";
+	}
+	@RequestMapping("/find_cat_board.do")
+	public ModelAndView findCatBoard(HttpServletRequest req,@ModelAttribute FindCatBoardDTO dto) {
+		String pageNum = req.getParameter("pageNum");
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		int pageSize = 12;
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = pageSize * currentPage - (pageSize - 1);
+		int endRow = pageSize * currentPage;
+		dto.setStart(startRow);
+		dto.setEnd(endRow);
+		int count = catBoardMapper.findGetCount(dto);
+		if (endRow>count) endRow = count;
+		List<CatBoardDTO> listBoard = catBoardMapper.find_cat_listBoard(dto);
+		int startNum = count - ((currentPage-1) * pageSize);
+		int pageBlock = 3;
+		int pageCount = count/pageSize + (count%pageSize == 0 ? 0 : 1);
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		if (endPage>pageCount) endPage = pageCount;
+		
+		ModelAndView mav = new ModelAndView("cat_board/cat_board");
+		mav.addObject("upPath",uploadPath);
+		mav.addObject("count", count);
+		mav.addObject("startNum", startNum);
+		mav.addObject("pageCount", pageCount);
+		mav.addObject("startPage", startPage);
+		mav.addObject("endPage", endPage);
+		mav.addObject("pageBlock", pageBlock);
+		mav.addObject("cat_listBoard", listBoard);
+		return mav;
 	}
 }
 

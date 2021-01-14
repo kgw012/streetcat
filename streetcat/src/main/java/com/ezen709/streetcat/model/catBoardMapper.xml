@@ -7,6 +7,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (select rownum rn, A.* from (select * from cat_board order by bnum desc)A)
 		where rn between #{start} and #{end}
 	</select>
+	<select id="find_cat_listBoard" resultType="CatBoardDTO" parameterType="FindCatBoardDTO">
+	select * from (select rownum rn, A.* from (select * from cat_board where
+	 <choose>
+	  <when test="type=='subject'">
+	  subject like '%'||#{searchString}||'%'
+	  </when>
+	  <when test="type=='content'">
+	  content like '%'||#{searchString}||'%'
+	  </when> 
+	  <when test="type=='writer'">
+	  writer like #{searchString}
+	  </when> 
+	  </choose>
+	  order by bnum desc)A)
+		where rn between #{start} and #{end}
+	</select>
+	<select id="findGetCount" resultType="int" parameterType="FindCatBoardDTO">
+	select count(*) from cat_board where #{type} like '%'||#{searchString}||'%'
+	</select>
 	<select id="getCount" resultType="int">
 		select count(*) from cat_board
 	</select>
@@ -43,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    update cat_board set commentcount = #{count} where bnum = #{bnum}
 	</update>
 	<insert id="boardLike" parameterType="CatBoardLikeDTO">
-	  insert into cat_board_ulike values(#{bnum},#{id})
+	  insert into cat_board_like values(#{bnum},#{id})
 	</insert>
 	<delete id="boardUnLike" parameterType="int">
           delete from cat_board_like where bnum = #{bnum}

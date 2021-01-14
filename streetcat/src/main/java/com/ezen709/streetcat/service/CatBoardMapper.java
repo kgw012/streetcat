@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen709.streetcat.model.CatBoardDTO;
 import com.ezen709.streetcat.model.CatDTO;
+import com.ezen709.streetcat.model.FindCatBoardDTO;
 import com.ezen709.streetcat.model.CatBoardCommentDTO;
 import com.ezen709.streetcat.model.CatBoardLikeDTO;
 
@@ -26,6 +27,12 @@ public class CatBoardMapper {
 				map.put("end", end);
 				return sqlSession.selectList("cat_listBoard", map);
 		}
+		public List<CatBoardDTO> find_cat_listBoard(FindCatBoardDTO dto){
+			return sqlSession.selectList("find_cat_listBoard", dto);
+	    }
+		public int findGetCount(FindCatBoardDTO dto){
+			return sqlSession.selectOne("findGetCount",dto);
+	    }
 		public int getCount(){
 				return sqlSession.selectOne("getCount");
 		}
@@ -104,4 +111,5 @@ public class CatBoardMapper {
 				res = sqlSession.selectOne("beforeBoard",bnum);}
 				return res;
 		}
+		
 	}

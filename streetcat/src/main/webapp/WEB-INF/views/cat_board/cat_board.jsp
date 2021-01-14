@@ -51,3 +51,16 @@
 </c:if>
 </c:if>
 </div>
+<div align="center">
+<form name="f" action="find_cat_board.do">
+
+<select name="type">
+<option value="subject">제목</option>
+<option value="content">내용</option>
+<option value="writer">작성자</option>
+</select>
+<input type="text" name="searchString">
+<input type="submit" value="검색">
+</form>
+</div>
+
