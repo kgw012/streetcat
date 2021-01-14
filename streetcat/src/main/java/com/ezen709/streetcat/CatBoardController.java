@@ -241,13 +241,13 @@ public class CatBoardController {
 		    if(type.equals("popup")) {
 		    	url= "popup";
 		    }else {
-			url = "cat_board_content.do?bnum="+bnum;}
+			url = "cat_board_content.do?type=now&bnum="+bnum;}
 		}else {
 			msg = "댓글쓰기 실패 글상세 페이지로 이동합니다";
 			if(type.equals("popup")) {
 		    	url= "popup";
 		    }else {
-			url = "cat_board_content.do?bnum="+bnum;}
+			url = "cat_board_content.do?type=now&bnum="+bnum;}
 		}
 		
 		req.setAttribute("msg", msg);

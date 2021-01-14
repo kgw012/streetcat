@@ -16,7 +16,17 @@
 				<td align="center">
 				
 				<a href="cat_board_content.do?bnum=${dto.bnum}&type='now'">
+				<c:choose>
+				    <c:when test="${dto.type eq 'private'}">
+				    <img src="./resources/image/private.jpg" width="150" height="150">
+				    </c:when>
+				    <c:when test="${empty dto.image1}">
+				    <img src="./resources/image/cat.jpg" width="150" height="150">
+				    </c:when>
+				    <c:otherwise>
 					<img src="${upPath}/${dto.image1}" width="150" height="150">
+					</c:otherwise>
+			    </c:choose>
 				</a><br>
 				${dto.bnum}|${dto.subject}[${dto.commentcount}]<br>
 				</td>

@@ -130,8 +130,7 @@ ${getBoard.subject}
  <tr>
  <td colspan="2">
  <c:if test="${dto.re_level>0}">
-				<img src="${upPath}/resources/img/level.gif" width="${dto.re_level*10}" height="15"/>
-				<img src="${upPath}/resources/img/re.gif">
+				<img src="./resources/image/reComment.jpg" width="15" height="15">
 				<c:if test="${dto.writer==getBoard.writer}">
 				[글쓴이]
 				</c:if>
@@ -167,7 +166,10 @@ ${getBoard.subject}
  </tr>
  <tr>
  <td align="center">
- <textarea onfocus="isLogin()" placeholder='댓글을 입력하세요' name="content" rows="3" cols="100%" required></textarea>
+ <!-- isLogin() 비로그인시 로그인창으로 이동 
+  onfocus="isLogin()" 
+ -->
+ <textarea placeholder='댓글을 입력하세요' name="content" rows="3" cols="100%" required></textarea>
  </td>
  <td>
  <input type="hidden" name="bnum" value="${getBoard.bnum}">
