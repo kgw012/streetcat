@@ -17,6 +17,7 @@
 				return
 			}
 			document.f.submit()
+			window.close()
 		}
 	</script>
 	
@@ -55,7 +56,7 @@
   				<tr>
 					<td colspan="2" align="center">
 						<a href="javascript:check()">[전송]</a>
-						<a href="#">[취소]</a>
+						<a href="javascript:window.close();">[취소]</a>
 					</td>
   				</tr>
   			</table>

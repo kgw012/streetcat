@@ -58,9 +58,9 @@ public class CatBoardController {
 		System.out.println("filensize = " + filesize + "bytes");
 	}
 	
-	@RequestMapping("/index.do")
+	@RequestMapping("/home.do")
 	public String index() {
-		return "index";
+		return "home";
 	}
 	@RequestMapping("/cat_board.do")
 	public ModelAndView catBoard(HttpServletRequest req) {
