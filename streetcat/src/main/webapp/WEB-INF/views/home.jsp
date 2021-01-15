@@ -32,12 +32,21 @@
 			<table width="100%">
 	        <tr>
 	        <td valign="top">
-	        <c:if test="${sessionScope.id==null}">
+	        <c:if test="${!empty mbId and mbId ne admin }">
+	        ${mbId}님 로그인 중...
+	        <c:set var="mbId" value="${mbId}" scope="session"/>
+
+	        </c:if>
+	        <c:if test="${mbId eq admin }"> <!--회원등급으로 불러와서 보여줄수있도록 수정예정 -->
+	        관리자 계정 접속 중
+	        <c:set var="mbId" value="${mbId}" scope="session"/>
+	        </c:if>
+	        <c:if test="${empty mbId}">
 	        <br><br><br><br>
 	                 회원 로그인<br>
 	        <form name="f" action="member_login.do" method="post">
-	        <input type="text" name="id"><br>
-	        <input type="text" name="password"><br>
+	        <input type="text" name="id" ><br>
+	        <input type="text" name="passwd"><br>
 	        <input type="submit" value="로그인">
 	        <button type="button" onclick="window.open('member.do','회원가입', 'width=570, height=350, resizable = no, scrollbars = no')">회원가입</button>
 	        </form>

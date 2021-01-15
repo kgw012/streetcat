@@ -1,5 +1,6 @@
 package com.ezen709.streetcat;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.ezen709.streetcat.model.LoginDTO;
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.service.LoginMapper;
 import com.ezen709.streetcat.service.MemberMapper;
 
 @Controller
@@ -22,6 +24,8 @@ public class MemberController {
 	
 		@Autowired
 		private MemberMapper memberMapper;
+		@Autowired
+		private LoginMapper loginMapper;
 		
 		@RequestMapping(value="/member.do", method=RequestMethod.GET)
 		public String memberInsertForm() {
@@ -94,4 +98,28 @@ public class MemberController {
 			return "redirect:admin_list.do";
 		}
 		
-}
+		@RequestMapping("/member_login.do")
+		public ModelAndView login(HttpServletRequest req) {
+		
+			String id = req.getParameter("id");
+			String passwd = req.getParameter("passwd");
+			LoginDTO dto = loginMapper.logincheck(id, passwd);
+			
+			ModelAndView mav = new ModelAndView();
+			
+				if(dto.getId() ==null || dto.getId().trim().equals("")) {
+				mav.setViewName("member/member");
+					return	mav;
+				}
+				
+				String mbId = dto.getId();
+				
+			mav.setViewName("home");
+			mav.addObject("mbId", mbId);
+					
+			return mav;
+		
+		
+				}
+		}
+
