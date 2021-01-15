@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -181,13 +182,17 @@ public class CatBoardController {
 		return mav;
 	}
 	@RequestMapping(value="/cat_board_content.do")
-	public ModelAndView catBoardContent(HttpServletRequest req) {
+	public ModelAndView catBoardContent(HttpServletRequest req,HttpSession session) {
         String pageNum = req.getParameter("pageNum");
-		
+        
+        
 		if (pageNum == null) {
 			pageNum = "1";
 		}
 		String type = req.getParameter("type");
+		if(req.getParameter("type")==null) {
+			type="now";
+		}
 		int bnumCount = catBoardMapper.getCount();
 		int bnum = Integer.parseInt(req.getParameter("bnum"));
 		
@@ -197,6 +202,7 @@ public class CatBoardController {
 		}else if(type.equals("before")) {
 			bnum = catBoardMapper.beforeBoard(bnum);
 		}
+		List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
 		int count = catBoardMapper.getCommentCount(bnum);
 		ModelAndView mav = new ModelAndView("cat_board/cat_board_content");
 		int pageSize = 12;
@@ -222,6 +228,18 @@ public class CatBoardController {
 		mav.addObject("pageBlock", pageBlock);
 		mav.addObject("getBoard",getBoard);
 		mav.addObject("boardComment",boardComment);
+		mav.addObject("likeList",likeList);
+		String id = (String)session.getAttribute("id");
+		String like = "like";
+		int likeCount = 0;
+		for(CatBoardLikeDTO dto: likeList) {
+			likeCount++;
+			if(dto.getId().equals(id)) {
+				like="unlike";
+			}
+		}
+		mav.addObject("likeCount",likeCount);
+		mav.addObject("like",like);
 		return mav;
 	}
 	
@@ -268,16 +286,37 @@ public class CatBoardController {
         int bnum = Integer.parseInt(req.getParameter("bnum"));
         String id = (String)req.getParameter("id");
         int res = catBoardMapper.boardLike(dto);
-        req.setAttribute("bnum", bnum);
-		return "cat_board/cat_board_content";
+        List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
+        CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);
+		if(res>0) {
+		    msg = "추천 성공 게시글로 이동합니다";
+			url = "cat_board_content.do?bnum="+bnum;
+		}else {
+			msg = "추천 실패 게시글로 이동합니다";
+			url = "cat_board_content.do?bnum="+bnum;
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		return "message";
 	}
 	@RequestMapping(value="/cat_board_unLike.do")
 	public String catBoardUnLike(HttpServletRequest req) {
 		String msg,url = null;
         int bnum = Integer.parseInt(req.getParameter("bnum"));
         int res = catBoardMapper.boardUnLike(bnum);
-        req.setAttribute("bnum", bnum);
-		return "cat_board/cat_board_content";
+        List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
+        CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);
+		if(res>0) {
+		    msg = "추천 취소! 게시글로 이동합니다";
+			url = "cat_board_content.do?bnum="+bnum;
+		}else {
+			msg = "추천 실패 게시글로 이동합니다";
+			url = "cat_board_content.do?bnum="+bnum;
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		
+		return "message";
 	}
 	@RequestMapping(value="/cat_board_delete.do")
 	public String catBoardDelete(HttpServletRequest req) {

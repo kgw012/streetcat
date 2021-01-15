@@ -86,6 +86,9 @@ public class CatBoardMapper {
 		public int getCommentCount(int bnum) {
 			return sqlSession.selectOne("getCommentCount",bnum);
 		}
+		public List<CatBoardLikeDTO> likeList(int bnum){
+			return sqlSession.selectList("likeList",bnum);
+		}
 		public int boardLike(CatBoardLikeDTO dto) {
 			return sqlSession.insert("boardLike",dto);
 		}

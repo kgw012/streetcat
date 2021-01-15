@@ -61,11 +61,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCommentCount" parameterType="java.util.Map">
 	    update cat_board set commentcount = #{count} where bnum = #{bnum}
 	</update>
+	<select id="likeList" parameterType="int" resultType="CatBoardLikeDTO">
+	 select * from cat_board_ulike where bnum =#{bnum}
+	</select>
 	<insert id="boardLike" parameterType="CatBoardLikeDTO">
-	  insert into cat_board_like values(#{bnum},#{id})
+	  insert into cat_board_ulike values(#{bnum},#{id})
 	</insert>
 	<delete id="boardUnLike" parameterType="int">
-          delete from cat_board_like where bnum = #{bnum}
+          delete from cat_board_ulike where bnum = #{bnum}
     </delete>
     <delete id="boardCommentDelete" parameterType="int">
      delete from cat_board_comment where bnum = #{bnum}

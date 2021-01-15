@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=euc-kr"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR" import="java.util.*,com.ezen709.streetcat.model.*"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
     
 <h2>게시글 상세보기</h2>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> <style> .carousel-inner > .carousel-item > img{ width: 50px; height: 300px;} </style>
@@ -13,6 +15,23 @@
           interval: 2000 //기본 5초 })
    </script>
    <script>
+   
+   function isLoginLike(bnum,id){
+  	 <% if(session.getAttribute("id")==null){%>
+  	 alert("로그인 후 이용해주세요")
+  	 <%}else{%>
+  	 alert("추천 완료!")
+  	 location.href("cat_board_like.do?bnum="+bnum+"&id="+id)
+  	 <%}%>
+   }
+   function isLoginUnLike(bnum,id){
+	  	 <% if(session.getAttribute("id")==null){%>
+	  	 alert("로그인 후 이용해주세요")
+	  	 <%}else{%>
+	  	 alert("추천 취소!")
+	  	 location.href("cat_board_unLike.do?bnum="+bnum+"&id="+id)
+	  	 <%}%>
+	   }
      function isLogin(){
     	 <% if(session.getAttribute("name")==null){%>
     	 alert("로그인 후 이용해주세요")
@@ -23,6 +42,7 @@
      alert("처음/마지막글 입니다")
 	 window.history.back()
 	 <%}%>
+	 
 	 <c:if test="${getBoard.type == 'member'&&sessionScope.name==null}">
 	 alert("회원공개 게시물입니다")
 	 window.history.back()
@@ -107,12 +127,20 @@ ${getBoard.subject}
  </tr>
  </table>
  <br>
- 
  <table align="center">
   <tr>
+  <c:choose>
+  <c:when test="${like=='unlike'}">
   <td>
-   <button onclick="window.location('cat_board_like.do?bnum=${getBoard.bnum}&id=${sessionScope.id}')">추천</button>
+   <button onclick="isLoginUnLike('${getBoard.bnum}','${sessionScope.id}')">추천취소 : ${likeCount}</button>
   </td>
+  </c:when>
+  <c:when test="${like=='like'}">
+  <td>
+   <button onclick="isLoginLike('${getBoard.bnum}','${sessionScope.id}')">추천 : ${likeCount}</button>
+  </td>
+  </c:when>
+  </c:choose>
   <td>
    <button onclick="window.location.href='cat_board.do'">목록가기</button>
   </td>
