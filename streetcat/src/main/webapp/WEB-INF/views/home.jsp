@@ -6,11 +6,13 @@
 
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<title>CatStreet</title>
 </head>
  <h3></h3>
 <body>
 <h2 align="center">Street Cat</h2>
+	<div align ="center">
 	<table width="100%">
 	
 		<colgroup>
@@ -32,12 +34,23 @@
 			<table width="100%">
 	        <tr>
 	        <td valign="top">
-	        <c:if test="${sessionScope.id==null}">
+	        <c:if test="${!empty mbId }">
+	   		 [${grade}등급] ${mbId}님 로그인 중...  
+	   		   <c:if test="${grade eq '관리자' }">
+				<br><a href="admin_list.do">회원관리</a>
+				</c:if>
+	       
+	        <form name="f" action="member_logout.do" method="get">
+	        <input type="submit" value="로그아웃">
+	        </c:if>
+	        </form>
+	      
+	        <c:if test="${empty mbId}">
 	        <br><br><br><br>
 	                 회원 로그인<br>
 	        <form name="f" action="member_login.do" method="post">
-	        <input type="text" name="id"><br>
-	        <input type="text" name="password"><br>
+	        <input type="text" name="id" ><br>
+	        <input type="password" name="passwd"><br>
 	        <input type="submit" value="로그인">
 	        <button type="button" onclick="window.open('member.do','회원가입', 'width=570, height=350, resizable = no, scrollbars = no')">회원가입</button>
 	        </form>
@@ -61,6 +74,6 @@
 			</c:choose>
 		</tr>
 	</table>
-	<li><a href="admin_list.do">관리자 회원목록(삭제예정)</a></li>  
+	</div>
 </body>
 </html>
