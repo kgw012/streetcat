@@ -19,6 +19,7 @@ public class LoginMapper {
 			Map<String, String> map = new Hashtable<String, String>();
 			map.put("id",id);
 			map.put("passwd",passwd);
+			
 			return sqlSession.selectOne("loginCheck",map);
 		}
 	

@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.core.RemoveTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -97,6 +99,13 @@ public class MemberController {
 			int res = memberMapper.deleteMember(unum, check);
 			return "redirect:admin_list.do";
 		}
+		@RequestMapping("/member_logout.do")
+		public String logout(HttpSession session) {
+			
+			session.removeAttribute("mbId");
+			
+			return"redirect:home.do";
+		}
 		
 		@RequestMapping("/member_login.do")
 		public ModelAndView login(HttpServletRequest req) {
@@ -113,9 +122,27 @@ public class MemberController {
 				}
 				
 				String mbId = dto.getId();
+				int grade = dto.getGrade();
+				String gradeString =null;
+				if(grade ==0) {
+					gradeString="일반회원";
+				}
+				else if(grade ==1) {
+					gradeString ="준회원";
+				}
+				else if(grade ==2) {
+					gradeString ="우수회원";
+				}
+				else if(grade ==3) {
+					gradeString ="관리자";
+				}
 				
+				HttpSession session = req.getSession();
 			mav.setViewName("home");
 			mav.addObject("mbId", mbId);
+			mav.addObject("grade",gradeString);
+		
+			mav.addObject("session", session);
 					
 			return mav;
 		
