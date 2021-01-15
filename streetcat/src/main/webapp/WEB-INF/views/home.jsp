@@ -35,7 +35,10 @@
 	        <tr>
 	        <td valign="top">
 	        <c:if test="${!empty mbId }">
-	   		   [${grade}등급] ${mbId}님 로그인 중...  
+	   		 [${grade}등급] ${mbId}님 로그인 중...  
+	   		   <c:if test="${grade eq '관리자' }">
+				<br><a href="admin_list.do">회원관리</a>
+				</c:if>
 	       
 	        <form name="f" action="member_logout.do" method="get">
 	        <input type="submit" value="로그아웃">
@@ -72,6 +75,5 @@
 		</tr>
 	</table>
 	</div>
-	<li><a href="admin_list.do">관리자 회원목록(삭제예정)</a></li>  
 </body>
 </html>
