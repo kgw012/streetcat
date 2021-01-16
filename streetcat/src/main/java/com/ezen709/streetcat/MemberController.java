@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.apache.taglibs.standard.tag.common.core.RemoveTag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,7 @@ public class MemberController {
 			
 			return"redirect:home.do";
 		}
+	
 		
 		@RequestMapping("/member_login.do")
 		public ModelAndView login(HttpServletRequest req) {
@@ -114,16 +116,20 @@ public class MemberController {
 			String passwd = req.getParameter("passwd");
 			LoginDTO dto = loginMapper.logincheck(id, passwd);
 			
+			String mbId = null;
+			int grade =0;
+			String gradeString =null;
 			ModelAndView mav = new ModelAndView();
-			
+			try {
 				if(dto.getId() ==null || dto.getId().trim().equals("")) {
-				mav.setViewName("member/member");
+					mav.setViewName("home");
 					return	mav;
-				}
 				
-				String mbId = dto.getId();
-				int grade = dto.getGrade();
-				String gradeString =null;
+				}else if( dto.getId() !=null) {
+
+				mbId = dto.getId();
+				grade = dto.getGrade();
+				
 				if(grade ==0) {
 					gradeString="일반회원";
 				}
@@ -136,12 +142,18 @@ public class MemberController {
 				else if(grade ==3) {
 					gradeString ="관리자";
 				}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
 				
-				HttpSession session = req.getSession();
+			}
+				
+				
+				
+			HttpSession session = req.getSession();
 			mav.setViewName("home");
 			mav.addObject("mbId", mbId);
 			mav.addObject("grade",gradeString);
-		
 			mav.addObject("session", session);
 					
 			return mav;
