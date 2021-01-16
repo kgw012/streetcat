@@ -10,6 +10,13 @@ public class ProductDTO {
 	private int plike;
 	private String image1;
 	private String image2;
+	private int unum;
+	public int getUnum() {
+		return unum;
+	}
+	public void setUnum(int unum) {
+		this.unum = unum;
+	}
 	public int getPnum() {
 		return pnum;
 	}

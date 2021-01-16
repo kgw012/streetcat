@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String email;
 	private String joindate;
 	private int grade;
+
 	
 	public int getGrade() {
 		return grade;

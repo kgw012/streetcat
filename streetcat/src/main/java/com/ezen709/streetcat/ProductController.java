@@ -64,6 +64,11 @@ public class ProductController {
 			mav.addObject("pageBlock", pageBlock);
 			mav.addObject("listProduct", listProduct);
 			mav.addObject("uploadPath", uploadPath);
+			
+			int unum = Integer.parseInt(req.getParameter("unum"));
+			String grade = req.getParameter("grade");
+			mav.addObject("unum", unum);
+			mav.addObject("grade", grade);
 			return mav;
 		}
 		
@@ -105,6 +110,9 @@ public class ProductController {
 		      dto.setImage1(file.getOriginalFilename());
 		      dto.setImage2(file2.getOriginalFilename());
 		      dto.setPlike(0);
+		      
+		      int unum = Integer.parseInt(req.getParameter("unum"));
+		      dto.setUnum(unum);
 		      res = productMapper.insertProduct(dto);
 			return "redirect:product_list.do";
 		}		
@@ -117,6 +125,7 @@ public class ProductController {
 			ProductDTO dto = productMapper.getProduct(pnum);
 			ModelAndView mav = new ModelAndView("product/product_content", "getProduct", dto);
 			mav.addObject("uploadPath",uploadPath);
+			
 			return mav;
 		}
 		@RequestMapping(value="/product_update.do",method=RequestMethod.GET)

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div align="center">
-	<form name="f" action="product_write_ok.do" method="post"
+	<form name="f" action="product_write_ok.do?unum=${unum}" method="post"
 												 enctype ="multipart/form-data">
 										
 		<table border="1" width="500">
@@ -56,7 +56,7 @@
 				<td colspan="2" align="center">
 					<input type="submit" value="글쓰기">
 					<input type="reset" value="다시쓰기">
-					<input type="button" value="목록보기" onclick="window.location='product_list.do'">
+					<input type="button" value="목록보기" onclick="window.location='product_list.do?unum=${unum}'">
 				</td>
 			</tr>
 		</table>

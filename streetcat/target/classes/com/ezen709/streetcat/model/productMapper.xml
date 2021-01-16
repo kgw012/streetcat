@@ -18,7 +18,7 @@
 		<insert id="insertProduct" parameterType="productDTO">
 		insert into product values (seq_pnum.nextval, 
 			#{pname}, #{shopname}, #{price}, #{type}, #{content},
-			#{plike}, #{image1}, #{image2})
+			#{plike}, #{image1}, #{image2}, #{unum})
 	</insert>
 	
 		<select id ="getProduct" resultType="productDTO" parameterType="Int">

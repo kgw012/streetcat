@@ -21,12 +21,14 @@
 			<col style="width:25%;" />
 			<col style="width:25%;" />
 		</colgroup>
-		
+		<c:if test="${empty unum }">
+		<c:set var="unum" value="0"/>
+		</c:if>
 			<tr>
 				<th><a href="cat_board.do">길냥이 일반 게시판</a></th>
 				<th><a href="cat_list.do">길냥이 검색</a></th>
 				<th><a href="catstreet_qna.do">Q&A</a></th>
-				<th><a href="product_list.do">상품추천</a></th>
+				<th><a href="product_list.do?unum=${unum}">상품추천</a></th>
 				
 			</tr>
 			</table>

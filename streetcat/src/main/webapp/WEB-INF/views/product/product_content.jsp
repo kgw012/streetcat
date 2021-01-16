@@ -53,9 +53,11 @@
 		</tr>
 		<tr>
 			<td width="80%" align="right" colspan="4">
+			<c:if test="${grade eq '관리자' }">
 				<input type="button" value="글수정" onclick="window.location='product_update.do?pnum=${getProduct.pnum}'">
 				<input type="button" value="글삭제" onclick="window.location='product_delete.do?pnum=${getProduct.pnum}'">
-				<input type="button" value="글목록" onclick="window.location='product_list.do'">
+			</c:if>	
+				<input type="button" value="글목록" onclick="window.location='product_list.do?unum=${unum}'">
 			</td>
 		</tr>
 	</table>

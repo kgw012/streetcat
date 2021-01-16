@@ -42,7 +42,7 @@
  					
 	<tr><td colspan ="2" bgcolor="skyblue" align="center" width="10%"><a  href = "product_update.do"><input type="submit" value="글수정"></a>
 			<input type="reset" value="다시작성">
-		<input type="button" value="목록보기" onclick="window.location='product_list.do'">
+		<input type="button" value="목록보기" onclick="window.location='product_list.do?unum=${unum}'">
 				</td>	
 					</tr>
 				

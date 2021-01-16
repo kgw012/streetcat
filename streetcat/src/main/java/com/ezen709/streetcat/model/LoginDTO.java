@@ -9,7 +9,14 @@ public class LoginDTO {
 	private String id;
 	private String passwd;
 	private int grade;
+	private int unum;
 	
+	public int getUnum() {
+		return unum;
+	}
+	public void setUnum(int unum) {
+		this.unum = unum;
+	}
 	public int getGrade() {
 		return grade;
 	}

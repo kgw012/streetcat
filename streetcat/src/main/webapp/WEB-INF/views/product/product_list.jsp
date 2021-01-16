@@ -10,12 +10,15 @@
 <body>
 <div align="center">
 	<b>글 목 록</b>
-	<table border="0" width="80%">
-		<tr bgcolor="yellow">
-			<td align="right"><a href="product_write.do">글쓰기</a></td>
+	<table border="0" width="50%">
+		<tr bgcolor="skyblue">
+		
+		<td align="left"><a href ="home.do">StreetCat</a></td>	
+		<c:if test="${unum ne 0}"><td align="right"><a href="product_write.do?unum=${unum}">글쓰기</a></td>
+		</c:if>
 		</tr>
 	</table>
-	<table border="1" width="40%">
+	<table border="1" width="50%">
 		<tr bgcolor="green">
 			<th width="5%">번호</th>
 			<th width="20%">상품</th>

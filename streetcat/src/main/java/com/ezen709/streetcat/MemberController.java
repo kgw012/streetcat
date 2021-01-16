@@ -103,8 +103,8 @@ public class MemberController {
 		@RequestMapping("/member_logout.do")
 		public String logout(HttpSession session) {
 			
-			session.removeAttribute("mbId");
 			
+			session.invalidate();
 			return"redirect:home.do";
 		}
 	
@@ -118,6 +118,7 @@ public class MemberController {
 			
 			String mbId = null;
 			int grade =0;
+			int unum =0;
 			String gradeString =null;
 			ModelAndView mav = new ModelAndView();
 			try {
@@ -129,33 +130,34 @@ public class MemberController {
 
 				mbId = dto.getId();
 				grade = dto.getGrade();
-				
+				unum = dto.getUnum();
 				if(grade ==0) {
 					gradeString="일반회원";
-				}
-				else if(grade ==1) {
+				}else if(grade ==1) {
 					gradeString ="준회원";
-				}
-				else if(grade ==2) {
+				}else if(grade ==2) {
 					gradeString ="우수회원";
-				}
-				else if(grade ==3) {
+				}else if(grade ==3) {
 					gradeString ="관리자";
 				}
-				}
+			}
 			}catch(Exception e) {
-				e.printStackTrace();
-				
+				e.printStackTrace();	
 			}
 				
 				
 				
 			HttpSession session = req.getSession();
+			
 			mav.setViewName("home");
-			mav.addObject("mbId", mbId);
-			mav.addObject("grade",gradeString);
+			session.setAttribute("mbId", mbId);
+			session.setAttribute("grade", gradeString);
+			session.setAttribute("unum", unum);
+			
 			mav.addObject("session", session);
-					
+			mav.addObject("mbId",mbId);
+			mav.addObject("grade",gradeString);
+			mav.addObject("unum", unum);
 			return mav;
 		
 		
