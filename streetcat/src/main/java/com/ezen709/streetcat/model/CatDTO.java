@@ -6,6 +6,8 @@ public class CatDTO {
 	private String image;
 	private String name;
 	private String feature;
+	private double location_lat;
+	private double location_long;
 	
 	public int getCnum() {
 		return cnum;
@@ -36,5 +38,17 @@ public class CatDTO {
 	}
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+	public double getLocation_lat() {
+		return location_lat;
+	}
+	public void setLocation_lat(double location_lat) {
+		this.location_lat = location_lat;
+	}
+	public double getLocation_long() {
+		return location_long;
+	}
+	public void setLocation_long(double location_long) {
+		this.location_long = location_long;
 	}
 }
