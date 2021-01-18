@@ -21,7 +21,12 @@ public class CatMapper {
 	}
 	
 	public List<CatDTO> findCatList(String searchString, String search){
-		String sql = "select * from cat where " + searchString + " = " + search;
+		String sql = null;
+		if(search == null || search.equals("")) {
+			sql = "select * from cat";
+		}else {
+			sql = "select * from cat where " + searchString + " = '" + search + "'";
+		}
 
 		Map<String, String> map = new Hashtable<>();
 		map.put("sql", sql);
