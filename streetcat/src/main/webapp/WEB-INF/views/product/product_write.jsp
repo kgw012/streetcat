@@ -9,9 +9,9 @@
 </head>
 <body>
 <div align="center">
-	<form name="f" action="product_write_ok.do?unum=${unum}" method="post"
+	<form name="f" action="product_write_ok.do" method="post"
 												 enctype ="multipart/form-data">
-										
+										<input type="hidden" name="unum" value="${unum}">
 		<table border="1" width="500">
 			<tr bgcolor="yellow">
 				<td align="center" colspan="2">상 품 추 천</td>
@@ -41,6 +41,7 @@
 				<td><select name ="type">
 						<option>:::종류:::</option>
 						<option value="feed">사료</option>
+						<option value="tuna">참치</option>
 						<option value="snack">츄르</option>
 						<option value="toy">장난감</option>
 						<option value="sand">모래</option>
