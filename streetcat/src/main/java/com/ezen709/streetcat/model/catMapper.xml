@@ -3,7 +3,16 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen709.streetcat">
+	<select id="getCatList" resultType="CatDTO">
+		select * from cat
+	</select>
 	<select id="findCat" resultType="CatDTO" parameterType="java.util.Map">
 		${sql}
+	</select>
+	<insert id="insert_cat" parameterType="CatDTO">
+	  insert into cat values (seq_cnum.nextval, #{location}, #{image}, #{name}, #{feature}, #{location_lat}, #{location_long})
+	</insert>
+	<select id ="getCatByCnum" resultType="CatDTO" parameterType="Int">
+		select * from cat where cnum= #{cnum}
 	</select>
 </mapper>

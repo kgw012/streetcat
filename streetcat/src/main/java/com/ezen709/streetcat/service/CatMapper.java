@@ -16,13 +16,30 @@ public class CatMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public List<CatDTO> getCatList(){
+		return sqlSession.selectList("getCatList");
+	}
+	
 	public List<CatDTO> findCatList(String searchString, String search){
-		String sql = "select * from cat where " + searchString + " = " + search;
+		String sql = null;
+		if(search == null || search.equals("")) {
+			sql = "select * from cat";
+		}else {
+			sql = "select * from cat where " + searchString + " = '" + search + "'";
+		}
 
 		Map<String, String> map = new Hashtable<>();
 		map.put("sql", sql);
 		
 		List<CatDTO> list = sqlSession.selectList("findCat", map);
 		return list;
+	}
+	
+	public int insertCat(CatDTO dto) {
+		return sqlSession.insert("insert_cat", dto);
+	}
+	
+	public CatDTO getCatByCnum(int cnum) {
+		return sqlSession.selectOne("getCatByCnum", cnum);
 	}
 }

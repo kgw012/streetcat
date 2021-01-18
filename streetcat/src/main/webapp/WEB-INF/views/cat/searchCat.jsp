@@ -4,32 +4,64 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>고양이 위치찾기</title>
-	</head>
+	<title>고양이 위치검색</title>
+</head>
 <body>
 	<div align="center">
-		<h1>고양이 위치찾기</h1>
+		<h1>고양이 위치검색</h1>
 		<div id="map" style="width:500px;height:400px;"></div>
 		<div id="clickLatlng"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js
 			?appkey=c545970a000c32aa58cb39d32c259bd4"></script>
 		<script>
+			var lat = 33.450701,
+				lon = 126.570667;
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨 
+			    }; 
 
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		    // 마커를 생성합니다
+		    var marker = new kakao.maps.Marker({  
+		        map: map, 
+		        position: new kakao.maps.LatLng(lat, lon)
+		    });
+			
+			// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+			if (navigator.geolocation) {
+			    
+			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			    navigator.geolocation.getCurrentPosition(function(position) {
+			        
+			        lat = position.coords.latitude, // 위도
+		            lon = position.coords.longitude; // 경도
+			        
+			        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+			        
+			        // 마커를 표시합니다
+			        displayMarker(locPosition);
+			            
+			      });
+			    
+			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치를 설정합니다
+			    
+			    var locPosition = new kakao.maps.LatLng(lat, lon);    
+			        
+			    displayMarker(locPosition);
+			}
+			
+		    
+			// 지도에 마커를 표시하는 함수입니다
+			function displayMarker(locPosition) {
 		
-			// 지도를 클릭한 위치에 표출할 마커입니다
-			var marker = new kakao.maps.Marker({ 
-			    // 지도 중심좌표에 마커를 생성합니다 
-			    position: map.getCenter() 
-			}); 
-			// 지도에 마커를 표시합니다
-			marker.setMap(map);
-		
+			    marker.setPosition(locPosition);
+			    // 지도 중심좌표를 접속위치로 변경합니다
+			    map.setCenter(locPosition);      
+			}
+			
 			// 지도에 클릭 이벤트를 등록합니다
 			// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 			kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
