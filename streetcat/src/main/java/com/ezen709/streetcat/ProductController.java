@@ -69,15 +69,7 @@ public class ProductController {
 	
 			
 			HttpSession session = req.getSession();
-			
-		//	int unum = Integer.parseInt(req.getParameter("unum"));
-			int unum =(int)session.getAttribute("unum");
-			
-			
-			String grade = (String)session.getAttribute("grade");
-					//req.getParameter("grade");
-			
-			
+		
 			
 			mav.addObject("session", session);
 			

@@ -14,7 +14,7 @@
 		<tr bgcolor="skyblue">
 		
 		<td align="left"><a href ="home.do">StreetCat</a></td>	
-		<c:if test="${unum ne 0}"><td align="right"><a href="product_write.do?unum=${unum}">글쓰기</a></td>
+		<c:if test="${!empty unum}"><td align="right"><a href="product_write.do?unum=${unum}">글쓰기</a></td>
 		
 		</c:if>
 		</tr>

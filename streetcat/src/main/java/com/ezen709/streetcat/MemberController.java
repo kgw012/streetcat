@@ -38,7 +38,7 @@ public class MemberController {
 	public String memberInsert_Ok(@ModelAttribute MemberDTO dto) {
 
 		int res = memberMapper.insertMember(dto);
-		return "redirect:home.do"; // 수정예정 로그인한 회원이 가야할 메인화면
+		return "redirect:home.do"; 
 	}
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)
@@ -112,23 +112,25 @@ public class MemberController {
 
 		String id = req.getParameter("id");
 		String passwd = req.getParameter("passwd");
+	
 		LoginDTO dto = loginMapper.logincheck(id, passwd);
-
-		String mbId = dto.getId();
+	
+		String mbId = null;
 		int grade = 0;
-		int unum = dto.getUnum();
+		int unum = 0;
 		String gradeString = null;
 		ModelAndView mav = new ModelAndView();
-		try {
-			if (dto.getId() == null || dto.getId().trim().equals("")) {
+		
+			if (dto== null || dto.getId().trim().equals("")) {
 				mav.setViewName("home");
+				mav.addObject("unum", 0);
 				return mav;
 
 			} else if (dto.getId() != null) {
 
-				
+				mbId =dto.getId();
 				grade = dto.getGrade();
-				
+				unum = dto.getUnum();
 				if (grade == 0) {
 					gradeString = "일반회원";
 				} else if (grade == 1) {
@@ -138,23 +140,16 @@ public class MemberController {
 				} else if (grade == 3) {
 					gradeString = "관리자";
 				}
+				HttpSession session = req.getSession();
+				
+				session.setAttribute("mbId", mbId);
+				session.setAttribute("grade", gradeString);
+				session.setAttribute("unum", unum);
+				mav.setViewName("home");
+				mav.addObject("session", session);
+				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		HttpSession session = req.getSession();
 		
-		
-		session.setAttribute("mbId", mbId);
-		session.setAttribute("grade", gradeString);
-		session.setAttribute("unum", unum);
-
-		mav.setViewName("home");
-
-		 mav.addObject("session", session);
-			
-		 
 		return mav;
 
 	}
