@@ -65,6 +65,9 @@
 			<c:if test= "${dto.type eq 'sand'}" >
 			모래
 			</c:if>
+			<c:if test= "${dto.type eq 'etc'}" >
+			기타
+			</c:if>
 		
 			</td>
 			<td align="center">${dto.plike}</td>

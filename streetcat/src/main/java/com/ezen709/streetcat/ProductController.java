@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,14 +67,20 @@ public class ProductController {
 			mav.addObject("listProduct", listProduct);
 			mav.addObject("uploadPath", uploadPath);
 	
-			int unum = Integer.parseInt(req.getParameter("unum"));
-			 System.out.println(unum+ "unum°ª");
-			String grade = req.getParameter("grade");
 			
-			MemberDTO dto = new MemberDTO();
+			HttpSession session = req.getSession();
 			
-			mav.addObject("unum", unum);
-			mav.addObject("grade", grade);
+		//	int unum = Integer.parseInt(req.getParameter("unum"));
+			int unum =(int)session.getAttribute("unum");
+			
+			
+			String grade = (String)session.getAttribute("grade");
+					//req.getParameter("grade");
+			
+			
+			
+			mav.addObject("session", session);
+			
 			return mav;
 		}
 		
@@ -82,9 +89,10 @@ public class ProductController {
 		private String uploadPath;
 	
 		@RequestMapping("/product_write.do")
-			public ModelAndView productWrite(HttpServletRequest req) {
+			public ModelAndView productWrite(HttpSession session) {
 			
-			int unum = Integer.parseInt(req.getParameter("unum"));
+		//	int unum = Integer.parseInt(req.getParameter("unum"));
+			int unum =(int)session.getAttribute("unum");
 			ModelAndView mav = new ModelAndView("product/product_write");
 			mav.addObject("unum", unum);
 			
@@ -92,7 +100,7 @@ public class ProductController {
 			return mav;
 		}
 		@RequestMapping("/product_write_ok.do")
-		public String fileUpload_ok(HttpServletRequest req,@ModelAttribute ProductDTO dto)  {
+		public String fileUpload_ok(HttpServletRequest req,@ModelAttribute ProductDTO dto,HttpSession session)  {
 			String filename="";
 			int filesize =0;
 			String filename2="";
@@ -121,8 +129,8 @@ public class ProductController {
 		      dto.setImage1(file.getOriginalFilename());
 		      dto.setImage2(file2.getOriginalFilename());
 		      dto.setPlike(0);
-		      int unum = Integer.parseInt(req.getParameter("unum"));
-		     
+		  //    int unum = Integer.parseInt(req.getParameter("unum"));
+		  	int unum =(int)session.getAttribute("unum");
 		      dto.setUnum(unum);
 		     
 		      res = productMapper.insertProduct(dto);

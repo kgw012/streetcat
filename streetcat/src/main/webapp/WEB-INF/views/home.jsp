@@ -21,6 +21,7 @@
 			<col style="width:25%;" />
 			<col style="width:25%;" />
 		</colgroup>
+		
 		<c:if test="${empty unum }">
 		<c:set var="unum" value="0"/>
 		</c:if>

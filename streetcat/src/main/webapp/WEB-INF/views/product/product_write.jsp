@@ -4,7 +4,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-<title>게시글쓰기</title>
+<title>게시글쓰기  </title>
 
 </head>
 <body>
@@ -45,6 +45,7 @@
 						<option value="snack">츄르</option>
 						<option value="toy">장난감</option>
 						<option value="sand">모래</option>
+						<option value="etc">기타</option>
 						
 				</select>
 			</tr>
