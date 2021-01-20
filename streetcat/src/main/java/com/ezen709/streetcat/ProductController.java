@@ -83,10 +83,9 @@ public class ProductController {
 		@RequestMapping("/product_write.do")
 			public ModelAndView productWrite(HttpSession session) {
 			
-		//	int unum = Integer.parseInt(req.getParameter("unum"));
-			int unum =(int)session.getAttribute("unum");
+		
 			ModelAndView mav = new ModelAndView("product/product_write");
-			mav.addObject("unum", unum);
+	
 			
 						
 			return mav;
@@ -158,8 +157,9 @@ public class ProductController {
 			return "product/product_delete";
 		}
 		@RequestMapping(value="/product_delete.do",method=RequestMethod.POST)
-		public String deletePro(@RequestParam int pnum, @RequestParam String pname)	{
-			int res =  productMapper.deleteProduct(pnum, pname);
+		public String deletePro(@RequestParam int pnum, @RequestParam String delete)	{
+			
+			int res =  productMapper.deleteProduct(pnum, delete);
 			return "redirect:product_list.do";
 		}
 }

@@ -15,8 +15,8 @@
 <form name ="f" action ="product_delete.do" method ="post">
 
 <table align ="center" width ="400" border="1"> <caption>글삭제</caption>
-<tr bgcolor ="yellow" align ="center"> <td>비밀번호를 입력해 주세요.(임시 pname을 입력) </td> </tr>
-<tr align ="center"> <td> 비밀번호 : <input type ="password" name ="pname" size="10"></td></tr>
+<tr bgcolor ="yellow" align ="center"> <td>삭제를 원하시면 'delete'를 입력해 주세요. </td> </tr>
+<tr align ="center"> <td> 입력 : <input type ="text" name ="pname" size="10"></td></tr>
 <tr align ="center"> <td> 
 <input type="hidden" name="pnum" value="${param.pnum}"/>
 		<a href="product_delete.do">	<input type ="submit" name= "delete" value="글삭제"></a>

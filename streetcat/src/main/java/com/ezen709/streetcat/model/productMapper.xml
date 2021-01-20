@@ -33,4 +33,6 @@
 	<delete id="deleteProduct" parameterType="int">
 		delete from product where pnum=#{pnum}
 	</delete>
+	
+	
 </mapper>

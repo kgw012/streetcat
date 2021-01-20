@@ -11,7 +11,7 @@
 <div align="center">
 	<form name="f" action="product_write_ok.do" method="post"
 												 enctype ="multipart/form-data">
-										<input type="hidden" name="unum" value="${unum}">
+										
 		<table border="1" width="500">
 			<tr bgcolor="yellow">
 				<td align="center" colspan="2">상 품 추 천</td>

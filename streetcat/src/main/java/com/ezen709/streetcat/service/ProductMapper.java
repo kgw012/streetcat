@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.model.ProductDTO;
 
 @Service
@@ -47,19 +47,13 @@ public class ProductMapper {
 			
 			return res;
 		}
-		public int deleteProduct(int pnum, String pname) {
-			if(!isPasswd(pnum	, pname)){
+		public int deleteProduct(int pnum, String delete) {
+			if(delete =="delete"){
 				return -1;
 			}
 			return sqlSession.delete("deleteProduct", pnum);
 		}
 		
-		protected   boolean isPasswd(int pnum, String pname) {
-			ProductDTO dto = getProduct(pnum);
-			if(dto.getPname().equals(pname)) {
-				return true;
-			}
-			return false;
-		}
+		
 		
 }
