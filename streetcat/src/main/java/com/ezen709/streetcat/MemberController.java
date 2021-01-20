@@ -122,8 +122,13 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		
 			if (dto== null || dto.getId().trim().equals("")) {
-				mav.setViewName("home");
-				mav.addObject("unum", 0);
+			//	mav.setViewName("home");
+			//	mav.addObject("unum", 0);
+			String msg = "아이디와 비밀번호를 확인해 주세요.";	
+			String url = "home.do";
+			mav.setViewName("message");	
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
 				return mav;
 
 			} else if (dto.getId() != null) {
