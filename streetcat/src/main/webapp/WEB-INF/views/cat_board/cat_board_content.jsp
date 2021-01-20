@@ -55,7 +55,7 @@
 	 </c:if>
     </script>
     
-<c:if test="${getBoard.writer==sessionScope.name}">
+<c:if test="${getBoard.writer==sessionScope.mbId}">
 <a href="cat_board_edit.do?bnum=${getBoard.bnum}">수정</a>
 | <a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
 삭제</a> <!-- 작성자와 로그인id가 같을시 수정|삭제 띄움 -->
@@ -165,17 +165,17 @@ ${getBoard.subject}
  <tr>
  <td colspan="2">
  <c:if test="${dto.re_level>0}">
-				<img src="./resources/image/reComment.jpg" width="15" height="15">
+				<img src="./resources/image/reComment.jpg" width="20" height="20">
 				<c:if test="${dto.writer==getBoard.writer}">
-				[글쓴이]
+				<img src="./resources/image/writer.jpg" width="40" height="20">
 				</c:if>
-				${dto.writer} : ${dto.content} '${dto.reg_date}'
+				${dto.writer}님 : ${dto.content} '${dto.reg_date}'
 </c:if>	
 <c:if test="${dto.re_level==0}">
 <c:if test="${dto.writer==getBoard.writer}">
-				[글쓴이]
+				<img src="./resources/image/writer.jpg" width="40" height="17">
 				</c:if>
-  ${dto.writer} : ${dto.content} '${dto.reg_date}'
+  ${dto.writer}님 : ${dto.content} '${dto.reg_date}'
   <a href="#" onclick="window.open('reComment.do?comment_num=${dto.comment_num}','', 'width=500, height=250, resizable = no, scrollbars = no')">
   [답글달기]</a>
   </c:if>
@@ -209,6 +209,7 @@ ${getBoard.subject}
  <td>
  <input type="hidden" name="bnum" value="${getBoard.bnum}">
  <input type="hidden" name="type" value="normal">
+ <input type="hidden" name="writer" value="${sessionScope.mbId}">
  <input type="submit" value="등록">
  </td>
  </tr>

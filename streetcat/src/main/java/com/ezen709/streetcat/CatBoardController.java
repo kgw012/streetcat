@@ -177,6 +177,7 @@ public class CatBoardController {
 		String location = (String)req.getParameter("location");
 		List<CatDTO> listCat = catBoardMapper.cat_list(location);
 		ModelAndView mav = new ModelAndView("cat_board/cat_find");
+		mav.addObject("upPath",uploadPath);
 		mav.addObject("location",location);
 		mav.addObject("cat_list",listCat);
 		return mav;
@@ -229,7 +230,7 @@ public class CatBoardController {
 		mav.addObject("getBoard",getBoard);
 		mav.addObject("boardComment",boardComment);
 		mav.addObject("likeList",likeList);
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("mbId");
 		String like = "like";
 		int likeCount = 0;
 		for(CatBoardLikeDTO dto: likeList) {

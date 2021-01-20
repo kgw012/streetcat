@@ -16,7 +16,7 @@ function sendChildValue(cnum,location,name,feature){
 <table border="1">
  <tr>
  <td>
- <input type="text" name="location" width="300" value="${location}">
+ <input type="text" name="location" width="300">
  <input type="submit" value="찾기">
  </td>
  </tr>
@@ -25,6 +25,9 @@ function sendChildValue(cnum,location,name,feature){
 
 <table border="1" width="100%" align="center">
 <tr>
+<td>
+사진
+</td>
 <td>
 위치
 </td>
@@ -37,13 +40,16 @@ function sendChildValue(cnum,location,name,feature){
 </tr>
 <c:forEach var="dto" items="${cat_list}">
 <tr>
+<td width="110">
+<a href="javascript:sendChildValue('${dto.cnum}','${dto.location}','${dto.name}','${dto.feature }')">
+<img src="${upPath}/${dto.image}" width="100" height="100">
+</a>
+</td>
 <td>
 ${dto.location}
 </td>
 <td>
-<a href="javascript:sendChildValue('${dto.cnum}','${dto.location}','${dto.name}','${dto.feature }')">
 ${dto.name}
-</a>
 </td>
 <td>
 ${dto.feature}

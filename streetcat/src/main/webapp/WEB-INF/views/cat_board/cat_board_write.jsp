@@ -7,16 +7,45 @@
         document.getElementById("pname").value = name;
         document.getElementById("pfeature").value = feature;
   }
-    var num = 2;
+    var num = 1;
     function addFile(){
+    	num++;
     	if(num>5){
     		alert("파일은 5개 이하만 가능합니다");
     		return;
     	}
-    	var input = '<br><input type="file" name="image'+num+'">';
-    	num++;
+
+    	var input = '<input type="file" value="파일찾기" name="image'+num+'" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
+    	
     	var fileContainer = document.getElementById('file_container');
     	fileContainer.innerHTML += input;
+    	}
+    function preImg(a, b, c, d) {
+    	  var f = a.value;
+    	  var g = f.substring(f.lastIndexOf('.') + 1).toLowerCase();
+    	  var h = document.getElementById(b);
+    	  if (!/(jpg|png|gif|jpeg)$/i.test(g)) {
+    	    alert('이미지파일 형식은 jpg, png, gif 만 등록 가능합니다.');
+    	    return;
+    	  }
+    	  while (h.firstChild) {
+    	    h.removeChild(h.firstChild);
+    	  }
+    	  if (window.FileReader) {
+    	    var i = b + "_img";
+    	    var j = new FileReader();
+    	    var k = "";
+    	    j.onload = function(e) {
+    	      k = "<img id='" + i+num+ "' src='" + e.target.result + "' style='width:auto;height:" + d + "px;max-width:" + c + "px;' alt='이미지'/>";
+    	      document.getElementById(b).innerHTML = k;
+    	    };
+    	    j.readAsDataURL(a.files[0]);
+    	  } else {
+    	    a.select();
+    	    a.blur();
+    	    var l = document.selection.createRange().text;
+    	    h.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src='" + l + "')";
+    	  }
     	}
    </script>
 <h3 align="center">게 시 글 작 성</h3>
@@ -46,7 +75,10 @@
  <td>파일</td>
  <td>
  <div id="file_container">
- <input type="file" name="image1">
+ 
+ <input type="file" value="파일찾기" name="image1" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view1', 50, 50)">
+<div id="img_view1" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;">
+ </div>
  </div>
  <button type="button" onclick="addFile()">+</button>
  <br>
