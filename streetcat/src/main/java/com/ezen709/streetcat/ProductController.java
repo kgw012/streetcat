@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.model.ProductDTO;
 import com.ezen709.streetcat.service.ProductMapper;
 
@@ -64,11 +66,13 @@ public class ProductController {
 			mav.addObject("pageBlock", pageBlock);
 			mav.addObject("listProduct", listProduct);
 			mav.addObject("uploadPath", uploadPath);
+	
 			
-			int unum = Integer.parseInt(req.getParameter("unum"));
-			String grade = req.getParameter("grade");
-			mav.addObject("unum", unum);
-			mav.addObject("grade", grade);
+			HttpSession session = req.getSession();
+		
+			
+			mav.addObject("session", session);
+			
 			return mav;
 		}
 		
@@ -77,11 +81,17 @@ public class ProductController {
 		private String uploadPath;
 	
 		@RequestMapping("/product_write.do")
-			public String productWrite() {
-			return "product/product_write";
+			public ModelAndView productWrite(HttpSession session) {
+			
+		
+			ModelAndView mav = new ModelAndView("product/product_write");
+	
+			
+						
+			return mav;
 		}
 		@RequestMapping("/product_write_ok.do")
-		public String fileUpload_ok(HttpServletRequest req,@ModelAttribute ProductDTO dto)  {
+		public String fileUpload_ok(HttpServletRequest req,@ModelAttribute ProductDTO dto,HttpSession session)  {
 			String filename="";
 			int filesize =0;
 			String filename2="";
@@ -110,9 +120,10 @@ public class ProductController {
 		      dto.setImage1(file.getOriginalFilename());
 		      dto.setImage2(file2.getOriginalFilename());
 		      dto.setPlike(0);
-		      
-		      int unum = Integer.parseInt(req.getParameter("unum"));
+		  //    int unum = Integer.parseInt(req.getParameter("unum"));
+		  	int unum =(int)session.getAttribute("unum");
 		      dto.setUnum(unum);
+		     
 		      res = productMapper.insertProduct(dto);
 			return "redirect:product_list.do";
 		}		
@@ -146,8 +157,9 @@ public class ProductController {
 			return "product/product_delete";
 		}
 		@RequestMapping(value="/product_delete.do",method=RequestMethod.POST)
-		public String deletePro(@RequestParam int pnum, @RequestParam String pname)	{
-			int res =  productMapper.deleteProduct(pnum, pname);
+		public String deletePro(@RequestParam int pnum, @RequestParam String delete)	{
+			
+			int res =  productMapper.deleteProduct(pnum, delete);
 			return "redirect:product_list.do";
 		}
 }

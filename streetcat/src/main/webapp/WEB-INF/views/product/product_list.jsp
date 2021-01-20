@@ -14,7 +14,8 @@
 		<tr bgcolor="skyblue">
 		
 		<td align="left"><a href ="home.do">StreetCat</a></td>	
-		<c:if test="${unum ne 0}"><td align="right"><a href="product_write.do?unum=${unum}">글쓰기</a></td>
+		<c:if test="${!empty unum}"><td align="right"><a href="product_write.do?unum=${unum}">글쓰기</a></td>
+		
 		</c:if>
 		</tr>
 	</table>
@@ -52,6 +53,9 @@
 			<c:if test= "${dto.type eq 'snack'}" >
 			간식
 			</c:if>
+			<c:if test= "${dto.type eq 'tuna'}" >
+			참치
+			</c:if>
 			<c:if test= "${dto.type eq 'toy'}" >
 			장난감
 			</c:if>
@@ -60,6 +64,9 @@
 			</c:if>
 			<c:if test= "${dto.type eq 'sand'}" >
 			모래
+			</c:if>
+			<c:if test= "${dto.type eq 'etc'}" >
+			기타
 			</c:if>
 		
 			</td>

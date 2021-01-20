@@ -53,7 +53,7 @@
   		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="등급 수정">
-				<a href="#">[취소]</a>
+				<a href="admin_list.do">[목록]</a>
 			</td>
   		</tr>
   	</table>

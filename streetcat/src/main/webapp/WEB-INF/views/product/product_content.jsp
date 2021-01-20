@@ -29,6 +29,9 @@
 			<c:if test= "${getProduct.type eq 'snack'}" >
 			간식
 			</c:if>
+			<c:if test= "${getProduct.type eq 'tuna'}" >
+			참치
+			</c:if>
 			<c:if test= "${getProduct.type eq 'toy'}" >
 			장난감
 			</c:if>
@@ -37,6 +40,9 @@
 			</c:if>
 			<c:if test= "${getProduct.type eq 'sand'}" >
 			모래
+			</c:if>
+			<c:if test= "${getProduct.type eq 'etc'}" >
+			기타
 			</c:if></td>
 		</tr>
 		<tr>
@@ -53,7 +59,7 @@
 		</tr>
 		<tr>
 			<td width="80%" align="right" colspan="4">
-			<c:if test="${grade eq '관리자' }">
+			<c:if test="${grade eq '관리자' or unum eq getProduct.unum}">
 				<input type="button" value="글수정" onclick="window.location='product_update.do?pnum=${getProduct.pnum}'">
 				<input type="button" value="글삭제" onclick="window.location='product_delete.do?pnum=${getProduct.pnum}'">
 			</c:if>	

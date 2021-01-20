@@ -4,12 +4,12 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-<title>게시글쓰기</title>
+<title>게시글쓰기  </title>
 
 </head>
 <body>
 <div align="center">
-	<form name="f" action="product_write_ok.do?unum=${unum}" method="post"
+	<form name="f" action="product_write_ok.do" method="post"
 												 enctype ="multipart/form-data">
 										
 		<table border="1" width="500">
@@ -41,9 +41,11 @@
 				<td><select name ="type">
 						<option>:::종류:::</option>
 						<option value="feed">사료</option>
+						<option value="tuna">참치</option>
 						<option value="snack">츄르</option>
 						<option value="toy">장난감</option>
 						<option value="sand">모래</option>
+						<option value="etc">기타</option>
 						
 				</select>
 			</tr>
