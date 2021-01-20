@@ -9,17 +9,27 @@
   }
     var num = 1;
     function addFile(){
-    	num++;
+    	
     	if(num>5){
     		alert("파일은 5개 이하만 가능합니다");
     		return;
     	}
 
-    	var input = '<input type="file" value="파일찾기" name="image'+num+'" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
+    	var input = '<input type="file" value="파일찾기" name="image'+num+'" required accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
     	
     	var fileContainer = document.getElementById('file_container');
     	fileContainer.innerHTML += input;
+    	num++;
     	}
+    function removeFile(){
+
+    	var input = '<input type="file" value="파일찾기" name="image'+num+'" required accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
+    	
+    	var fileContainer = document.getElementById('file_container');
+    	fileContainer.innerHTML = "";
+    	num=1;
+    	
+    }
     function preImg(a, b, c, d) {
     	  var f = a.value;
     	  var g = f.substring(f.lastIndexOf('.') + 1).toLowerCase();
@@ -76,11 +86,10 @@
  <td>
  <div id="file_container">
  
- <input type="file" value="파일찾기" name="image1" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view1', 50, 50)">
-<div id="img_view1" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;">
- </div>
+ 
  </div>
  <button type="button" onclick="addFile()">+</button>
+ <button type="button" onclick="removeFile()">reset</button>
  <br>
  </tr>
  <tr>
@@ -91,7 +100,7 @@
  <td>위치</td>
  <td><input type="text" name="location" id="plocation">
  <input type="hidden" name="cnum" id="pcnum">
- <button type="button" onclick="window.open('cat_find.do','childForm', 'width=570, height=350, resizable = no, scrollbars = no')">고양이찾기
+ <button type="button" onclick="window.open('cat_find.do','childForm', 'width=570, height=350, resizable = no, scrollbars = yes')">고양이찾기
  </button>
  </td>
  </tr>

@@ -28,7 +28,7 @@ function isLogin(name){
 				    <c:when test="${dto.type eq 'private'}">
 				    <img src="./resources/image/private.jpg" width="150" height="150">
 				    </c:when>
-				    <c:when test="${empty dto.image1}">
+				    <c:when test="${dto.type eq 'member'}">
 				    <img src="./resources/image/cat.jpg" width="150" height="150">
 				    </c:when>
 				    <c:otherwise>
