@@ -17,7 +17,7 @@
    <script>
    
    function isLoginLike(bnum,id){
-  	 <% if(session.getAttribute("id")==null){%>
+  	 <% if(session.getAttribute("mbId")==null){%>
   	 alert("로그인 후 이용해주세요")
   	 <%}else{%>
   	 alert("추천 완료!")
@@ -25,7 +25,7 @@
   	 <%}%>
    }
    function isLoginUnLike(bnum,id){
-	  	 <% if(session.getAttribute("id")==null){%>
+	  	 <% if(session.getAttribute("mbId")==null){%>
 	  	 alert("로그인 후 이용해주세요")
 	  	 <%}else{%>
 	  	 alert("추천 취소!")
@@ -33,7 +33,7 @@
 	  	 <%}%>
 	   }
      function isLogin(){
-    	 <% if(session.getAttribute("name")==null){%>
+    	 <% if(session.getAttribute("mbId")==null){%>
     	 alert("로그인 후 이용해주세요")
     	 location.href("cat_board.do")
     	 <%}%>
@@ -43,22 +43,29 @@
 	 window.history.back()
 	 <%}%>
 	 
-	 <c:if test="${getBoard.type == 'member'&&sessionScope.name==null}">
+	 <c:if test="${getBoard.type == 'member'&&sessionScope.mbId==null}">
 	 alert("회원공개 게시물입니다")
 	 window.history.back()
 	 </c:if>
-	 <c:if test="${getBoard.type == 'private'&&sessionScope.name!=getBoard.writer}">
+	 <c:if test="${getBoard.type == 'private'&&sessionScope.mbId!=getBoard.writer}">
+	  <c:if test="${sessionScope.grade!='관리자'}">
 	 alert("비공개 게시물입니다")
 	 window.history.back()
+	  </c:if>
 	 </c:if>
     </script>
     
 <c:if test="${getBoard.writer==sessionScope.name}">
-
-</c:if>
 <a href="cat_board_edit.do?bnum=${getBoard.bnum}">수정</a>
 | <a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
 삭제</a> <!-- 작성자와 로그인id가 같을시 수정|삭제 띄움 -->
+</c:if>
+<c:if test="${sessionScope.grade=='관리자'}">
+<a href="cat_board_edit.do?bnum=${getBoard.bnum}">수정</a>
+| <a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
+삭제</a> <!-- 관리자로 로그인할시 수정|삭제 띄움 -->
+</c:if>
+
 
 <html>
 
@@ -132,12 +139,12 @@ ${getBoard.subject}
   <c:choose>
   <c:when test="${like=='unlike'}">
   <td>
-   <button onclick="isLoginUnLike('${getBoard.bnum}','${sessionScope.id}')">추천취소 : ${likeCount}</button>
+   <button onclick="isLoginUnLike('${getBoard.bnum}','${sessionScope.mbId}')">추천취소 : ${likeCount}</button>
   </td>
   </c:when>
   <c:when test="${like=='like'}">
   <td>
-   <button onclick="isLoginLike('${getBoard.bnum}','${sessionScope.id}')">추천 : ${likeCount}</button>
+   <button onclick="isLoginLike('${getBoard.bnum}','${sessionScope.mbId}')">추천 : ${likeCount}</button>
   </td>
   </c:when>
   </c:choose>
@@ -197,7 +204,7 @@ ${getBoard.subject}
  <!-- isLogin() 비로그인시 로그인창으로 이동 
   onfocus="isLogin()" 
  -->
- <textarea placeholder='댓글을 입력하세요' name="content" rows="3" cols="100%" required></textarea>
+ <textarea onclick="isLogin()" placeholder='댓글을 입력하세요' name="content" rows="3" cols="100%" required></textarea>
  </td>
  <td>
  <input type="hidden" name="bnum" value="${getBoard.bnum}">

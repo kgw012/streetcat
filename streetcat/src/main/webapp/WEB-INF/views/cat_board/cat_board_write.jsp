@@ -36,7 +36,7 @@
  </tr>
  <tr>
  <td>작성자</td>
- <td><input type="text" name="writer" value="${sessionScope.name}"></td>
+ <td><input type="text" name="writer" value="${sessionScope.mbId}" readonly></td>
  </tr>
  <tr>
  <td>제목</td>
