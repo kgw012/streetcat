@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{image1,jdbcType=VARCHAR},#{image2,jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},#{image4,jdbcType=VARCHAR},#{image5,jdbcType=VARCHAR},#{location}, #{name}, #{feature},#{type},0,0)
 	</insert>
 	<select id="cat_list"  resultType="CatDTO" parameterType="java.util.Map">
-		select * from cat where location = #{location}
+		select * from cat where location like '%'||#{location}||'%'
 	</select>
 	<select id="getCat"  resultType="CatDTO" parameterType="int">
 		select * from cat where cnum = #{cnum}
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cat_board where bnum = #{bnum}
 	</select>
 	<insert id="cat_insertComment" parameterType="CatBoardCommentDTO">
-	  insert into cat_board_comment values(seq_comment_num.nextval,#{bnum},0,sysdate,#{content},#{re_step}, #{re_level})
+	  insert into cat_board_comment values(seq_comment_num.nextval,#{bnum},#{writer},sysdate,#{content},#{re_step}, #{re_level})
 	</insert>
 	<select id="cat_boardComment" resultType="CatBoardCommentDTO" parameterType="java.util.Map">
 	  select * from (select rownum rn, A.* from (select * from cat_board_comment order by re_step asc)A) where rn between #{start} and #{end} and bnum = #{bnum}
