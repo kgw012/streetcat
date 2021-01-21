@@ -35,10 +35,28 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member.do", method = RequestMethod.POST)
-	public String memberInsert_Ok(@ModelAttribute MemberDTO dto) {
-
-		int res = memberMapper.insertMember(dto);
-		return "redirect:home.do"; 
+	public String memberInsert_Ok(HttpServletRequest req, @ModelAttribute MemberDTO dto) {
+		
+		 
+		String search = "id";
+		String searchString = req.getParameter("id");
+		
+		
+		String msg= null;
+		String url ="";
+		List<MemberDTO> listMember = memberMapper.findMember(search, searchString);
+		if(listMember.isEmpty()) {
+			int res = memberMapper.insertMember(dto);
+			msg = "회원가입이 정상적으로 처리되었습니다.";
+			url ="member/member";
+			
+		}else if(!listMember.isEmpty()) {
+			msg = "중복된 아이디 입니다.";
+		
+		}
+		req.setAttribute("msg",msg);
+		req.setAttribute("url",url	);
+			return "message"; //메시지 팝업왜 안뜨냐..
 	}
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)
