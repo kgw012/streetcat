@@ -4,7 +4,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-	
+	  <script>
+   
+   function isLoginLike(pnum,mbNo){
+  	 <% if(session.getAttribute("mbId")==null){%>
+  	 alert("로그인 후 이용해주세요")
+  	 <%}else{%>
+  	 alert("추천 완료!")
+  	 location.href("product_like.do?pnum="+pnum+"&mbNo="+mbNo)
+  	 <%}%>
+   }
+   function isLoginUnLike(pnum,mbNo){
+	  	 <% if(session.getAttribute("mbId")==null){%>
+	  	 alert("로그인 후 이용해주세요")
+	  	 <%}else{%>
+	  	 alert("추천 취소!")
+	  	 location.href("product_unLike.do?pnum="+pnum+"&mbNo="+mbNo)
+	  	 <%}%>
+	   }
+   </script>
 	<title>글내용</title>
 </head>
 <body>
@@ -58,7 +76,19 @@
 			<td width="80%" align="center" colspan="3">${getProduct.content}</td>
 		</tr>
 		<tr>
-			<td width="80%" align="right" colspan="4">
+			<c:choose>
+  <c:when test="${like=='like'}">
+  <td>
+   <button onclick="isLoginUnLike('${getProduct.pnum}','${mbNo}')" >좋아ing : ${getProduct.plike}</button>
+  </td>
+  </c:when>
+  <c:when test="${like=='unlike'}">
+  <td>
+   <button onclick="isLoginLike('${getProduct.pnum}','${mbNo}')"  >좋아? : ${getProduct.plike}</button>
+   </td>
+  </c:when>
+  			</c:choose>
+			<td width="80%" align="right" colspan="3">
 			<c:if test="${grade eq '관리자' or unum eq getProduct.unum}">
 				<input type="button" value="글수정" onclick="window.location='product_update.do?pnum=${getProduct.pnum}'">
 				<input type="button" value="글삭제" onclick="window.location='product_delete.do?pnum=${getProduct.pnum}'">

@@ -150,6 +150,7 @@ public class MemberController {
 				session.setAttribute("mbId", mbId);
 				session.setAttribute("grade", gradeString);
 				session.setAttribute("unum", unum);
+				session.setAttribute("mbNo", unum);
 				mav.setViewName("home");
 				mav.addObject("session", session);
 				

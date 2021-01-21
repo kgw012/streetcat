@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.model.ProdLikeDTO;
 import com.ezen709.streetcat.model.ProductDTO;
 
 @Service
@@ -54,6 +55,43 @@ public class ProductMapper {
 			return sqlSession.delete("deleteProduct", pnum);
 		}
 		
+		public int getProdLike(int pnum, int unum ) {
+			Map<String,Integer> map = new Hashtable<>();
+			map.put("pnum", pnum);
+			map.put("unum", unum);
+			int res = sqlSession.selectOne("getProdLike",map);
+		  
+			return res;
+		}
+		public int getProdLikeAll(int pnum) {
 		
+			int res = sqlSession.selectOne("getProdLikeAll",pnum);
+		  
+			return res;
+		}
 		
+		public int plusProdLike(int pnum, int mbNo) {
+			Map<String,Integer> map = new Hashtable<>();
+			map.put("pnum", pnum);
+			map.put("mbNo", mbNo);
+			
+			int res = sqlSession.insert("plusProdLike", map);
+			return res;
+		}
+		public int minusProdLike(int pnum, int mbNo) {
+			Map<String,Integer> map = new Hashtable<>();
+			map.put("pnum", pnum);
+			map.put("mbNo", mbNo);
+			
+			int res = sqlSession.delete("minusProdLike", map);
+			return res;
+		}
+		public void updateLike(int pnum, int plike) {
+			Map<String,Integer> map = new Hashtable<>();
+			map.put("pnum", pnum);
+			map.put("plike", plike);
+			sqlSession.update("updateLike", map);
+			
+		}
+	
 }

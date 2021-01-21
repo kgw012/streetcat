@@ -19,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen709.streetcat.model.CatBoardDTO;
+import com.ezen709.streetcat.model.CatBoardLikeDTO;
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.model.ProdLikeDTO;
 import com.ezen709.streetcat.model.ProductDTO;
 import com.ezen709.streetcat.service.ProductMapper;
 
@@ -131,12 +134,27 @@ public class ProductController {
 	
 		
 		@RequestMapping("/product_content.do")
-		public ModelAndView content(@RequestParam int pnum) {
+		public ModelAndView content(HttpServletRequest req) {
 			
+			int pnum = Integer.parseInt(req.getParameter("pnum"));
+		
 			ProductDTO dto = productMapper.getProduct(pnum);
 			ModelAndView mav = new ModelAndView("product/product_content", "getProduct", dto);
-			mav.addObject("uploadPath",uploadPath);
+		
+			HttpSession session = req.getSession();
 			
+			int unum =(int)session.getAttribute("unum");
+			  int count_like = productMapper.getProdLike(pnum, unum);
+			  String like = null;
+			  if(count_like ==0	) {
+				  like ="unlike";
+			  }else {
+				  like="like";
+			  }
+			 
+			
+			mav.addObject("uploadPath",uploadPath);
+			mav.addObject("like", like);
 			return mav;
 		}
 		@RequestMapping(value="/product_update.do",method=RequestMethod.GET)
@@ -162,4 +180,50 @@ public class ProductController {
 			int res =  productMapper.deleteProduct(pnum, delete);
 			return "redirect:product_list.do";
 		}
+	
+		//추천기능
+		@RequestMapping(value="/product_like.do")
+		public String proudctLike(HttpServletRequest req) {
+			String msg,url = null;
+	        int pnum = Integer.parseInt(req.getParameter("pnum"));
+	        int mbNo = Integer.parseInt(req.getParameter("mbNo"));
+	       
+	        int res = productMapper.plusProdLike(pnum, mbNo);
+	        System.out.println("res : " + res);
+	        int plike = productMapper.getProdLikeAll(pnum);
+	        System.out.println("plike : " + plike);
+	        if(res>0) {
+			   productMapper.updateLike(pnum, plike);
+				msg = "좋아요 성공 게시글로 이동합니다";
+				url = "product_content.do?pnum="+pnum;
+			}else {
+				msg = "좋아요 실패 게시글로 이동합니다";
+				url = "product_content.do?pnum="+pnum;
+			}
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			return "message";
+		}
+		@RequestMapping(value="/product_unLike.do")
+		public String proudctUnLike(HttpServletRequest req) {
+			String msg,url = null;
+	        int pnum = Integer.parseInt(req.getParameter("pnum"));
+	        int mbNo = Integer.parseInt(req.getParameter("mbNo"));
+   
+	        int res = productMapper.minusProdLike(pnum, mbNo);
+	    	int plike = productMapper.getProdLikeAll(pnum);
+			
+	    	if(res>0) {
+				productMapper.updateLike(pnum, plike);
+				msg = "좋아요 취소 성공 게시글로 이동합니다";
+				url = "product_content.do?pnum="+pnum;
+			}else {
+				msg = "좋아요 취소 실패 게시글로 이동합니다";
+				url = "product_content.do?pnum="+pnum;
+			}
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			return "message";
+		}
+		
 }

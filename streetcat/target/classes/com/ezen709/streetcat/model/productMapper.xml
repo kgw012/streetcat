@@ -4,10 +4,9 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen709.streetcat.model">
 	<select id="listProduct"   resultType="productDTO" parameterType="java.util.Map">
-		
-		select * from product  
-		where pnum between #{start} and #{end} 
-		order by  pnum desc
+			
+		select * from (select rownum rn, A.* from (select * from product order by pnum desc)A)
+		where rn between #{start} and #{end}
 		
 	</select>
 	
@@ -34,5 +33,24 @@
 		delete from product where pnum=#{pnum}
 	</delete>
 	
+	<select id="getProdLike" resultType="Integer" parameterType="java.util.Map">
+		select count(*) from p_like_tab where pnum=#{pnum} and unum=#{unum}
+		
+	</select>
+	<select id="getProdLikeAll" resultType="Integer" parameterType="int">
+		select count(*) from p_like_tab where pnum=#{pnum}
+		
+	</select>
 	
+	<insert id="plusProdLike"  parameterType="java.util.Map">
+		insert into p_like_tab values (seq_plike_no.nextval, #{pnum}, #{mbNo})
+	</insert>
+	
+	<insert id="minusProdLike"  parameterType="java.util.Map">
+		delete from p_like_tab where pnum= #{pnum} and unum=#{mbNo}
+	</insert>
+	
+	<update id="updateLike" parameterType="java.util.Map">
+		update product set plike=#{plike} where pnum=#{pnum} 
+	</update>
 </mapper>
