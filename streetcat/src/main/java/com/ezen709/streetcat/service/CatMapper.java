@@ -35,6 +35,23 @@ public class CatMapper {
 		return list;
 	}
 	
+	public List<CatDTO> findCatListByLocation(double lat, double lon){
+		double lat_min = lat - 1 / 109.958489129649955;
+		double lat_max = lat + 1 / 109.958489129649955;
+		double lon_min = lon - 1 / 88.74;
+		double lon_max = lon + 1 / 88.74;
+		String sql = "SELECT * FROM cat WHERE "
+				+ " ( location_lat BETWEEN " + lat_min + " AND " + lat_max + " ) "
+				+ " AND "
+				+ " ( location_long BETWEEN " + lon_min + " AND " + lon_max + " ) ";
+		
+		Map<String, String> map = new Hashtable<>();
+		map.put("sql", sql);
+		
+		List<CatDTO> list = sqlSession.selectList("findCat", map);
+		return list;
+	}
+	
 	public int insertCat(CatDTO dto) {
 		return sqlSession.insert("insert_cat", dto);
 	}

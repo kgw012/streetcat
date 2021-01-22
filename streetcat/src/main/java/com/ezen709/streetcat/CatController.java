@@ -27,22 +27,26 @@ public class CatController {
 	@Autowired
 	private CatMapper catMapper;
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
 	@RequestMapping(value = "/cat_list.do", method = RequestMethod.GET)
 	public ModelAndView go_catList() {
 		List<CatDTO> catList = catMapper.getCatList();
 		ModelAndView mav = new ModelAndView("cat/cat_list");
 		mav.addObject("catList", catList);
-		mav.addObject("uploadPath", uploadPath);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/cat_list.do", method = RequestMethod.POST)
 	public ModelAndView findCat(@RequestParam String searchString, @RequestParam String search) {
-		List<CatDTO> catList = catMapper.findCatList(searchString, search);
 		ModelAndView mav = new ModelAndView("cat/cat_list");
+		List<CatDTO> catList = null;
+		if(searchString.equals("findByLocation")) {
+			String[] s = search.split(",");
+			double lat = Double.parseDouble(s[0]);
+			double lon = Double.parseDouble(s[1]);
+			catList = catMapper.findCatListByLocation(lat, lon);
+		}else {
+			catList = catMapper.findCatList(searchString, search);
+		}
 		mav.addObject("catList", catList);
 		return mav;
 	}
@@ -62,12 +66,16 @@ public class CatController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile file = mr.getFile("image_file");
 		
+		String root_path = req.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/upload/";
+		String filename = dto.getCnum() + "_" + file.getOriginalFilename();
+		
 		if(file!=null) {
-			File target = new File(uploadPath, file.getOriginalFilename());
+			File target = new File(root_path + attach_path, filename);
 			try {
 				file.transferTo(target);
 				int filesize = (int)file.getSize();
-				dto.setImage(file.getOriginalFilename());
+				dto.setImage(filename);
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -83,7 +91,6 @@ public class CatController {
 		CatDTO dto = catMapper.getCatByCnum(Integer.parseInt(cnum));
 		ModelAndView mav = new ModelAndView("cat/cat_content");
 		mav.addObject("getCat", dto);
-		mav.addObject("uploadPath", uploadPath);
 		return mav;
 	}
 	

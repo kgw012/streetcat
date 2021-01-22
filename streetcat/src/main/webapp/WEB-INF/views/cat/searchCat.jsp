@@ -9,8 +9,15 @@
 <body>
 	<div align="center">
 		<h1>고양이 위치검색</h1>
+		<p>
+			지도를 클릭하여 근방의 고양이들을 찾습니다.
+		</p>
+		<form name="f" method="post">
+			<input type="hidden" name="searchString" value="">
+			<input type="hidden" name="search" value="">
+			<input type="button" value="찾기" onclick="searchSubmit(lat, lon);">
+		</form>
 		<div id="map" style="width:500px;height:400px;"></div>
-		<div id="clickLatlng"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js
 			?appkey=c545970a000c32aa58cb39d32c259bd4"></script>
 		<script>
@@ -69,16 +76,24 @@
 			    // 클릭한 위도, 경도 정보를 가져옵니다 
 			    var latlng = mouseEvent.latLng; 
 			    
+			    lat = latlng.getLat();
+			    lon = latlng.getLng();
+			    
 			    // 마커 위치를 클릭한 위치로 옮깁니다
 			    marker.setPosition(latlng);
 			    
-			    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-			    message += '경도는 ' + latlng.getLng() + ' 입니다';
-			    
-			    var resultDiv = document.getElementById('clickLatlng'); 
-			    resultDiv.innerHTML = message;
-			    
 			});
+			
+			function searchSubmit(lat, lon){
+				document.getElementsByName("searchString")[0].value = "findByLocation";
+				document.getElementsByName("search")[0].value = lat + "," + lon;
+				
+				window.opener.name = "parentPage";
+				document.f.target = "parentPage";
+				document.f.action = "cat_list.do";
+				document.f.submit();
+				self.close();
+			}
 		</script>
 	</div>
 </body>

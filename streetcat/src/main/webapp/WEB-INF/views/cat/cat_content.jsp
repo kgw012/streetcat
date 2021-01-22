@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<th width="20%" bgcolor="yellow">고양이 사진</th>
-				<td align="center"><img src="${uploadPath}/${getCat.image}" width="150" height="150"></td>
+				<td align="center"><img src="./resources/upload/${getCat.image}" width="150" height="150"></td>
 			</tr>
 			<tr bgcolor="yellow">
 				<td colspan="2" align="center">

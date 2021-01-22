@@ -6,6 +6,15 @@
 <head>
 	<meta charset="EUC-KR">
 	<title>고양이 검색</title>
+	<script type="text/javascript">
+		function open_serachCat(){
+			var width = 700;
+			var height = 500;
+			var left = window.screen.width / 2 - width / 2;
+			var top = window.screen.height / 2 - height / 2;
+			window.open("searchCat.do", "고양이 위치로찾기", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+		}
+	</script>
 </head>
 <body>
 	<div align="center">
@@ -17,6 +26,7 @@
 				<option value="feature">특징검색</option>
 			</select>
 				<input type="text" name="search">
+				<input type="button" value="위치로 찾기" onclick="open_serachCat();">
 				<input type="submit" value="검색">
 		</form>
 		<br>
@@ -40,7 +50,7 @@
 			<tr>
 				<td align="center"><a href="cat_content.do?cnum=${dto.cnum}">${dto.name }</a></td>
 				<td align="center">${dto.feature }</td>
-				<td align="center"><a href="cat_content.do?cnum=${dto.cnum}"><img src="${uploadPath}/${dto.image}" width="150" height="150"></a></td>
+				<td align="center"><a href="cat_content.do?cnum=${dto.cnum}"><img src="./resources/upload/${dto.image}" width="150" height="150"></a></td>
 				<td align="center">${dto.location }</td>
 			</tr>
 </c:forEach>
