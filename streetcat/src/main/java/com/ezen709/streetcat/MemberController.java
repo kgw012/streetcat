@@ -48,15 +48,12 @@ public class MemberController {
 		if(listMember.isEmpty()) {
 			int res = memberMapper.insertMember(dto);
 			msg = "회원가입이 정상적으로 처리되었습니다.";
-			url ="member/member";
-			
 		}else if(!listMember.isEmpty()) {
 			msg = "중복된 아이디 입니다.";
-		
 		}
 		req.setAttribute("msg",msg);
 		req.setAttribute("url",url	);
-			return "message"; //메시지 팝업왜 안뜨냐..
+			return "message2"; 
 	}
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)

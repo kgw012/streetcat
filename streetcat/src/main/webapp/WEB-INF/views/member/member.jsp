@@ -17,7 +17,7 @@
 				return
 			}
 			document.f.submit()
-			window.close()
+			
 		}
 	</script>
 	
