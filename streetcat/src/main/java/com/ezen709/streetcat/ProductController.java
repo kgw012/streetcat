@@ -142,8 +142,10 @@ public class ProductController {
 			ModelAndView mav = new ModelAndView("product/product_content", "getProduct", dto);
 		
 			HttpSession session = req.getSession();
-			
-			int unum =(int)session.getAttribute("unum");
+			int unum= 0;
+			if(session.getAttribute("unum")!=null) {
+				 unum =(int)session.getAttribute("unum");
+			}
 			  int count_like = productMapper.getProdLike(pnum, unum);
 			  String like = null;
 			  if(count_like ==0	) {
