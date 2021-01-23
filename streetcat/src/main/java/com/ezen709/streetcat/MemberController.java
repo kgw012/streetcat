@@ -50,10 +50,11 @@ public class MemberController {
 			msg = "회원가입이 정상적으로 처리되었습니다.";
 		}else if(!listMember.isEmpty()) {
 			msg = "중복된 아이디 입니다.";
+			url = "haveId";
 		}
 		req.setAttribute("msg",msg);
-		req.setAttribute("url",url	);
-			return "message2"; 
+		req.setAttribute("url",url);
+			return "message"; 
 	}
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)

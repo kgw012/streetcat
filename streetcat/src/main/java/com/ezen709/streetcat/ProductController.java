@@ -143,8 +143,10 @@ public class ProductController {
 		
 			HttpSession session = req.getSession();
 			int unum= 0;
-			if(session.getAttribute("unum")!=null) {
-				 unum =(int)session.getAttribute("unum");
+			if(session.getAttribute("unum")==null) {
+				 unum = 0;
+			}else {
+				unum =(int)session.getAttribute("unum");
 			}
 			  int count_like = productMapper.getProdLike(pnum, unum);
 			  String like = null;

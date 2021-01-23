@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="cat_insertBoard" parameterType="CatBoardDTO">
 	  insert into cat_board values (seq_bnum.nextval,
-			#{writer}, #{subject}, #{content},sysdate,0, 0,
+			#{writer}, #{subject}, #{content},sysdate,0,0,
 			#{image1,jdbcType=VARCHAR},#{image2,jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},#{image4,jdbcType=VARCHAR},#{image5,jdbcType=VARCHAR},#{location}, #{name}, #{feature},#{type},0,0)
 	</insert>
 	<select id="cat_list"  resultType="CatDTO" parameterType="java.util.Map">
@@ -77,7 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      delete from cat_board where bnum = #{bnum}
     </delete>
     <update id="boardEdit" parameterType="CatBoardDTO">
-     update cat_board set subject = #{subject} content = #{content} location = #{location} name = #{name} feature = #{feature} where bnum = #{bnum}
+     update cat_board set image1 = #{image1,jdbcType=VARCHAR}, image2 = #{image2,jdbcType=VARCHAR}, image3 = #{image3,jdbcType=VARCHAR}, image4 = #{image4,jdbcType=VARCHAR}, image5 = #{image5,jdbcType=VARCHAR},
+     subject = #{subject}, content = #{content}, location = #{location}, name = #{name}, feature = #{feature} where bnum = #{bnum}
     </update>
     <select id="nextBoard" parameterType="int" resultType="int">
      select min(bnum) bnum from cat_board where <![CDATA[bnum > #{bnum}]]>
@@ -85,4 +86,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="beforeBoard" parameterType="int" resultType="int">
      select max(bnum) bnum from cat_board where <![CDATA[bnum < #{bnum}]]>
     </select>
+    <update id="imageDelete" parameterType="CatBoardDTO">
+    <choose>
+    <when test="image=='image1'">
+     update cat_board set image1 = null where bnum = #{bnum}
+     </when>
+     <when test="image=='image2'">
+     update cat_board set image2 = null where bnum = #{bnum}
+     </when>
+     <when test="image=='image3'">
+     update cat_board set image3 = null where bnum = #{bnum}
+     </when>
+     <when test="image=='image4'">
+     update cat_board set image4 = null where bnum = #{bnum}
+     </when>
+     <when test="image=='image5'">
+     update cat_board set image5 = null where bnum = #{bnum}
+     </when>
+     </choose>
+    </update>
 </mapper>

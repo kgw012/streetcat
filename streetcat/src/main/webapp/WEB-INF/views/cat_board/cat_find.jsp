@@ -42,7 +42,7 @@ function sendChildValue(cnum,location,name,feature){
 <tr>
 <td width="110">
 <a href="javascript:sendChildValue('${dto.cnum}','${dto.location}','${dto.name}','${dto.feature }')">
-<img src="${upPath}/${dto.image}" width="100" height="100">
+<img src="./resources/upload/${dto.image}" width="100" height="100">
 </a>
 </td>
 <td>

@@ -10,6 +10,11 @@
 				alert("<%=msg%>")
 				self.close()
 			</script>
+			<%}else if(url.equals("haveId")){ %>
+			<script type="text/javascript">
+				alert("<%=msg%>")
+				self.close()
+			</script>
 <% 	}else {%>
 			<script type="text/javascript">
 				alert("<%=msg%>")

@@ -114,5 +114,8 @@ public class CatBoardMapper {
 				res = sqlSession.selectOne("beforeBoard",bnum);}
 				return res;
 		}
+		public int imageDelete(CatBoardDTO dto) {
+			return sqlSession.update("imageDelete",dto);
+		}
 		
 	}
