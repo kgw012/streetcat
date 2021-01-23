@@ -5,20 +5,28 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>고양이 검색</title>
+	<title>길냥이 검색</title>
 	<script type="text/javascript">
 		function open_serachCat(){
 			var width = 700;
-			var height = 500;
+			var height = 600;
 			var left = window.screen.width / 2 - width / 2;
 			var top = window.screen.height / 2 - height / 2;
 			window.open("searchCat.do", "고양이 위치로찾기", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 		}
+		function isLogin(unum){
+			if(unum == null){
+				alert("로그인 후 이용해주세요");
+				return;
+			}
+			document.reg.submit();
+		}
 	</script>
 </head>
 <body>
+    <h2><a href="home.do">CATSTREET</a></h2>
 	<div align="center">
-		<h1>고양이 검색</h1>
+		<h1>길냥이 검색</h1>
 		<br>
 		<form name="f" action="cat_list.do" method="post">
 			<select name="searchString">
@@ -30,10 +38,16 @@
 				<input type="submit" value="검색">
 		</form>
 		<br>
-		<h2>고양이 목록</h2>
+		<h2>길냥이 목록</h2>
 		<table border="1" style="width:80%;">
 			<tr>
-				<td align="right" colspan="4"><a href="cat_insert.do">고양이 등록하기</a></td>
+				<td align="right" colspan="4">
+					<form name="reg" action="cat_insert.do" method="post">
+						<input type="hidden" name="unum" value="${sessionScope.unum}">
+						<a href="javascript:isLogin(${sessionScope.unum})">길냥이 등록하기</a>
+					</form>
+				
+				</td>
 			</tr>
 			<tr>
 				<th>이름</th>
@@ -43,7 +57,7 @@
 			</tr>
 <c:if test="${empty catList}">	
 			<tr>
-				<td colspan="4">등록된 고양이가 없습니다.</td>
+				<td colspan="4">등록된 길냥이가 없습니다.</td>
 			</tr>
 </c:if>
 <c:forEach var="dto" items="${catList}">

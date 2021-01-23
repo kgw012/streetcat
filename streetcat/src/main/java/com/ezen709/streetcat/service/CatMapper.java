@@ -59,4 +59,12 @@ public class CatMapper {
 	public CatDTO getCatByCnum(int cnum) {
 		return sqlSession.selectOne("getCatByCnum", cnum);
 	}
+	
+	public int editCat(CatDTO dto) {
+		return sqlSession.update("edit_cat", dto);
+	}
+	
+	public int deleteCat(int cnum) {
+		return sqlSession.delete("delete_cat", cnum);
+	}
 }

@@ -8,6 +8,7 @@ public class CatDTO {
 	private String feature;
 	private double location_lat;
 	private double location_long;
+	private int unum;
 	
 	public int getCnum() {
 		return cnum;
@@ -51,4 +52,11 @@ public class CatDTO {
 	public void setLocation_long(double location_long) {
 		this.location_long = location_long;
 	}
+	public int getUnum() {
+		return unum;
+	}
+	public void setUnum(int unum) {
+		this.unum = unum;
+	}
+	
 }

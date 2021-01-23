@@ -10,9 +10,16 @@
 		${sql}
 	</select>
 	<insert id="insert_cat" parameterType="CatDTO">
-	  insert into cat values (seq_cnum.nextval, #{location}, #{image}, #{name}, #{feature}, #{location_lat}, #{location_long})
+	  insert into cat values (seq_cnum.nextval, #{location}, #{image}, #{name}, #{feature}, #{location_lat}, #{location_long}, #{unum})
 	</insert>
 	<select id ="getCatByCnum" resultType="CatDTO" parameterType="Int">
 		select * from cat where cnum= #{cnum}
 	</select>
+	<update id="edit_cat" parameterType="CatDTO">
+    	update cat set location = #{location}, image = #{image}, name = #{name}, feature = #{feature}, location_lat = #{location_lat},
+    	 location_long = #{location_long} where cnum = #{cnum}
+    </update>
+    <delete id="delete_cat" parameterType="int">
+    	delete from cat where cnum = #{cnum}
+    </delete>
 </mapper>

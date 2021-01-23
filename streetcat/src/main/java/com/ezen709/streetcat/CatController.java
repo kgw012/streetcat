@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen709.streetcat.model.CatDTO;
+import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.service.CatMapper;
+import com.ezen709.streetcat.service.MemberMapper;
 
 @Controller
 public class CatController {
 
 	@Autowired
 	private CatMapper catMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	@RequestMapping(value = "/cat_list.do", method = RequestMethod.GET)
 	public ModelAndView go_catList() {
@@ -56,9 +60,13 @@ public class CatController {
 		return "cat/searchCat";
 	}
 	
-	@RequestMapping(value = "/cat_insert.do", method = RequestMethod.GET)
-	public String insert_cat() {
-		return "cat/cat_insert";
+	@RequestMapping(value = "/cat_insert.do", method = RequestMethod.POST)
+	public ModelAndView insert_cat(@RequestParam int unum) {
+		ModelAndView mav = new ModelAndView("cat/cat_insert");
+		mav.addObject("unum", unum);
+		MemberDTO member = memberMapper.getMember(unum);
+		mav.addObject("mbId", member.getId());
+		return mav;
 	}
 	
 	@RequestMapping(value = "/cat_insert_ok.do", method = RequestMethod.POST)
@@ -69,6 +77,7 @@ public class CatController {
 		String root_path = req.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/upload/";
 		String filename = dto.getCnum() + "_" + file.getOriginalFilename();
+		System.out.println(root_path);
 		
 		if(file!=null) {
 			File target = new File(root_path + attach_path, filename);
@@ -92,6 +101,49 @@ public class CatController {
 		ModelAndView mav = new ModelAndView("cat/cat_content");
 		mav.addObject("getCat", dto);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/cat_edit.do")
+	public ModelAndView cat_edit(@RequestParam int unum, @RequestParam int cnum) {
+		MemberDTO member = memberMapper.getMember(unum);
+		ModelAndView mav = new ModelAndView("cat/cat_edit");
+		CatDTO cat = catMapper.getCatByCnum(cnum);
+		mav.addObject("unum", unum);
+		mav.addObject("cat", cat);
+		mav.addObject("mbId", member.getId());
+		return mav;
+	}
+	
+	@RequestMapping(value = "/cat_edit_ok.do")
+	public String cat_edit_ok(HttpServletRequest req, @ModelAttribute CatDTO dto, BindingResult result) {
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile file = mr.getFile("image_file");
+		
+		String root_path = req.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/upload/";
+		String filename = dto.getCnum() + "_" + file.getOriginalFilename();
+		System.out.println(root_path);
+		
+		if(!file.isEmpty()) {
+			File target = new File(root_path + attach_path, filename);
+			try {
+				file.transferTo(target);
+				int filesize = (int)file.getSize();
+				dto.setImage(filename);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+		
+		int res = catMapper.editCat(dto);
+		
+		return "redirect:cat_list.do";
+	}
+	
+	@RequestMapping(value = "/cat_delete.do")
+	public String cat_delete(@RequestParam int cnum) {
+		int res = catMapper.deleteCat(cnum);
+		return "redirect:cat_list.do";
 	}
 	
 }

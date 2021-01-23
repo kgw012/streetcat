@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>길냥이 등록하기</title>
+	<title>길냥이 수정하기</title>
 	<style>
 	    .map_wrap {position:relative;width:100%;height:350px;}
 	    .title {font-weight:bold;display:block;}
@@ -32,10 +32,6 @@
 				alert("지도상에 출현 위치를 클릭해주세요!");
 				return false;
 			}
-			if(f.image_file.value==""){
-				alert("대표사진을 업로드해주세요!");
-				return false;
-			}
 			return true;
 		}
 	</script>
@@ -43,12 +39,12 @@
 <body>
     <h2><a href="home.do">CATSTREET</a></h2>
 	<div align="center">
-		<h1>길냥이 등록하기</h1>
+		<h1>길냥이 수정하기</h1>
 		<br>
-		<form name="f" action="cat_insert_ok.do" method="post" enctype ="multipart/form-data" onsubmit="return check()">
+		<form name="f" action="cat_edit_ok.do" method="post" enctype ="multipart/form-data" onsubmit="return check()">
 			<table border="1" style="width:800px;">
 				<tr bgcolor="yellow">
-					<td align="center" colspan="2">길냥이 등록하기</td>
+					<td align="center" colspan="2">길냥이 수정하기</td>
 				</tr>
 				<tr>
 					<th width="20%" bgcolor="yellow">등록자</th>
@@ -57,18 +53,18 @@
 				</tr>
 				<tr>
 					<th width="20%" bgcolor="yellow">길냥이 이름</th>
-					<td><input type="text" name="name" class="box" size="45"></td>
+					<td><input type="text" name="name" class="box" size="45" value="${cat.name }"></td>
 				</tr>
 				<tr>
 					<th width="20%" bgcolor="yellow">길냥이 특징</th>
-					<td><input type="text" name="feature" class="box" size="45"></td>
+					<td><input type="text" name="feature" class="box" size="45" value="${cat.feature }"></td>
 				</tr>
 				<tr>
 					<th width="20%" bgcolor="yellow">출현위치</th>
 					<td>
-						<input type="hidden" name="location" value="" />
-						<input type="hidden" name="location_lat" value="" />
-						<input type="hidden" name="location_long" value="" />
+						<input type="hidden" name="location" value="${cat.location }" />
+						<input type="hidden" name="location_lat" value="${cat.location_lat }" />
+						<input type="hidden" name="location_long" value="${cat.location_long }" />
 						<div class="map_wrap">
 						    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 						    <div class="hAddr">
@@ -79,12 +75,18 @@
 					</td>
 				</tr>
 				<tr>
-					<th width="20%" bgcolor="yellow">길냥이 사진</th>
-					<td><input type="file" name="image_file" class="box"></td>
+					<th width="20%" bgcolor="yellow">길냥이 사진 수정하기</th>
+					<td>
+						<img src="./resources/upload/${cat.image}" width="150" height="150">
+						<input type="hidden" name="image" value="${cat.image }">
+						<br>
+						수정할 이미지 선택 : <input type="file" id="image_file" name="image_file">
+					</td>
 				</tr>
 				<tr bgcolor="yellow">
 					<td colspan="2" align="center">
-						<input type="submit" value="등록하기">
+						<input type="hidden" name="cnum" value="${cat.cnum }">
+						<input type="submit" value="수정완료">
 						<input type="reset" value="다시쓰기">
 						<input type="button" value="목록보기" onclick="window.location='cat_list.do'">
 					</td>
@@ -106,32 +108,19 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+var infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
     
-// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-if (navigator.geolocation) {
-    
-    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    navigator.geolocation.getCurrentPosition(function(position) {
-        
-        var lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
-        
-        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+var lat = ${cat.location_lat};
+var lon = ${cat.location_long};
 
-        // 지도 중심좌표를 접속위치로 변경합니다
-        map.setCenter(locPosition); 
-            
-      });
-    
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    
-    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);  
+var locPosition = new kakao.maps.LatLng(lat, lon);
 
-    // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);     
-}
+// 클릭한 위치를 표시할 마커입니다
+var marker = new kakao.maps.Marker({
+	position: locPosition
+});
+map.setCenter(locPosition);
+marker.setMap(map);
 
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
