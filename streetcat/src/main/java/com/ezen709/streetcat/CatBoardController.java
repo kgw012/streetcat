@@ -92,7 +92,7 @@ public class CatBoardController {
 		MultipartFile file4 = mr.getFile("image4");
 		MultipartFile file5 = mr.getFile("image5");
 		
-		if(file1!=null) {
+		if(!file1.isEmpty()) {
 			File target1 = new File(uploadPath,file1.getOriginalFilename());
 				try {
 					file1.transferTo(target1);
@@ -103,7 +103,7 @@ public class CatBoardController {
 				e.printStackTrace();
 				}
 	    }
-		if(file2!=null) {
+		if(!file2.isEmpty()) {
 			File target2 = new File(uploadPath,file2.getOriginalFilename());
 			try {
 				file2.transferTo(target2);
@@ -114,7 +114,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(file3!=null) {
+		if(!file3.isEmpty()) {
 			File target3 = new File(uploadPath,file3.getOriginalFilename());
 			try {
 				file3.transferTo(target3);
@@ -125,7 +125,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(file4!=null) {
+		if(!file4.isEmpty()) {
 			File target4 = new File(uploadPath,file4.getOriginalFilename());
 			try {
 				file4.transferTo(target4);
@@ -136,7 +136,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(file5!=null) {
+		if(!file5.isEmpty()) {
 			File target5 = new File(uploadPath,file5.getOriginalFilename());
 			try {
 				file5.transferTo(target5);
@@ -180,13 +180,13 @@ public class CatBoardController {
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("location",location);
 		mav.addObject("cat_list",listCat);
+	    System.out.print(location);
 		return mav;
 	}
 	@RequestMapping(value="/cat_board_content.do")
 	public ModelAndView catBoardContent(HttpServletRequest req,HttpSession session) {
         String pageNum = req.getParameter("pageNum");
-        
-        
+  
 		if (pageNum == null) {
 			pageNum = "1";
 		}
@@ -343,7 +343,87 @@ public class CatBoardController {
 		req.setAttribute("getBoard", getBoard);
 		return "cat_board/cat_board_edit";
 	}
-	@RequestMapping("/find_cat_board.do")
+	@RequestMapping(value="/cat_board_edit_ok.do")
+	public String catBoardEditOk(HttpServletRequest req,@ModelAttribute CatBoardDTO dto, BindingResult result) {
+		int bnum = Integer.parseInt(req.getParameter("bnum"));
+		int filesize=0;
+        String filename;
+		
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile file1 = mr.getFile("image1");
+		MultipartFile file2 = mr.getFile("image2");
+		MultipartFile file3 = mr.getFile("image3");
+		MultipartFile file4 = mr.getFile("image4");
+		MultipartFile file5 = mr.getFile("image5");
+		System.out.print(file1);
+		CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);
+		dto.setImage1(getBoard.getImage1());
+		dto.setImage2(getBoard.getImage2());
+		dto.setImage3(getBoard.getImage3());
+		dto.setImage4(getBoard.getImage4());
+		dto.setImage5(getBoard.getImage5());
+		if(!file1.isEmpty()) {
+			File target1 = new File(uploadPath,file1.getOriginalFilename());
+				try {
+					file1.transferTo(target1);
+					filename = file1.getOriginalFilename();
+					filesize = (int)file1.getSize();
+					dto.setImage1(filename);
+				}catch (IOException e) {
+				e.printStackTrace();
+				}
+	    }
+		if(!file2.isEmpty()) {
+			File target2 = new File(uploadPath,file2.getOriginalFilename());
+			try {
+				file2.transferTo(target2);
+				filename = file2.getOriginalFilename();
+				filesize = (int)file2.getSize();
+				dto.setImage2(filename);
+			}catch (IOException e) {
+			e.printStackTrace();
+			}
+    }
+		if(!file3.isEmpty()) {
+			File target3 = new File(uploadPath,file3.getOriginalFilename());
+			try {
+				file3.transferTo(target3);
+				filename = file3.getOriginalFilename();
+				filesize = (int)file3.getSize();
+				dto.setImage3(filename);
+			}catch (IOException e) {
+			e.printStackTrace();
+			}
+    }
+		if(!file4.isEmpty()) {
+			File target4 = new File(uploadPath,file4.getOriginalFilename());
+			try {
+				file4.transferTo(target4);
+				filename = file4.getOriginalFilename();
+				filesize = (int)file4.getSize();
+				dto.setImage4(filename);
+			}catch (IOException e) {
+			e.printStackTrace();
+			}
+    }
+		if(!file5.isEmpty()) {
+			File target5 = new File(uploadPath,file5.getOriginalFilename());
+			try {
+				file5.transferTo(target5);
+				filename = file5.getOriginalFilename();
+				filesize = (int)file5.getSize();
+				dto.setImage5(filename);
+			}catch (IOException e) {
+			e.printStackTrace();
+			}
+    }
+        catBoardMapper.boardEdit(dto);
+		req.setAttribute("bnum", bnum);
+		req.setAttribute("msg", "수정완료!");
+		req.setAttribute("url", "cat_board.do");
+		return "message";
+	}
+	@RequestMapping(value="/find_cat_board.do")
 	public ModelAndView findCatBoard(HttpServletRequest req,@ModelAttribute FindCatBoardDTO dto) {
 		String pageNum = req.getParameter("pageNum");
 		if (pageNum == null) {
@@ -375,6 +455,18 @@ public class CatBoardController {
 		mav.addObject("pageBlock", pageBlock);
 		mav.addObject("cat_listBoard", listBoard);
 		return mav;
+	}
+	@RequestMapping(value="/image_delete.do")
+	public String imageDelete(HttpServletRequest req,CatBoardDTO dto) {
+		String image = req.getParameter("image");
+		int bnum = Integer.parseInt(req.getParameter("bnum"));
+		dto.setBnum(bnum);
+		dto.setImage(image);
+		catBoardMapper.imageDelete(dto);
+		String url="cat_board_edit.do?bnum="+bnum;
+		req.setAttribute("msg","이미지를 삭제했습니다");
+		req.setAttribute("url", url);
+		return "message";
 	}
 }
 

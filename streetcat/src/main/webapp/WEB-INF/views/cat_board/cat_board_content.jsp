@@ -94,9 +94,17 @@ ${getBoard.subject}
     <div class="carousel-inner">
       <!-- 슬라이드 쇼 -->
       <div class="carousel-item active">
-        <!--가로--> <img class="d-block w-100" src="${upPath}/${getBoard.image1}" alt="1st slide" onerror="this.parentNode.style.display='none'">
+        <c:choose>
+        <c:when test='${empty getBoard.image1}'>
+<img class="d-block w-100" src="${upPath}/${getBoard.image2}" alt="1st slide" >
+        </c:when>
+        <c:otherwise>
+<img class="d-block w-100" src="${upPath}/${getBoard.image1}" alt="1st slide" >
+        </c:otherwise>
+        </c:choose>
+        
         <div class="carousel-caption d-none d-md-block">
-
+        
         </div>
       </div>
       <c:if test="${getBoard.image2!=null}">
@@ -121,6 +129,7 @@ ${getBoard.subject}
         <li data-target="#demo" data-slide-to="1"></li>
         <li data-target="#demo" data-slide-to="2"></li>
       </ul> 인디케이터 끝 -->
+    </div>
     </div>
  <br>
  </td>

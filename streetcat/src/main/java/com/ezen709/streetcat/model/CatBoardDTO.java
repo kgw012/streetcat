@@ -20,8 +20,15 @@ public class CatBoardDTO {
 	private int readcount;
 	private int commentcount;
 	private String ip;
+	private String image;
 	
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getReadcount() {
 		return readcount;
 	}
