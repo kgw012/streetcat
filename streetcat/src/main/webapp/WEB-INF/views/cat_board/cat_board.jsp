@@ -10,7 +10,7 @@ function isLogin(name){
 	 alert("로그인 후 이용해주세요")
 	 return
 	 <%}%>
-	 location.href("cat_board_write.do?name="+name)
+	 location.href = "cat_board_write.do?name="+name;
 }
 </script>
 <%int count=0; %>
