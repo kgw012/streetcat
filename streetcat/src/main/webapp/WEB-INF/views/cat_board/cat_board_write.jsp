@@ -15,7 +15,7 @@
     		return;
     	}
 
-    	var input = '<input type="file" value="파일찾기" name="image'+num+'" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
+    	var input = '<input type="file" value="파일찾기" name="image'+num+'" required accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, '+"'img_view"+num+"'"+', 50, 50)"><div id="img_view'+num+'" style="width:auto;height:50px;max-width:50px;margin-bottom:10px;margin-left:10px;"></div>';
     	
     	var fileContainer = document.getElementById('file_container');
     	fileContainer.innerHTML += input;

@@ -92,7 +92,7 @@ public class CatBoardController {
 		MultipartFile file4 = mr.getFile("image4");
 		MultipartFile file5 = mr.getFile("image5");
 		
-		if(!file1.isEmpty()) {
+		if(file1!=null) {
 			File target1 = new File(uploadPath,file1.getOriginalFilename());
 				try {
 					file1.transferTo(target1);
@@ -103,7 +103,7 @@ public class CatBoardController {
 				e.printStackTrace();
 				}
 	    }
-		if(!file2.isEmpty()) {
+		if(file2!=null) {
 			File target2 = new File(uploadPath,file2.getOriginalFilename());
 			try {
 				file2.transferTo(target2);
@@ -114,7 +114,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(!file3.isEmpty()) {
+		if(file3!=null) {
 			File target3 = new File(uploadPath,file3.getOriginalFilename());
 			try {
 				file3.transferTo(target3);
@@ -125,7 +125,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(!file4.isEmpty()) {
+		if(file4!=null) {
 			File target4 = new File(uploadPath,file4.getOriginalFilename());
 			try {
 				file4.transferTo(target4);
@@ -136,7 +136,7 @@ public class CatBoardController {
 			e.printStackTrace();
 			}
     }
-		if(!file5.isEmpty()) {
+		if(file5!=null) {
 			File target5 = new File(uploadPath,file5.getOriginalFilename());
 			try {
 				file5.transferTo(target5);
