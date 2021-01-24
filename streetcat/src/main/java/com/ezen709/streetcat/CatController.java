@@ -99,7 +99,9 @@ public class CatController {
 	public ModelAndView cat_content(@RequestParam String cnum) {
 		CatDTO dto = catMapper.getCatByCnum(Integer.parseInt(cnum));
 		ModelAndView mav = new ModelAndView("cat/cat_content");
+		MemberDTO member = memberMapper.getMember(dto.getUnum());
 		mav.addObject("getCat", dto);
+		mav.addObject("mbId", member.getId());
 		return mav;
 	}
 	

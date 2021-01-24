@@ -13,7 +13,13 @@
 			if(unum == null){
 				alert("로그인 후 이용해주세요");
 				return;
-			}else if(unum != "${sessionScope.unum}"){
+			}
+			if("${sessionScope.grade}" == "관리자"){
+				alert("관리자 권한으로 정보를 수정합니다.");
+				document.editForm.submit();
+				return;
+			}
+			if(unum != "${sessionScope.unum}"){
 				alert("작성자만 수정할 수 있습니다.");
 				return;
 			}
@@ -23,7 +29,18 @@
 			if(unum == null){
 				alert("로그인 후 이용해주세요");
 				return;
-			}else if(unum != "${sessionScope.unum}"){
+			}
+			if("${sessionScope.grade}" == "관리자"){
+				var flag = confirm("관리자 권한으로 등록된 고양이를 삭제하시겠습니까?");
+				if(flag==true){
+					alert("삭제되었습니다.");
+					document.deleteForm.submit();
+				}else{
+					alert("취소하였습니다.");
+				}
+				return;
+			}
+			if(unum != "${sessionScope.unum}"){
 				alert("작성자만 삭제할 수 있습니다.");
 				return;
 			}
@@ -75,6 +92,7 @@
 					<form name="editForm" action="cat_edit.do" method="post" style="display: inline;">
 						<input type="hidden" name="unum" value="${getCat.unum }">
 						<input type="hidden" name="cnum" value="${getCat.cnum }">
+						<input type="hidden" name="mbId" value="${mbId }">
 						<input type="button" value="수정하기" onclick="go_edit(${getCat.unum});">
 					</form>
 					<form name="deleteForm" action="cat_delete.do" method="post" style="display: inline;">
