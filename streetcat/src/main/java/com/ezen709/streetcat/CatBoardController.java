@@ -239,6 +239,7 @@ public class CatBoardController {
 				like="unlike";
 			}
 		}
+		catBoardMapper.plusReadCount(bnum);
 		mav.addObject("likeCount",likeCount);
 		mav.addObject("like",like);
 		return mav;

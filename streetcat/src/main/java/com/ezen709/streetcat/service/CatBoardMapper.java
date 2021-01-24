@@ -36,8 +36,8 @@ public class CatBoardMapper {
 		public int getCount(){
 				return sqlSession.selectOne("getCount");
 		}
-		public void plusReadCount(int num) {
-			sqlSession.update("plusReadCount", num);
+		public void plusReadCount(int bnum) {
+			sqlSession.update("plusReadCount", bnum);
 	    }
 		public List<CatDTO> cat_list(String location){
 			Map<String, String> map = new Hashtable<String, String>();
@@ -117,5 +117,6 @@ public class CatBoardMapper {
 		public int imageDelete(CatBoardDTO dto) {
 			return sqlSession.update("imageDelete",dto);
 		}
+		
 		
 	}

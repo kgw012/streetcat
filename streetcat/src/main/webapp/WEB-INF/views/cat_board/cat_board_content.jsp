@@ -87,7 +87,13 @@ ${getBoard.subject}
 </tr>
  <tr>
  
- <td align="right">
+ <td align="center">
+ 위치 : ${getBoard.location}<br>
+ <br>
+ 이름 : ${getBoard.name}<br>
+ <br>
+ 특징 : ${getBoard.feature}<br>
+
  </td>
  <td align="center">
  <div id="demo" class="carousel slide" data-ride="carousel">
