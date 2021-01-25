@@ -58,5 +58,4 @@ public class CatDTO {
 	public void setUnum(int unum) {
 		this.unum = unum;
 	}
-	
 }
