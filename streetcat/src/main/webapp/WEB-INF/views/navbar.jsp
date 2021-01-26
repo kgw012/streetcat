@@ -39,10 +39,7 @@
 							<input type="password" placeholder="비밀번호" class="form-control" name="passwd">
 						</div>
 						<button type="submit" class="btn btn-success">로그인</button>
-						<button type="button" class="btn btn-success"
-							onclick="window.open('member.do','회원가입', 'width=570, height=350, resizable = no, scrollbars = no')">
-								회원가입
-						</button>
+	       				 <button type="button" onclick="location.href='signUpPage.do'" class="btn btn-success">회원가입</button>
 					</c:if>
 				</form>
 					

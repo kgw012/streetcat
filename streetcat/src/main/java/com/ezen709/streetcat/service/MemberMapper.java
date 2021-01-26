@@ -4,12 +4,15 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.model.MemberVO;
 
 
 
@@ -65,4 +68,18 @@ public class MemberMapper {
 		}
 		return sqlSession.delete("deleteMember", unum);
 	}
+	
+	//아이디 체크
+	public int idCheck(String userId) {
+		System.out.println("===> Mybatis로 idCheck");
+		int result = sqlSession.selectOne("idCheck",userId);
+		return result;
+	}
+	
+	//회원가입
+	public void signUp(MemberVO vo) {
+		System.out.println("===> Mybatis로 회원가입(signUp)");
+		sqlSession.insert("signUp",vo);
+	}
+	
 }

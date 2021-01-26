@@ -29,4 +29,21 @@
 	<delete id="deleteMember" parameterType="int">
 		delete cat_user where unum= #{unum}
 	</delete>
+	
+
+	
+	<select id="idCheck" resultType="int">
+		<![CDATA[
+			SELECT count(*) FROM member
+			WHERE user_id = #{userId}
+		]]>
+	</select>
+	
+	<insert id="signUp">
+		<![CDATA[
+			insert into member(user_id,passwd)
+			values (#{userId},#{passwd})
+		]]>
+	</insert>
+
 </mapper>

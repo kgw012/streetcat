@@ -52,4 +52,5 @@ public class MemberDTO {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
 	}
+
 }

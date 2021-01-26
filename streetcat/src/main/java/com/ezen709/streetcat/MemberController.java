@@ -1,16 +1,11 @@
 package com.ezen709.streetcat;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
-
-import org.apache.taglibs.standard.tag.common.core.RemoveTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,33 +24,7 @@ public class MemberController {
 	@Autowired
 	private LoginMapper loginMapper;
 
-	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
-	public String memberInsertForm() {
-		return "member/member";
-	}
-
-	@RequestMapping(value = "/member.do", method = RequestMethod.POST)
-	public String memberInsert_Ok(HttpServletRequest req, @ModelAttribute MemberDTO dto) {
-		
-		 
-		String search = "id";
-		String searchString = req.getParameter("id");
-		
-		
-		String msg= null;
-		String url ="";
-		List<MemberDTO> listMember = memberMapper.findMember(search, searchString);
-		if(listMember.isEmpty()) {
-			int res = memberMapper.insertMember(dto);
-			msg = "회원가입이 정상적으로 처리되었습니다.";
-		}else if(!listMember.isEmpty()) {
-			msg = "중복된 아이디 입니다.";
-			url = "haveId";
-		}
-		req.setAttribute("msg",msg);
-		req.setAttribute("url",url);
-			return "message"; 
-	}
+	
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)
 	public ModelAndView memberList(HttpServletRequest req) {
@@ -138,8 +107,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		
 			if (dto== null || dto.getId().trim().equals("")) {
-			//	mav.setViewName("home");
-			//	mav.addObject("unum", 0);
+			
 			String msg = "아이디와 비밀번호를 확인해 주세요.";	
 			String url = "home.do";
 			mav.setViewName("message");	
