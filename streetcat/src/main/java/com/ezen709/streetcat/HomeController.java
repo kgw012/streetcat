@@ -36,4 +36,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/chatting.do")
+	public String chatting() {
+		return "chatting";
+	}
 }
