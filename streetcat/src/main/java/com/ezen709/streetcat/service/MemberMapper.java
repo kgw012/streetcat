@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.ezen709.streetcat.model.MemberDTO;
-import com.ezen709.streetcat.model.MemberVO;
+
 
 
 
@@ -77,9 +77,9 @@ public class MemberMapper {
 	}
 	
 	//회원가입
-	public void signUp(MemberVO vo) {
+	public void signUp(MemberDTO dto) {
 		System.out.println("===> Mybatis로 회원가입(signUp)");
-		sqlSession.insert("signUp",vo);
+		sqlSession.insert("signUp",dto);
 	}
 	
 }

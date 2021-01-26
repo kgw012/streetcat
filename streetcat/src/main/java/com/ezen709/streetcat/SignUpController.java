@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ezen709.streetcat.model.MemberVO;
+import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.service.MemberMapper;
 
 
@@ -25,11 +25,11 @@ public class SignUpController {
 			return "signUp/signUp";
 		}
 		@RequestMapping(value = "/signUp.do")
-		public String signUp(MemberVO vo) {
+		public String signUp(MemberDTO dto) {
 			
-			memberMapper.signUp(vo);
+			memberMapper.signUp(dto);
 			
-			return "login";
+			return "home";
 		}
 		
 		//produces는 ajax가 데이터 넘겨받을때 깨짐 방지

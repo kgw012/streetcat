@@ -65,7 +65,7 @@ public class CatController {
 		ModelAndView mav = new ModelAndView("cat/cat_insert");
 		mav.addObject("unum", unum);
 		MemberDTO member = memberMapper.getMember(unum);
-		mav.addObject("mbId", member.getId());
+		mav.addObject("mbId", member.getUserId());
 		return mav;
 	}
 	
@@ -101,7 +101,7 @@ public class CatController {
 		ModelAndView mav = new ModelAndView("cat/cat_content");
 		MemberDTO member = memberMapper.getMember(dto.getUnum());
 		mav.addObject("getCat", dto);
-		mav.addObject("mbId", member.getId());
+		mav.addObject("mbId", member.getUserId());
 		return mav;
 	}
 	
@@ -112,7 +112,7 @@ public class CatController {
 		CatDTO cat = catMapper.getCatByCnum(cnum);
 		mav.addObject("unum", unum);
 		mav.addObject("cat", cat);
-		mav.addObject("mbId", member.getId());
+		mav.addObject("mbId", member.getUserId());
 		return mav;
 	}
 	

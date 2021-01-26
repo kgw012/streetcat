@@ -8,12 +8,6 @@
 		select * from cat_user  
 	</select>
 	
-
-	<insert id="insertMember" parameterType="memberDTO">
-		insert into cat_user values (seq_unum.nextval, 
-			#{name}, #{id}, #{passwd}, #{email}, sysdate, 0)
-	</insert>
-
 	<select id="findMember"	resultType="memberDTO" parameterType="java.util.Map">
 		${sql}
 	</select>
@@ -34,15 +28,15 @@
 	
 	<select id="idCheck" resultType="int">
 		<![CDATA[
-			SELECT count(*) FROM member
+			SELECT count(*) FROM cat_user
 			WHERE user_id = #{userId}
 		]]>
 	</select>
 	
 	<insert id="signUp">
 		<![CDATA[
-			insert into member(user_id,passwd)
-			values (#{userId},#{passwd})
+			insert into cat_user values (seq_unum.nextval, 
+			#{name}, #{userId}, #{passwd}, #{email}, sysdate, 0)
 		]]>
 	</insert>
 
