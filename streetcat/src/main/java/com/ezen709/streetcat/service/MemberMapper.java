@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.model.MessageDTO;
 
 
 
@@ -80,6 +81,15 @@ public class MemberMapper {
 	public void signUp(MemberDTO dto) {
 		System.out.println("===> Mybatis로 회원가입(signUp)");
 		sqlSession.insert("signUp",dto);
+	}
+	public int sendMessage(MessageDTO dto) {
+		return sqlSession.insert("messageSend",dto);
+	}
+	public List<MessageDTO> getMessage(String receiveId){
+		return sqlSession.selectList("getMessage",receiveId);
+	}
+	public List<MessageDTO> getSendMessage(String sendId){
+		return sqlSession.selectList("getSendMessage",sendId);
 	}
 	
 }

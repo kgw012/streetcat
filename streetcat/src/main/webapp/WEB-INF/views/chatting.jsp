@@ -89,7 +89,7 @@
 <table width="100%">
 <tr>
 <td>
-       <textarea id="chattingLog" rows="10" cols="100%"></textarea>
+       <textarea id="chattingLog" rows="10" cols="60"></textarea>
     <div class=container style="margin:10px; ">
 		<input type="text" id="message"/>
 		<button onclick="sendMessage();">Send</button> 현재 접속자수 : <%=sc.getNowUser()%>

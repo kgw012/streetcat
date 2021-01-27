@@ -39,5 +39,13 @@
 			#{name}, #{userId}, #{passwd}, #{email}, sysdate, 0)
 		]]>
 	</insert>
-
+    <insert id="messageSend" parameterType="MessageDTO">
+       insert into message values(seq_mnum.nextval,#{receiveId},#{sendId},#{sendName},#{content},sysdate,0)
+    </insert>
+    <select id="getMessage" parameterType="String" resultType="MessageDTO">
+       select * from message where receiveId = #{receiveId}
+    </select>
+    <select id="getSendMessage" parameterType="String" resultType="MessageDTO">
+       select * from message where sendId = #{sendId}
+    </select>
 </mapper>
