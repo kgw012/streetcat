@@ -35,7 +35,7 @@ public class chatHandler extends TextWebSocketHandler{
 		List<MemberDTO> list = loginMapper.loginListUp();
 		String loginList = "loginList";
 		for(int i = 0 ;i<list.size();i++) {
-		  loginList = loginList +","+list.get(i).getId();
+		  loginList = loginList +","+list.get(i).getUserId();
 		  
 		}
 		System.out.println(loginList);

@@ -33,7 +33,7 @@
 				<form class="navbar-form navbar-right" name="f" action="member_login.do" method="post">
 					<c:if test="${empty mbId }">
 						<div class="form-group">
-							<input type="text" placeholder="아이디" class="form-control" name="id">
+							<input type="text" placeholder="아이디" class="form-control" name="userId">
 						</div>
 						<div class="form-group">
 							<input type="password" placeholder="비밀번호" class="form-control" name="passwd">

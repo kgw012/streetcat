@@ -235,7 +235,7 @@ public class CatBoardController {
 		int likeCount = 0;
 		for(CatBoardLikeDTO dto: likeList) {
 			likeCount++;
-			if(dto.getId().equals(id)) {
+			if(dto.getUserId().equals(id)) {
 				like="unlike";
 			}
 		}
@@ -286,7 +286,7 @@ public class CatBoardController {
 	public String catBoardLike(HttpServletRequest req,@ModelAttribute CatBoardLikeDTO dto) {
 		String msg,url = null;
         int bnum = Integer.parseInt(req.getParameter("bnum"));
-        String id = (String)req.getParameter("id");
+        String userId = (String)req.getParameter("userId");
         int res = catBoardMapper.boardLike(dto);
         List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
         CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);

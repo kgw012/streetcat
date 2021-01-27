@@ -95,10 +95,10 @@ public class MemberController {
 	@RequestMapping("/member_login.do")
 	public ModelAndView login(HttpServletRequest req) {
 
-		String id = req.getParameter("id");
+		String userId = req.getParameter("userId");
 		String passwd = req.getParameter("passwd");
 	
-		LoginDTO dto = loginMapper.logincheck(id, passwd);
+		LoginDTO dto = loginMapper.logincheck(userId, passwd);
 	
 		String mbId = null;
 		int grade = 0;
@@ -106,7 +106,7 @@ public class MemberController {
 		String gradeString = null;
 		ModelAndView mav = new ModelAndView();
 		
-			if (dto== null || dto.getId().trim().equals("")) {
+			if (dto== null || dto.getUserId().trim().equals("")) {
 			
 			String msg = "아이디와 비밀번호를 확인해 주세요.";	
 			String url = "home.do";
@@ -115,9 +115,9 @@ public class MemberController {
 			mav.addObject("url", url);
 				return mav;
 
-			} else if (dto.getId() != null) {
+			} else if (dto.getUserId() != null) {
 
-				mbId =dto.getId();
+				mbId =dto.getUserId();
 				grade = dto.getGrade();
 				unum = dto.getUnum();
 				if (grade == 0) {

@@ -17,21 +17,21 @@ public class LoginMapper {
 		@Autowired
 		private SqlSession sqlSession;
 		
-		public LoginDTO logincheck(String id, String passwd) {
+		public LoginDTO logincheck(String userId, String passwd) {
 			Map<String, String> map = new Hashtable<String, String>();
-			map.put("id",id);
+			map.put("userId",userId);
 			map.put("passwd",passwd);
 			
 			return sqlSession.selectOne("loginCheck",map);
 		}
-		public int loginList(String id) {
-			return sqlSession.insert("loginList",id);
+		public int loginList(String userId) {
+			return sqlSession.insert("loginList",userId);
 		}
 		public List<MemberDTO> loginListUp() {
 			return sqlSession.selectList("loginListUp");
 		}
-		public int loginListOut(String id) {
-			return sqlSession.delete("loginListOut",id);
+		public int loginListOut(String userId) {
+			return sqlSession.delete("loginListOut", userId);
 		}
 	
 }

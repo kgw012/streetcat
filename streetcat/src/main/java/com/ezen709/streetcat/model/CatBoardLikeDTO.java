@@ -2,18 +2,18 @@ package com.ezen709.streetcat.model;
 
 public class CatBoardLikeDTO {
 	private int bnum;
-	private String id;
+	private String userId;
 	public int getBnum() {
 		return bnum;
 	}
 	public void setBnum(int bnum) {
 		this.bnum = bnum;
 	}
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String id) {
+		this.userId = userId;
 	}
 	
 
