@@ -62,7 +62,6 @@ public class CatBoardController {
 		ModelAndView mav = new ModelAndView("cat_board/cat_board");
 		
 		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
-		System.out.println(uploadPath);
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("count", count);
 		mav.addObject("startNum", startNum);
