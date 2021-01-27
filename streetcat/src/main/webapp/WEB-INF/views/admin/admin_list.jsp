@@ -19,7 +19,7 @@
 	<form name="f"  action="find.do" method="post">
 	<input type="hidden" name="mode" value="find"/>
 		<select name="search">
-			<option value="id">아이디</option>
+			<option value="userId">아이디</option>
 			<option value="name">이름</option>
 		</select>
 		<input type="text" name="searchString" class="box">
@@ -49,7 +49,7 @@
 		<tr>
 			<td>${dto.unum }</td>
 			<td>${dto.name }</td>
-			<td>${dto.id }</td>
+			<td>${dto.userId }</td>
 			<td>${dto.email }</td>
 			<td align="center">${dto.joindate }</td>
 			<td align="center">

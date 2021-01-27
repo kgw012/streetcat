@@ -36,8 +36,8 @@ public class MemberMapper {
 	
 	public  List<MemberDTO> findMember(String search, String searchString) {
 		String sql = null;
-		if(	search.toString().equals("id") ) {
-			sql = "select * from cat_user where id = '"+searchString+"'" ;
+		if(	search.toString().equals("userId") ) {
+			sql = "select * from cat_user where userId = '"+searchString+"'" ;
 		}else {
 			sql = "select * from cat_user where name = '"+searchString+"'" ;
 		}

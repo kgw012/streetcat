@@ -24,7 +24,7 @@
 			<td width="150" class="m3">¾ÆÀÌµð</td>
 			<td class="m3">
 				<input type="text" name="id" class="box"
-												value="${getMember.id}" readOnly>
+												value="${getMember.userId}" readOnly>
 			</td>
   		</tr>
   	
