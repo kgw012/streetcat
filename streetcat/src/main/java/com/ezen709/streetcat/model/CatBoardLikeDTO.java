@@ -12,7 +12,7 @@ public class CatBoardLikeDTO {
 	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(String id) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	
