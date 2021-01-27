@@ -67,31 +67,31 @@
  <input type="file"  name="image1" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view1', 50, 50)">대표이미지
  <div id="img_view1" style="width:auto;height:50px;max-width:50px;margin-bottom:20px;margin-left:10px;">
  <c:if test="${not empty getBoard.image1}">
- <img src="d:\\springFile/${getBoard.image1}" width="50" height="50"><a href="image_delete.do?image=image1&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+ <img src="./resources/upload/catBoard/${getBoard.image1}" width="50" height="50"><a href="image_delete.do?image=image1&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
  </c:if>
  </div>
  <input type="file"  name="image2" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view2', 50, 50)">
  <div id="img_view2" style="width:auto;height:50px;max-width:50px;margin-bottom:20px;margin-left:10px;">
  <c:if test="${not empty getBoard.image2}">
- <img src="d:\\springFile/${getBoard.image2}" width="50" height="50"><a href="image_delete.do?image=image2&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+ <img src="./resources/upload/catBoard/${getBoard.image2}" width="50" height="50"><a href="image_delete.do?image=image2&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
  </c:if>
  </div>
  <input type="file"  name="image3" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view3', 50, 50)">
  <div id="img_view3" style="width:auto;height:50px;max-width:50px;margin-bottom:20px;margin-left:10px;">
  <c:if test="${not empty getBoard.image3}">
- <img src="d:\\springFile/${getBoard.image3}" width="50" height="50"><a href="image_delete.do?image=image3&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+ <img src="./resources/upload/catBoard/${getBoard.image3}" width="50" height="50"><a href="image_delete.do?image=image3&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
  </c:if>
  </div>
  <input type="file"  name="image4" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view4', 50, 50)">
  <div id="img_view4" style="width:auto;height:50px;max-width:50px;margin-bottom:20px;margin-left:10px;">
  <c:if test="${not empty getBoard.image4}">
- <img src="d:\\springFile/${getBoard.image4}" width="50" height="50"><a href="image_delete.do?image=image4&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+ <img src="./resources/upload/catBoard/${getBoard.image4}" width="50" height="50"><a href="image_delete.do?image=image4&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
  </c:if>
  </div>
  <input type="file"  name="image5" accept=".png,.jpg,.jpeg,.gif" onchange="preImg(this, 'img_view5', 50, 50)">
  <div id="img_view5" style="width:auto;height:50px;max-width:50px;margin-bottom:20px;margin-left:10px;">
  <c:if test="${not empty getBoard.image5}">
- <img src="d:\\springFile/${getBoard.image5}" width="50" height="50"><a href="image_delete.do?image=image5&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+ <img src="./resources/upload/catBoard/${getBoard.image5}" width="50" height="50"><a href="image_delete.do?image=image5&bnum=${getBoard.bnum}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
  </c:if>
  </div>
  

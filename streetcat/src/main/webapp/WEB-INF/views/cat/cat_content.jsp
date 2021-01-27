@@ -28,7 +28,7 @@
 				</tr>
 				<tr>
 					<th width="20%">길냥이 사진</th>
-					<td><img src="./resources/upload/${getCat.image}" width="150" height="150"></td>
+					<td><img src="./resources/upload/cat/${getCat.image}" width="150" height="150"></td>
 				</tr>
 				<tr>
 					<td colspan="2">

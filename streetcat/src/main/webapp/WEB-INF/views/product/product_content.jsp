@@ -11,7 +11,7 @@
   	 alert("로그인 후 이용해주세요")
   	 <%}else{%>
   	 alert("추천 완료!")
-  	 location.href("product_like.do?pnum="+pnum+"&mbNo="+mbNo)
+  	 location.href = "product_like.do?pnum="+pnum+"&mbNo="+mbNo;
   	 <%}%>
    }
    function isLoginUnLike(pnum,mbNo){
@@ -19,7 +19,7 @@
 	  	 alert("로그인 후 이용해주세요")
 	  	 <%}else{%>
 	  	 alert("추천 취소!")
-	  	 location.href("product_unLike.do?pnum="+pnum+"&mbNo="+mbNo)
+	  	 location.href = "product_unLike.do?pnum="+pnum+"&mbNo="+mbNo;
 	  	 <%}%>
 	   }
    </script>
@@ -65,11 +65,11 @@
 		</tr>
 		<tr>
 			<th bgcolor="yellow" width="20%">상품 사진</th>
-			<td width="30%" align="center" colspan="3"><img src="${uploadPath}/${getProduct.image1}" width="300" height="300"></td>
+			<td width="30%" align="center" colspan="3"><img src="./resources/upload/product/${getProduct.image1}" width="300" height="300"></td>
 		</tr>
 		<tr>
 			<th bgcolor="yellow" width="20%">기타 사진</th>
-			<td width="30%" align="center" colspan="3"><img src="${uploadPath}/${getProduct.image2}" width="300" height="300"></td>
+			<td width="30%" align="center" colspan="3"><img src="./resources/upload/product/${getProduct.image2}" width="300" height="300"></td>
 		</tr>
 		<tr>
 			<th bgcolor="yellow" width="20%">글내용</th>

@@ -41,7 +41,7 @@
 		
 		
 			<td align="center"><a href="product_content.do?pnum=${dto.pnum}">
-			<img src="${uploadPath}/${dto.image1}" width="150" height="150">
+			<img src="./resources/upload/product/${dto.image1}" width="150" height="150">
 			
 			<br>	<b>	${dto.pname}</b>
 				</a>	

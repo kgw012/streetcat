@@ -59,7 +59,7 @@
 					<tr>
 						<td><a href="cat_content.do?cnum=${dto.cnum}">${dto.name }</a></td>
 						<td>${dto.feature }</td>
-						<td><a href="cat_content.do?cnum=${dto.cnum}"><img src="./resources/upload/${dto.image}" height="150"></a></td>
+						<td><a href="cat_content.do?cnum=${dto.cnum}"><img src="./resources/upload/cat/${dto.image}" height="150"></a></td>
 						<td>${dto.location }</td>
 					</tr>
 				</c:forEach>
