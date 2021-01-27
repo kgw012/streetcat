@@ -47,6 +47,7 @@
 				<c:if test="${!empty mbId }">
 					<form class="navbar-form navbar-right" name="f" action="member_logout.do" method="get">
 						<button type="submit" class="btn btn-success">로그아웃</button>
+						<button type="button" class="btn btn-success" onclick="window.open('chatting.do')">채팅방 입장</button>
 					</form>
 					<p class="navbar-text navbar-right">
 						[${grade}] ${mbId}님 로그인 중..
