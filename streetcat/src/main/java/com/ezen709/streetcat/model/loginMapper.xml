@@ -5,12 +5,12 @@
 <mapper namespace="com.ezen709.streetcat.model">
 <select id="loginCheck" resultType="LoginDTO" parameterType="java.util.Map">
 
-	select * from cat_user where user_id= #{userId} and passwd= #{passwd}
+	select * from cat_user where userId = #{userId} and passwd= #{passwd}
 </select>
 
 
 <delete id="loginListOut" parameterType="String">
-      delete from loginList where user_id = #{userId}
+      delete from loginList where userId = #{userId}
     </delete>
     
     <select id="loginListUp" resultType="MemberDTO">
