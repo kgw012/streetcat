@@ -35,7 +35,7 @@
 	
 	
 	<websocket:handlers>
-		<websocket:mapping handler="chatHandler" path="/home.do" />	
+		<websocket:mapping handler="chatHandler" path="/chatting.do" />	
 		<websocket:handshake-interceptors>
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 	    </websocket:handshake-interceptors>

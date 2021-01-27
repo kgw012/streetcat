@@ -24,7 +24,10 @@ public class MemberController {
 	@Autowired
 	private LoginMapper loginMapper;
 
-	
+	@RequestMapping(value = "/chatting.do")
+	public String chatting() {
+		return "chatting";
+	}
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)
 	public ModelAndView memberList(HttpServletRequest req) {
