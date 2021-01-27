@@ -33,9 +33,7 @@ public class CatBoardController {
 	
 	@Autowired
 	private CatBoardMapper catBoardMapper;
-	@Resource(name="uploadPath")
-	private String uploadPath;
-
+	
 	@RequestMapping("/home.do")
 	public String index() {
 		return "home";
@@ -62,6 +60,9 @@ public class CatBoardController {
 		if (endPage>pageCount) endPage = pageCount;
 		
 		ModelAndView mav = new ModelAndView("cat_board/cat_board");
+		
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
+		System.out.println(uploadPath);
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("count", count);
 		mav.addObject("startNum", startNum);
@@ -91,6 +92,8 @@ public class CatBoardController {
 		MultipartFile file3 = mr.getFile("image3");
 		MultipartFile file4 = mr.getFile("image4");
 		MultipartFile file5 = mr.getFile("image5");
+
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
 		
 		if(file1!=null) {
 			File target1 = new File(uploadPath,file1.getOriginalFilename());
@@ -177,6 +180,8 @@ public class CatBoardController {
 		String location = (String)req.getParameter("location");
 		List<CatDTO> listCat = catBoardMapper.cat_list(location);
 		ModelAndView mav = new ModelAndView("cat_board/cat_find");
+
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("location",location);
 		mav.addObject("cat_list",listCat);
@@ -220,6 +225,8 @@ public class CatBoardController {
 		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
 		if (endPage>pageCount) endPage = pageCount;
+
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("count", count);
 		mav.addObject("startNum", startNum);
@@ -363,6 +370,9 @@ public class CatBoardController {
 		dto.setImage3(getBoard.getImage3());
 		dto.setImage4(getBoard.getImage4());
 		dto.setImage5(getBoard.getImage5());
+
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
+		
 		if(!file1.isEmpty()) {
 			File target1 = new File(uploadPath,file1.getOriginalFilename());
 				try {
@@ -447,6 +457,8 @@ public class CatBoardController {
 		if (endPage>pageCount) endPage = pageCount;
 		
 		ModelAndView mav = new ModelAndView("cat_board/cat_board");
+
+		String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/catBoard/";
 		mav.addObject("upPath",uploadPath);
 		mav.addObject("count", count);
 		mav.addObject("startNum", startNum);

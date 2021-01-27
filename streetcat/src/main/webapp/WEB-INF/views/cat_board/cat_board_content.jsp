@@ -12,30 +12,31 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
     $('.carousel').carousel({
-          interval: 2000 //기본 5초 })
+          interval: 2000 //기본 5초 
+    });
    </script>
    <script>
    
-   function isLoginLike(bnum,id){
+   function isLoginLike(bnum,userId){
   	 <% if(session.getAttribute("mbId")==null){%>
   	 alert("로그인 후 이용해주세요")
   	 <%}else{%>
   	 alert("추천 완료!")
-  	 location.href("cat_board_like.do?bnum="+bnum+"&id="+id)
+  	 location.href = "cat_board_like.do?bnum="+bnum+"&userId="+userId;
   	 <%}%>
    }
-   function isLoginUnLike(bnum,id){
+   function isLoginUnLike(bnum,userId){
 	  	 <% if(session.getAttribute("mbId")==null){%>
 	  	 alert("로그인 후 이용해주세요")
 	  	 <%}else{%>
 	  	 alert("추천 취소!")
-	  	 location.href("cat_board_unLike.do?bnum="+bnum+"&id="+id)
+	  	 location.href = "cat_board_unLike.do?bnum="+bnum+"&userId="+userId;
 	  	 <%}%>
 	   }
      function isLogin(){
     	 <% if(session.getAttribute("mbId")==null){%>
     	 alert("로그인 후 이용해주세요")
-    	 location.href("cat_board.do")
+    	 location.href = "cat_board.do";
     	 <%}%>
      }
      <% if(request.getAttribute("getBoard")==null){%>
@@ -102,10 +103,10 @@ ${getBoard.subject}
       <div class="carousel-item active">
         <c:choose>
         <c:when test='${empty getBoard.image1}'>
-<img class="d-block w-100" src="${upPath}/${getBoard.image2}" alt="1st slide" >
+<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image2}" alt="1st slide" >
         </c:when>
         <c:otherwise>
-<img class="d-block w-100" src="${upPath}/${getBoard.image1}" alt="1st slide" >
+<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image1}" alt="1st slide" >
         </c:otherwise>
         </c:choose>
         
@@ -114,16 +115,16 @@ ${getBoard.subject}
         </div>
       </div>
       <c:if test="${getBoard.image2!=null}">
-      <div class="carousel-item"> <img class="d-block w-100" src="${upPath}/${getBoard.image2}" alt="2nd slide"> </div>
+      <div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image2}" alt="2nd slide"> </div>
       </c:if>
       <c:if test="${getBoard.image3!=null}">
-      <div class="carousel-item"> <img class="d-block w-100" src="${upPath}/${getBoard.image3}" alt="3nd slide"> </div>
+      <div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image3}" alt="3nd slide"> </div>
       </c:if> 
       <c:if test="${getBoard.image4!=null}">
-      <div class="carousel-item"> <img class="d-block w-100" src="${upPath}/${getBoard.image4}" alt="4nd slide"> </div>
+      <div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image4}" alt="4nd slide"> </div>
       </c:if>
       <c:if test="${getBoard.image5!=null}">
-      <div class="carousel-item"> <img class="d-block w-100" src="${upPath}/${getBoard.image5}" alt="5nd slide"> </div>
+      <div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image5}" alt="5nd slide"> </div>
       </c:if>
       <!-- / 슬라이드 쇼 끝 -->
       <!-- 왼쪽 오른쪽 화살표 버튼 --> <a class="carousel-control-prev" href="#demo" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <!-- <span>Previous</span> --> </a> <a class="carousel-control-next" href="#demo"

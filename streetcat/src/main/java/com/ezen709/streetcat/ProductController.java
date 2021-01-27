@@ -58,7 +58,7 @@ public class ProductController {
 			
 			List<ProductDTO> listProduct = productMapper.listProduct(startRow, endRow);
 		
-			
+			String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/product/";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("product/product_list");
 			mav.addObject("count", count);
@@ -79,10 +79,6 @@ public class ProductController {
 			return mav;
 		}
 		
-		
-		@Resource(name="uploadPath")
-		private String uploadPath;
-	
 		@RequestMapping("/product_write.do")
 			public ModelAndView productWrite(HttpSession session) {
 			
@@ -103,7 +99,8 @@ public class ProductController {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 			MultipartFile file = mr.getFile("image1_file");
 			MultipartFile file2 = mr.getFile("image2_file");
-			
+
+			String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/product/";
 			File target = new File(uploadPath, file.getOriginalFilename());
 			File target2 = new File(uploadPath, file2.getOriginalFilename());
 			int res = 0;
@@ -156,7 +153,7 @@ public class ProductController {
 				  like="like";
 			  }
 			 
-			
+			String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/upload/product/";
 			mav.addObject("uploadPath",uploadPath);
 			mav.addObject("like", like);
 			return mav;

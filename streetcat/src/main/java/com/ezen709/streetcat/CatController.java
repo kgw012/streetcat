@@ -74,13 +74,11 @@ public class CatController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile file = mr.getFile("image_file");
 		
-		String root_path = req.getSession().getServletContext().getRealPath("/");
-		String attach_path = "resources/upload/";
+		String uploadPath =  req.getSession().getServletContext().getRealPath("/") + "resources/upload/cat/";
 		String filename = dto.getCnum() + "_" + file.getOriginalFilename();
-		System.out.println(root_path);
 		
 		if(file!=null) {
-			File target = new File(root_path + attach_path, filename);
+			File target = new File(uploadPath, filename);
 			try {
 				file.transferTo(target);
 				int filesize = (int)file.getSize();
@@ -120,14 +118,12 @@ public class CatController {
 	public String cat_edit_ok(HttpServletRequest req, @ModelAttribute CatDTO dto, BindingResult result) {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile file = mr.getFile("image_file");
-		
-		String root_path = req.getSession().getServletContext().getRealPath("/");
-		String attach_path = "resources/upload/";
+
+		String uploadPath =  req.getSession().getServletContext().getRealPath("/") + "resources/upload/cat/";
 		String filename = dto.getCnum() + "_" + file.getOriginalFilename();
-		System.out.println(root_path);
 		
 		if(!file.isEmpty()) {
-			File target = new File(root_path + attach_path, filename);
+			File target = new File(uploadPath, filename);
 			try {
 				file.transferTo(target);
 				int filesize = (int)file.getSize();

@@ -32,10 +32,10 @@ function isLogin(name){
 				    <img src="./resources/image/cat.jpg" width="150" height="150">
 				    </c:when>
 				    <c:when test="${empty dto.image1}">
-				    <img src="${upPath}/${dto.image2}" width="150" height="150">
+				    <img src="./resources/upload/catBoard/${dto.image2}" width="150" height="150">
 				    </c:when>
 				    <c:otherwise>
-					<img src="${upPath}/${dto.image1}" width="150" height="150">
+					<img src="./resources/upload/catBoard/${dto.image1}" width="150" height="150">
 					</c:otherwise>
 			    </c:choose>
 				</a><br>
