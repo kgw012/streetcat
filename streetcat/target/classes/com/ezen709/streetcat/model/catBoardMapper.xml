@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cat_list"  resultType="CatDTO" parameterType="java.util.Map">
 		select * from cat where location like '%'||#{location}||'%'
 	</select>
+	<update id="plusReadCount" parameterType="int">
+		 update cat_board set readcount = readcount + 1 where bnum = #{bnum}
+	</update>
 	<select id="getCat"  resultType="CatDTO" parameterType="int">
 		select * from cat where cnum = #{cnum}
 	</select>

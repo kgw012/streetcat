@@ -9,6 +9,16 @@
 </select>
 
 
+<delete id="loginListOut" parameterType="String">
+      delete from loginList where id = #{id}
+    </delete>
+    
+    <select id="loginListUp" resultType="MemberDTO">
+      select * from loginList 
+    </select>
+    <insert id="loginList" parameterType="String">
+      insert into loginList values(#{id},sysdate)
+    </insert>
 
 
 </mapper>

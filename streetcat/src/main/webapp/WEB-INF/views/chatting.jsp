@@ -25,22 +25,49 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 
-    <script>
+<jsp:useBean id="sc" class="com.my.chat.util.SessionChecker" scope="application" />
+<%
+    session.setMaxInactiveInterval(60); 
+    sc.setSession(session);
+%> 
+
+<script>
         var websocket;
         var nickname = '<c:out value="${mbId}"/>';
         
-        function connectSocket(){
+        
+        
+        	<%
+        	if(session.getAttribute("mbId")!=null){%>
+       	 
+       	 
+        	
+        	
             websocket = new SockJS("http://localhost:8080/myhome/home.do");
             $('#guideMessage').text('연결됨');
             
             websocket.onopen = function(){
             	websocket.send(nickname+"님 등장!");
             }
+            
             websocket.onmessage = function(evt){
-            	$('#chattingLog').append(evt.data);
-            	$('#chattingLog').append("<br>");
+            	
+        		
+            	console.log(evt)
+            	if(evt.data.indexOf("loginList")!=-1){
+            		evt.data = evt.data.replace('loginList','')
+            		var log = evt.data.split(',')
+            		document.getElementById("loginLog").innerHTML='';
+                	for(var i=0;i<log.length;++i){
+            	  $('#loginLog').append(log[i]);
+            	  $('#loginLog').append('<br>');
+            		}
+            	}else{
+            	  $('#chattingLog').append(evt.data);
+            	  $('#chattingLog').append('</br>');
+            	}
            }
-        }
+            <%}%>
 
         function sendMessage(){
             websocket.send(nickname+ ": "+$("#message").val());
@@ -48,26 +75,34 @@
 	    }
 	    
     	function disconnect(){
-    		websocket.close();
+    		
+    		location.href = "member_logout.do?";
+    		
     	}
 
     </script>
+    
 </head>
 
 
 <body>
+<table width="100%">
+<tr>
+<td>
        <textarea id="chattingLog" rows="10" cols="100%"></textarea>
-    <div class=container style="margin:20px;">
+    <div class=container style="margin:10px; ">
 		<input type="text" id="message"/>
-		<button onclick="sendMessage();">Send</button>
+		<button onclick="sendMessage();">Send</button> 현재 접속자수 : <%=sc.getNowUser()%>
+		<br>
     </div>
-    <div class=container>
-    	<button onclick="connectSocket();"> 연결 </button>
-        <button onclick="disconnect();"> 종료 </button>
-    	<h5 id="guideMessage"></h5>
-    	
-    	
-    </div>
+    </td>
+    <td align="center" width="40%">
+  로 그 인 현 황<br>
+    <div id="loginLog">
     
+    </div>
+    </td>
+    </tr>
+    </table>
 </body>
 </html>  
