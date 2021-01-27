@@ -24,14 +24,18 @@
 		  <td width="16%">
 		  날 짜
 		  </td >
+		  <td width="16%">
+		 열람
+		  </td >
 		 </tr>
 		 <tr>
 		 <c:if test="${empty getMessage }">
-		  <td colspan="4">
+		  <td colspan="5">
 		  받은 쪽지가 없습니다
 		  </td>
 		  </c:if>
 		  <c:forEach var="dto" items="${getMessage}">
+		  <tr>
 		  <td width="8%">
 		     선 택
 		  </td>
@@ -43,7 +47,12 @@
 		  </td>
 		  <td width="16%">
 		   ${dto.reg_date}
-		  </td>  
+		  </td>
+		  <td width="16%">
+		  <c:if test="${dto.read==0}">
+		     미</c:if>열람
+		  </td> 
+		  </tr>  
  		  </c:forEach>
 		 </tr>
 		</table>

@@ -30,7 +30,7 @@
 		 </tr>
 		 <tr>
 		  <c:if test="${empty getMessage }">
-		  <td colspan="4">
+		  <td colspan="5">
 		  보낸 쪽지가 없습니다
 		  </td>
 		  </c:if>
