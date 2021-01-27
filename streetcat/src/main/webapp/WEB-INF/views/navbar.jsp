@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- navbar.jsp-->
@@ -11,20 +11,20 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="home.do">ìš°ë¦¬ ë™ë„¤ ê³ ì–‘ì´</a>
+				<a class="navbar-brand" href="home.do">¿ì¸® µ¿³× °í¾çÀÌ</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="cat_list.do">ê¸¸ëƒ¥ì´ ê²€ìƒ‰</a></li>
+					<li><a href="cat_list.do">±æ³ÉÀÌ °Ë»ö</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ê²Œì‹œíŒ <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">°Ô½ÃÆÇ <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li class="dropdown-header">ê¸¸ëƒ¥ì´ ê²Œì‹œíŒ</li>
-							<li><a href="cat_board.do">ì¼ë°˜ ê²Œì‹œíŒ</a></li>
-							<li><a href="catstreet_qna.do">ì§ˆë¬¸ê²Œì‹œíŒ</a></li>
+							<li class="dropdown-header">±æ³ÉÀÌ °Ô½ÃÆÇ</li>
+							<li><a href="cat_board.do">ÀÏ¹Ý °Ô½ÃÆÇ</a></li>
+							<li><a href="catstreet_qna.do">Áú¹®°Ô½ÃÆÇ</a></li>
 							<li class="divider"></li>
-							<li class="dropdown-header">ê¸¸ëƒ¥ì´ ìƒí’ˆ</li>
-							<li><a href="product_list.do">ìƒí’ˆì¶”ì²œ</a></li>
+							<li class="dropdown-header">±æ³ÉÀÌ »óÇ°</li>
+							<li><a href="product_list.do">»óÇ°ÃßÃµ</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -33,30 +33,31 @@
 				<form class="navbar-form navbar-right" name="f" action="member_login.do" method="post">
 					<c:if test="${empty mbId }">
 						<div class="form-group">
-							<input type="text" placeholder="ì•„ì´ë””" class="form-control" name="userId">
+							<input type="text" placeholder="¾ÆÀÌµð" class="form-control" name="userId">
 						</div>
 						<div class="form-group">
-							<input type="password" placeholder="ë¹„ë°€ë²ˆí˜¸" class="form-control" name="passwd">
+							<input type="password" placeholder="ºñ¹Ð¹øÈ£" class="form-control" name="passwd">
 						</div>
-						<button type="submit" class="btn btn-success">ë¡œê·¸ì¸</button>
-	       				 <button type="button" onclick="location.href='signUpPage.do'" class="btn btn-success">íšŒì›ê°€ìž…</button>
+						<button type="submit" class="btn btn-success">·Î±×ÀÎ</button>
+						<button type="button" class="btn btn-success"
+							onclick="window.open('member.do','È¸¿ø°¡ÀÔ', 'width=570, height=350, resizable = no, scrollbars = no')">
+								È¸¿ø°¡ÀÔ
+						</button>
 					</c:if>
 				</form>
 					
 				<!-- login -->
 				<c:if test="${!empty mbId }">
 					<form class="navbar-form navbar-right" name="f" action="member_logout.do" method="get">
-						<button type="submit" class="btn btn-success">ë¡œê·¸ì•„ì›ƒ</button>
+						<button type="submit" class="btn btn-success">·Î±×¾Æ¿ô</button>
 					</form>
 					<p class="navbar-text navbar-right">
-						[${grade}] ${mbId}ë‹˜ ë¡œê·¸ì¸ ì¤‘..
-						<c:if test="${grade eq 'ê´€ë¦¬ìž' }">
-							<a href="admin_list.do" class="navbar-link">(íšŒì›ê´€ë¦¬)</a>
+						[${grade}] ${mbId}´Ô ·Î±×ÀÎ Áß..
+						<c:if test="${grade eq '°ü¸®ÀÚ' }">
+							<a href="admin_list.do" class="navbar-link">(È¸¿ø°ü¸®)</a>
 						</c:if>
 		       		</p>
 	        	</c:if>
-		        
-		        
 			</div>
 		</div>
 	</nav>

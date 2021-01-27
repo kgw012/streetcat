@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<!-- index.jsp-->
+<!-- home.jsp-->
 <%@ include file="./top.jsp" %>
 <%@ include file="./navbar.jsp" %>
 
-<div class="container">
-	<div class="jumbotron">
-		<br>
-		<button type="button" onclick="window.open('chatting.do')">ì±„íŒ…ë°© ê°€ê¸°</button>
-		<br>
-		<img class="img-responsive center-block img-rounded" 
-	 		src="./resources/image/cat.jpg" width="900" height="600">
+	<div class="container">
+		<div class="jumbotron">
+			<br>
+			<button type="button" onclick="window.open('chatting.do')">Ã¤ÆÃ¹æ °¡±â</button>
+			<br>
+			<img class="img-responsive center-block img-rounded" 
+		 		src="./resources/image/cat.jpg" width="900" height="600">
+		</div>
 	</div>
-</div>
 
 <%@ include file="./bottom.jsp" %>

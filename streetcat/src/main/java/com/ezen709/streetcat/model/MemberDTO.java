@@ -3,7 +3,7 @@ package com.ezen709.streetcat.model;
 public class MemberDTO {
 	private int unum;
 	private String name;
-	private String id;
+	private String userId;
 	private String passwd;
 	private String email;
 	private String joindate;
@@ -28,11 +28,11 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getPasswd() {
 		return passwd;
