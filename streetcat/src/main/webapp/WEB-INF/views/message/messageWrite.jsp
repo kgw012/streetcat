@@ -9,7 +9,7 @@
 		<div class="jumbotron">
 			<h2>쪽 지 쓰 기</h2>
 			<form id="f" name="f" action="messageSend.do" method="post">
-		   받는사람<input type="text" name="receiveId" class="form-control" id="userId"><br><br>
+	             받는사람<input type="text" name="receiveId" class="form-control" id="userId" value="${sendId}"><br><br>
 		   <textarea name="content" cols="100%" rows="20" class="form-control"></textarea><br>
 		  <div align="left">
 			<input type="button" class="btn btn-default" value="보내기" id="check">

@@ -58,9 +58,43 @@ public class MemberController {
 		return "message/messageSendBox";
 	}
 	@RequestMapping(value = "/messageWrite.do")
-	public String messageWrite() {
-		
+	public String messageWrite(HttpServletRequest req) {
+		if(req.getParameter("sendId")!=null) {
+			req.setAttribute("sendId",req.getParameter("sendId"));
+		}
 		return "message/messageWrite";
+	}
+	@RequestMapping(value = "/messageReceiveDelete.do")
+	public String messageReceiveDelete(HttpServletRequest req,HttpSession session) {
+		String check = "";
+		int mnum = 0;
+		for(int i = 1;i<11;++i) {
+			check=new String("checkbox"+i);
+			if(req.getParameter(check)!=null) {
+				mnum = Integer.parseInt(req.getParameter(check));
+				memberMapper.receiveDelete(mnum);
+				}
+		}
+		String userId = (String)session.getAttribute("mbId");
+		List<MessageDTO> message = memberMapper.getMessage(userId);
+		req.setAttribute("getMessage", message);
+		return "message/messageBox";
+	}
+	@RequestMapping(value = "/messageSendDelete.do")
+	public String messageSendDelete(HttpServletRequest req,HttpSession session) {
+		String check = "";
+		int mnum = 0;
+		for(int i = 1;i<11;++i) {
+			check=new String("checkbox"+i);
+			if(req.getParameter(check)!=null) {
+			mnum = Integer.parseInt(req.getParameter(check));
+			memberMapper.sendDelete(mnum);
+			}	
+		}
+		String userId = (String)session.getAttribute("mbId");
+		List<MessageDTO> message = memberMapper.getSendMessage(userId);
+		req.setAttribute("getMessage", message);
+		return "message/messageSendBox";
 	}
 	@RequestMapping(value = "/messageSend.do")
 	public String messageSend(HttpServletRequest req,HttpSession session,@ModelAttribute MessageDTO dto) {
@@ -73,6 +107,16 @@ public class MemberController {
 		List<MessageDTO> message = memberMapper.getSendMessage(userId);
 		req.setAttribute("getMessage", message);
 		return "message/messageSendBox";
+	}
+	@RequestMapping(value = "/messageContent.do")
+	public String messageContent(HttpServletRequest req,HttpSession session,@ModelAttribute MessageDTO dto) {
+		String userId = (String)session.getAttribute("mbId");
+		int mnum = Integer.parseInt(req.getParameter("mnum"));
+		if(req.getParameter("type")!=null) {
+		memberMapper.messageRead(mnum);}
+		MessageDTO message = memberMapper.getMessageContent(mnum);
+		req.setAttribute("getMessage", message);
+		return "message/messageContent";
 	}
 
 

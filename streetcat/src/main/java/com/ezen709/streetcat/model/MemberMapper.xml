@@ -81,16 +81,25 @@
     </select>
     
       
-
-
     <insert id="messageSend" parameterType="MessageDTO">
-       insert into message values(seq_mnum.nextval,#{receiveId},#{sendId},#{sendName},#{content},sysdate,0)
+       insert into message values(seq_mnum.nextval,#{receiveId},#{sendId},#{sendName},#{content},sysdate,0,1,1)
     </insert>
     <select id="getMessage" parameterType="String" resultType="MessageDTO">
-       select * from message where receiveId = #{receiveId}
+       select * from message where receiveId = #{receiveId} and receiveSee = 1
     </select>
     <select id="getSendMessage" parameterType="String" resultType="MessageDTO">
-       select * from message where sendId = #{sendId}
+       select * from message where sendId = #{sendId} and sendSee = 1
     </select>
-
+    <select id="getMessageContent" parameterType="int" resultType="MessageDTO">
+       select * from message where mnum = #{sendId}
+    </select>
+    <update id="receiveDelete" parameterType="int">
+       update message set receiveSee = 0 where mnum = #{mnum}
+    </update>
+    <update id="sendDelete" parameterType="int">
+       update message set sendSee = 0 where mnum = #{mnum}
+    </update>
+    <update id="messageRead" parameterType="int">
+       update message set read = 1 where mnum = #{mnum}
+    </update>
 </mapper>

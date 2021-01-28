@@ -91,5 +91,17 @@ public class MemberMapper {
 	public List<MessageDTO> getSendMessage(String sendId){
 		return sqlSession.selectList("getSendMessage",sendId);
 	}
+	public MessageDTO getMessageContent(int mnum){
+		return sqlSession.selectOne("getMessageContent",mnum);
+	}
+	public int receiveDelete(int mnum) {
+		return sqlSession.update("receiveDelete",mnum);
+	}
+	public int sendDelete(int mnum) {
+		return sqlSession.update("sendDelete",mnum);
+	}
+	public int messageRead(int mnum) {
+		return sqlSession.update("messageRead",mnum);
+	}
 	
 }
