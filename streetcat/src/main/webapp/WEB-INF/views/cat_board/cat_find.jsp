@@ -2,9 +2,9 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-function sendChildValue(cnum,location,name,feature){
+function sendChildValue(cnum,location,name,feature,cat_image_name){
 
-	opener.setChildValue(cnum,location,name,feature);
+	opener.setChildValue(cnum,location,name,feature,cat_image_name);
 
 	window.close();
 
@@ -41,7 +41,7 @@ function sendChildValue(cnum,location,name,feature){
 <c:forEach var="dto" items="${cat_list}">
 <tr>
 <td width="110">
-<a href="javascript:sendChildValue('${dto.cnum}','${dto.location}','${dto.name}','${dto.feature }')">
+<a href="javascript:sendChildValue('${dto.cnum}','${dto.location}','${dto.name}','${dto.feature }', '${dto.image }')">
 <img src="./resources/upload/${dto.image}" width="100" height="100">
 </a>
 </td>

@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="cat_insertBoard" parameterType="CatBoardDTO">
 	  insert into cat_board values (seq_bnum.nextval,
 			#{writer}, #{subject}, #{content},sysdate,0,0,
-			#{image1,jdbcType=VARCHAR},#{image2,jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},#{image4,jdbcType=VARCHAR},#{image5,jdbcType=VARCHAR},#{location}, #{name}, #{feature},#{type},0,0)
+			#{image1,jdbcType=VARCHAR},#{image2,jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},#{image4,jdbcType=VARCHAR},#{image5,jdbcType=VARCHAR},#{location}, #{name}, #{feature},#{type},0,0, #{cat_image,jdbcType=VARCHAR})
 	</insert>
 	<select id="cat_list"  resultType="CatDTO" parameterType="java.util.Map">
 		select * from cat where location like '%'||#{location}||'%'
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     <update id="boardEdit" parameterType="CatBoardDTO">
      update cat_board set image1 = #{image1,jdbcType=VARCHAR}, image2 = #{image2,jdbcType=VARCHAR}, image3 = #{image3,jdbcType=VARCHAR}, image4 = #{image4,jdbcType=VARCHAR}, image5 = #{image5,jdbcType=VARCHAR},
-     subject = #{subject}, content = #{content}, location = #{location}, name = #{name}, feature = #{feature} where bnum = #{bnum}
+     subject = #{subject}, content = #{content}, location = #{location}, name = #{name}, feature = #{feature}, cat_image = #{cat_image} where bnum = #{bnum}
     </update>
     <select id="nextBoard" parameterType="int" resultType="int">
      select min(bnum) bnum from cat_board where <![CDATA[bnum > #{bnum}]]>

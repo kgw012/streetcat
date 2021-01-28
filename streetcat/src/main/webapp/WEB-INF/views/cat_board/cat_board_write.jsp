@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=euc-kr"
     pageEncoding="EUC-KR"%>
     <script type="text/javascript">
-    function setChildValue(cnum,location,name,feature){
+    function setChildValue(cnum,location,name,feature,cat_image_name){
     	document.getElementById("pcnum").value = cnum;
         document.getElementById("plocation").value = location;
         document.getElementById("pname").value = name;
         document.getElementById("pfeature").value = feature;
-  }
+        document.getElementById("cat_image").value = cat_image_name;
+        document.getElementById("cat_image_name").src = "./resources/upload/cat/" + cat_image_name;
+  	}
     var num = 1;
     function addFile(){
     	
@@ -102,6 +104,13 @@
  <input type="hidden" name="cnum" id="pcnum">
  <button type="button" onclick="window.open('cat_find.do','childForm', 'width=570, height=350, resizable = no, scrollbars = yes')">고양이찾기
  </button>
+ </td>
+ </tr>
+ <tr>
+ <td>대표이미지</td>
+ <td>
+ <img name="cat_image_name" id="cat_image_name" style="width:150px; max-height:150px;">
+ <input type="hidden" name="cat_image" id="cat_image">
  </td>
  </tr>
  <tr>

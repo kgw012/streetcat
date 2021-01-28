@@ -21,6 +21,7 @@ public class CatBoardDTO {
 	private int commentcount;
 	private String ip;
 	private String image;
+	private String cat_image;
 	
 	
 	public String getImage() {
@@ -142,6 +143,12 @@ public class CatBoardDTO {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getCat_image() {
+		return cat_image;
+	}
+	public void setCat_image(String cat_image) {
+		this.cat_image = cat_image;
 	}
 	
 }

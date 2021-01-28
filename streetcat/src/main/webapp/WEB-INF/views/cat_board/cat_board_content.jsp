@@ -4,72 +4,67 @@
 <%@ include file="../top.jsp" %>
 <%@ include file="../navbar.jsp" %>
     
-    <!-- validation check -->
+    <!-- page access validation check -->
     <script>
 	    <% if(request.getAttribute("getBoard")==null){%>
-			alert("처음/마지막글 입니다")
-			window.history.back()
+			alert("처음/마지막글 입니다");
+			window.history.back();
 		<%}%>
 		
 		<c:if test="${getBoard.type == 'member'&&sessionScope.mbId==null}">
-			alert("회원공개 게시물입니다")
-			window.history.back()
+			alert("회원공개 게시물입니다");
+			window.history.back();
 		</c:if>
 		<c:if test="${getBoard.type == 'private'&&sessionScope.mbId!=getBoard.writer}">
 			<c:if test="${sessionScope.grade!='관리자'}">
-				alert("비공개 게시물입니다")
-				window.history.back()
+				alert("비공개 게시물입니다");
+				window.history.back();
 			</c:if>
 		</c:if>
     </script>
     
     <!-- set carousel img css -->
 	<style>
-		.carousel-inner > .carousel-item > img{ width: 50px; height: 300px;}
+		.carousel-inner > .item > img{ height: 300px; max-width: 300px;}
 	</style>
 	
 	
 	<div class="container">
-		<h2>게시글 상세보기</h2>
-		    
-		<c:if test="${getBoard.writer==sessionScope.mbId}">
-		<a href="cat_board_edit.do?bnum=${getBoard.bnum}">수정</a>
-		| <a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
-		삭제</a> <!-- 작성자와 로그인id가 같을시 수정|삭제 띄움 -->
-		</c:if>
-		<c:if test="${sessionScope.grade=='관리자'}">
-		<a href="cat_board_edit.do?bnum=${getBoard.bnum}">수정</a>
-		| <a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
-		삭제</a> <!-- 관리자로 로그인할시 수정|삭제 띄움 -->
+		<div class="page-header" style="margin-bottom: 5px;">
+			<a href='cat_board.do'>일반 게시판 <span class="glyphicon glyphicon-menu-right"></span></a>
+			<h2>${getBoard.subject} <small>[${count}]</small></h2>
+			<h4><small>
+				작성자 ${getBoard.writer}<br>
+				작성일 ${getBoard.reg_date} 조회 ${getBoard.readcount}
+			</small></h4>
+		</div>
+		<!-- 작성자와 로그인id가 같거나, 관리자로 로그인할 시 수정|삭제 띄움 --> 
+		<c:if test="${getBoard.writer==sessionScope.mbId || sessionScope.grade=='관리자'}">
+			<h4 align="right" style="margin-top: 0px;"><small>
+				<a href="cat_board_edit.do?bnum=${getBoard.bnum}">
+					수정하기
+				</a> | 
+				<a href="cat_board_delete.do?bnum=${getBoard.bnum}"  onclick="return confirm('정말 삭제하시겠습니까?')">
+					삭제하기
+				</a>
+			</small></h4>
 		</c:if>
 		
 		
 		<table width="100%">
 			<tr>
-				<th align="left" width="25%">
-					작성자 : ${getBoard.writer}<br>
-					작성일 : ${getBoard.reg_date}
-				</th>
-				<th align="center">
-					${getBoard.subject}
-				</th>
-				<td align="right" width="25%">
-					조회수 : ${getBoard.readcount}
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
+				<td align="center" width="25%">
 					위치 : ${getBoard.location}<br>
 					<br>
 					이름 : ${getBoard.name}<br>
 					<br>
 					특징 : ${getBoard.feature}<br>
 				</td>
-				<td align="center">
+				<td align="center" width="25%">
 					<div id="demo" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner">
+						<div class="carousel-inner" role="listbox">
 							<!-- 슬라이드 쇼 -->
-							<div class="carousel-item active">
+							<div class="item active">
 								<c:choose>
 									<c:when test='${empty getBoard.image1}'>
 										<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image2}" alt="1st slide" >
@@ -84,28 +79,38 @@
 								</div>
 							</div>
 							<c:if test="${getBoard.image2!=null}">
-								<div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image2}" alt="2nd slide"> </div>
+								<div class="item">
+									<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image2}" alt="2nd slide">
+								</div>
 							</c:if>
 							<c:if test="${getBoard.image3!=null}">
-								<div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image3}" alt="3nd slide"> </div>
+								<div class="item">
+									<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image3}" alt="3nd slide"> 
+								</div>
 							</c:if> 
 							<c:if test="${getBoard.image4!=null}">
-								<div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image4}" alt="4nd slide"> </div>
+								<div class="item">
+									<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image4}" alt="4nd slide">
+								</div>
 							</c:if>
 							<c:if test="${getBoard.image5!=null}">
-								<div class="carousel-item"> <img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image5}" alt="5nd slide"> </div>
+								<div class="item">
+									<img class="d-block w-100" src="./resources/upload/catBoard/${getBoard.image5}" alt="5nd slide">
+								</div>
 							</c:if>
 							<!-- / 슬라이드 쇼 끝 -->
+							
 							<!-- 왼쪽 오른쪽 화살표 버튼 -->
-							<a class="carousel-control-prev" href="#demo" data-slide="prev">
-								<!-- <span>Previous</span> -->
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+							<a class="left carousel-control" href="#demo" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
 							</a>
-							<a class="carousel-control-next" href="#demo" data-slide="next">
-								<!-- <span>Next</span> -->
-								<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+							<a class="right carousel-control" href="#demo" role="button" data-slide="next">
+							    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							    <span class="sr-only">Next</span>
 							</a>
 							<!-- / 화살표 버튼 끝 -->
+							
 							<!-- 인디케이터 
 							<ul class="carousel-indicators">
 								<li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -115,9 +120,6 @@
 							</ul> 인디케이터 끝 -->
 						</div>
 					</div>
-					<br>
-				</td>
-				<td align="left">
 				</td>
 			</tr>
 			<tr>

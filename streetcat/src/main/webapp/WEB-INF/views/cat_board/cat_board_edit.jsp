@@ -2,11 +2,13 @@
     pageEncoding="EUC-KR" import="java.util.*,com.ezen709.streetcat.model.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script type="text/javascript">
-    function setChildValue(cnum,location,name,feature){
+    function setChildValue(cnum,location,name,feature,cat_image_name){
     	document.getElementById("pcnum").value = cnum;
         document.getElementById("plocation").value = location;
         document.getElementById("pname").value = name;
         document.getElementById("pfeature").value = feature;
+        document.getElementById("cat_image").value = cat_image_name;
+        document.getElementById("cat_image_name").src = "./resources/upload/cat/" + cat_image_name;
   }
     function preImg(a, b, c, d) {
     	  var f = a.value;
@@ -111,6 +113,12 @@
  <input type="hidden" name="bnum" value="${getBoard.bnum}">
  <button type="button" onclick="window.open('cat_find.do','childForm', 'width=570, height=350, resizable = no, scrollbars = yes')">고양이찾기
  </button>
+ </td>
+ </tr>
+ <tr>
+ <td>대표이미지</td>
+ <td><img name="cat_image" id="cat_image" style="width:150px; max-height:150px;" src="./resources/upload/cat/${getBoard.cat_image }">
+ <input type="hidden" name="cat_image" id="cat_image">
  </td>
  </tr>
  <tr>
