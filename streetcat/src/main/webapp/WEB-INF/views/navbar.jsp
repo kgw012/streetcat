@@ -39,7 +39,8 @@
 							<input type="password" placeholder="비밀번호" class="form-control" name="passwd">
 						</div>
 						<button type="submit" class="btn btn-success">로그인</button>
-						<button type="button" onclick="location.href='signUpPage.do'" class="btn btn-success">회원가입</button>
+						<button type="button" onclick="location.href='email.do'" class="btn btn-success">회원가입</button>
+						<button type="button" onclick="location.href='loginPage.do'" class="btn btn-success">로그인(임시)</button>
 					</c:if>
 				</form>
 					
