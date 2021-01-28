@@ -291,35 +291,28 @@ public class CatBoardController {
 	@RequestMapping(value="/cat_board_like.do")
 	public String catBoardLike(HttpServletRequest req,@ModelAttribute CatBoardLikeDTO dto) {
 		String msg,url = null;
-        int bnum = Integer.parseInt(req.getParameter("bnum"));
-        String userId = (String)req.getParameter("userId");
         int res = catBoardMapper.boardLike(dto);
-        List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
-        CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);
 		if(res>0) {
 		    msg = "추천 성공 게시글로 이동합니다";
-			url = "cat_board_content.do?bnum="+bnum;
+			url = "cat_board_content.do?bnum="+dto.getBnum();
 		}else {
 			msg = "추천 실패 게시글로 이동합니다";
-			url = "cat_board_content.do?bnum="+bnum;
+			url = "cat_board_content.do?bnum="+dto.getBnum();
 		}
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		return "message";
 	}
 	@RequestMapping(value="/cat_board_unLike.do")
-	public String catBoardUnLike(HttpServletRequest req) {
+	public String catBoardUnLike(HttpServletRequest req,@ModelAttribute CatBoardLikeDTO dto) {
 		String msg,url = null;
-        int bnum = Integer.parseInt(req.getParameter("bnum"));
-        int res = catBoardMapper.boardUnLike(bnum);
-        List<CatBoardLikeDTO> likeList = catBoardMapper.likeList(bnum);
-        CatBoardDTO getBoard = catBoardMapper.getBoard(bnum);
+        int res = catBoardMapper.boardUnLike(dto);
 		if(res>0) {
 		    msg = "추천 취소! 게시글로 이동합니다";
-			url = "cat_board_content.do?bnum="+bnum;
+			url = "cat_board_content.do?bnum="+dto.getBnum();
 		}else {
 			msg = "추천 실패 게시글로 이동합니다";
-			url = "cat_board_content.do?bnum="+bnum;
+			url = "cat_board_content.do?bnum="+dto.getBnum();
 		}
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
