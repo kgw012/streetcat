@@ -18,6 +18,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen709.streetcat.model.LoginDTO;
 import com.ezen709.streetcat.model.MemberDTO;
+import com.ezen709.streetcat.model.MessageDTO;
 import com.ezen709.streetcat.service.LoginMapper;
 import com.ezen709.streetcat.service.MemberMapper;
 import com.ezen709.streetcat.service.MemberService;
@@ -41,6 +43,38 @@ public class MemberController {
 	public String chatting() {
 		return "chatting";
 	}
+	@RequestMapping(value = "/messageBox.do")
+	public String messageBox(HttpServletRequest req,HttpSession session) {
+		String userId = (String)session.getAttribute("mbId");
+		List<MessageDTO> message = memberMapper.getMessage(userId);
+		req.setAttribute("getMessage", message);
+		return "message/messageBox";
+	}
+	@RequestMapping(value = "/messageSendBox.do")
+	public String messageSendBox(HttpServletRequest req,HttpSession session) {
+		String userId = (String)session.getAttribute("mbId");
+		List<MessageDTO> message = memberMapper.getSendMessage(userId);
+		req.setAttribute("getMessage", message);
+		return "message/messageSendBox";
+	}
+	@RequestMapping(value = "/messageWrite.do")
+	public String messageWrite() {
+		
+		return "message/messageWrite";
+	}
+	@RequestMapping(value = "/messageSend.do")
+	public String messageSend(HttpServletRequest req,HttpSession session,@ModelAttribute MessageDTO dto) {
+		String userId = (String)session.getAttribute("mbId");
+		int num = (int) session.getAttribute("mbNo");
+		MemberDTO dto2 = memberMapper.getMember(num);
+		dto.setSendId(userId);
+		dto.setSendName(dto2.getName());
+		int res = memberMapper.sendMessage(dto);
+		List<MessageDTO> message = memberMapper.getSendMessage(userId);
+		req.setAttribute("getMessage", message);
+		return "message/messageSendBox";
+	}
+
 
 	@RequestMapping(value = "/admin_list.do", method = RequestMethod.GET)
 	public ModelAndView memberList(HttpServletRequest req) {
