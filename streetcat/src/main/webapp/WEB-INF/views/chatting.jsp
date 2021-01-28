@@ -43,7 +43,7 @@
        	 
         	
         	
-            websocket = new SockJS("http://localhost:8080/myhome/chatting.do");
+            websocket = new SockJS("http://localhost:8081/streetcat/chatting.do");
             $('#guideMessage').text('연결됨');
             
             websocket.onopen = function(){
