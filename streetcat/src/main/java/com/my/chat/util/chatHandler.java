@@ -15,10 +15,13 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.service.LoginMapper;
+import com.ezen709.streetcat.service.MemberMapper;
 
 public class chatHandler extends TextWebSocketHandler{
 	@Autowired
 	private LoginMapper loginMapper;
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	Logger log = LoggerFactory.getLogger(chatHandler.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
@@ -30,15 +33,12 @@ public class chatHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
 		Map<String, Object> ss = session.getAttributes();
-		System.out.println((String)ss.get("mbId")+"로그인");
 		loginMapper.loginList((String)ss.get("mbId"));
 		List<MemberDTO> list = loginMapper.loginListUp();
 		String loginList = "loginList";
 		for(int i = 0 ;i<list.size();i++) {
 		  loginList = loginList +","+list.get(i).getUserId();
-		  
 		}
-		System.out.println(loginList);
 		sessionList.add(session);
 		log.info(session.getId() + " 연결됨 ");
 		for(WebSocketSession se : sessionList) {
@@ -55,9 +55,9 @@ public class chatHandler extends TextWebSocketHandler{
 		
 		for(WebSocketSession se : sessionList) {
 			se.sendMessage(new TextMessage(message.getPayload()));
-			
 		}
-		
+		int count = memberMapper.getMessageCount(message.getPayload());
+		session.sendMessage(new TextMessage("readMessage"+count));
         log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 
 	}
@@ -65,12 +65,12 @@ public class chatHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		Map<String, Object> ss = session.getAttributes();
-		System.out.println((String)ss.get("mbId")+"로그아웃");
 		loginMapper.loginListOut((String)ss.get("mbId"));
 		sessionList.remove(session);
 		log.info(session.getId()+ "연결 종료");
 	}
 }
+
 
 
 

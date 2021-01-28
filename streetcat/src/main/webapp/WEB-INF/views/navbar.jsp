@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <!-- navbar.jsp-->
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -47,7 +59,7 @@
 				<!-- login -->
 				<c:if test="${!empty mbId }">
 					<form class="navbar-form navbar-right" name="f" action="member_logout.do" method="get">
-					    <button type="button" class="btn btn-success" onclick="window.location.href = 'messageBox.do?mbId=${mbId}'">쪽지함</button>
+					                            <button type="button" class="btn btn-success" onclick="window.location.href='messageBox.do?mbId=${mbId}'" id="count">쪽지함</button>
 						<button type="submit" class="btn btn-success">로그아웃</button>
 						<button type="button" class="btn btn-success" onclick="window.open('chatting.do','','width=700, height=350, resizable = no, scrollbars = yes')">채팅방 입장</button>
 					</form>
@@ -61,3 +73,44 @@
 			</div>
 		</div>
 	</nav>
+	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
+
+    <script>
+    var websocket;
+    var nickname = '<c:out value="${mbId}"/>';
+    
+    
+    
+    	<%
+    	if(session.getAttribute("mbId")!=null){%>
+   	 
+   	 
+    	
+    	
+        websocket = new SockJS("http://localhost:8080/myhome/chatting.do");
+        $('#guideMessage').text('연결됨');
+        
+        websocket.onopen = function(){
+        	websocket.send(nickname);
+        }
+        
+        websocket.onmessage = function(evt){
+        	if(evt.data.indexOf("readMessage")!=-1){
+        	evt.data = evt.data.replace('readMessage','')
+        	  $('#count').append(":"+evt.data);
+        	}
+       }
+        <%}%>
+
+    function sendMessage(){
+        websocket.send("position"+nickname+ ": "+$("#message").val());
+        $('#message').val('');
+    }
+    
+	function disconnect(){
+		
+		location.href = "member_logout.do?";
+		
+	}
+
+        </script>

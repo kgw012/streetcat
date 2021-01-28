@@ -43,11 +43,11 @@
        	 
         	
         	
-            websocket = new SockJS("http://localhost:8081/streetcat/chatting.do");
+            websocket = new SockJS("http://localhost:8080/myhome/chatting.do");
             $('#guideMessage').text('연결됨');
             
             websocket.onopen = function(){
-            	websocket.send(nickname+"님 등장!");
+            	websocket.send("position"+nickname+"님 등장!");
             }
             
             websocket.onmessage = function(evt){
@@ -62,7 +62,8 @@
             	  $('#loginLog').append(log[i]);
             	  $('#loginLog').append('<br>');
             		}
-            	}else{
+            	}else if(evt.data.indexOf("position")!=-1){
+            		evt.data = evt.data.replace('position','')
             	  $('#chattingLog').append(evt.data);
             	  $('#chattingLog').append('\n');
             	}
@@ -70,7 +71,7 @@
             <%}%>
 
         function sendMessage(){
-            websocket.send(nickname+ ": "+$("#message").val());
+            websocket.send("position"+nickname+ ": "+$("#message").val());
             $('#message').val('');
 	    }
 	    

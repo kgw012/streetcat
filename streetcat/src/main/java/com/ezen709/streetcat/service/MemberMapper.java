@@ -103,5 +103,8 @@ public class MemberMapper {
 	public int messageRead(int mnum) {
 		return sqlSession.update("messageRead",mnum);
 	}
+	public int getMessageCount(String mnum) {
+		return sqlSession.selectOne("getMessageCount",mnum);
+	}
 	
 }
