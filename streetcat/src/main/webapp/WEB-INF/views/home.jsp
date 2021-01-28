@@ -10,5 +10,11 @@
 		 		src="./resources/image/cat.jpg" width="900" height="600">
 		</div>
 	</div>
+	
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 <%@ include file="./bottom.jsp" %>

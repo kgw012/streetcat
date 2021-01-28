@@ -10,7 +10,7 @@
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th width="20%">등록자</th>
-					<td>${mbId }</td>
+					<td>${writer }</td>
 				</tr>
 				<tr>
 					<th width="20%">길냥이 이름</th>
@@ -35,7 +35,7 @@
 						<form name="editForm" action="cat_edit.do" method="post" style="display: inline;">
 							<input type="hidden" name="unum" value="${getCat.unum }">
 							<input type="hidden" name="cnum" value="${getCat.cnum }">
-							<input type="hidden" name="mbId" value="${mbId }">
+							<input type="hidden" name="writer" value="${writer }">
 						</form>
 						<form name="deleteForm" action="cat_delete.do" method="post" style="display: inline;">
 							<input type="hidden" name="cnum" value="${getCat.cnum }">
@@ -50,6 +50,12 @@
 			</table>
 		</div>
 	</div>
+	
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	
 	<!-- Kakao Map API 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js

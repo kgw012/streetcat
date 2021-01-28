@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ include file="../top.jsp" %>
-<%@ include file="../navbar.jsp" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<!-- messageWrite.jsp -->
+<%@ include file="../top.jsp" %>
+<%@ include file="../navbar.jsp" %>
+
+
 	<div class="container">
 		<div class="jumbotron">
 			<h2>쪽 지 쓰 기</h2>
@@ -25,34 +28,45 @@
 			
 		</div>
 	</div>
-<script type="text/javascript">
-	$(document).ready(function(e){
+
+
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 		
-		$('#check').click(function(){
-			$.ajax({
-				url: "${pageContext.request.contextPath}/idCheck.do",
-				type: "GET",
-				data:{
-					"userId":$('#userId').val()
-				},
-				success: function(data){
-					if(data == 0 && $.trim($('#userId').val()) != '' ){
-						idx=true;
-						$('#userId').focus();
-						alert('없는 아이디입니다 다시 입력해주세요.');
-					}else{
-						alert('전송 성공!');
-						$('#f').submit();
+	<!-- functions -->
+	<script type="text/javascript">
+		$(document).ready(function(e){
+			
+			$('#check').click(function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/idCheck.do",
+					type: "GET",
+					data:{
+						"userId":$('#userId').val()
+					},
+					success: function(data){
+						if(data == 0 && $.trim($('#userId').val()) != '' ){
+							idx=true;
+							$('#userId').focus();
+							alert('없는 아이디입니다 다시 입력해주세요.');
+						}else{
+							alert('전송 성공!');
+							$('#f').submit();
+						}
+					},
+					error: function(){
+						alert("서버에러");
 					}
-				},
-				error: function(){
-					alert("서버에러");
-				}
+				});
+				
+	
 			});
 			
-
 		});
-		
-	});
-</script>
+	</script>
+	
+	
 <%@ include file="../bottom.jsp" %>

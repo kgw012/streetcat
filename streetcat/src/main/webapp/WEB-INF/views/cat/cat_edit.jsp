@@ -15,12 +15,12 @@
 	
 	<div class="container">
 		<h1 class="page-header">길냥이 수정하기</h1>
-		<form name="f" action="cat_edit_ok.do" method="post" enctype ="multipart/form-data" onsubmit="return check()">
+		<form name="myForm" action="cat_edit_ok.do" method="post" enctype ="multipart/form-data">
 			<input type="hidden" name="unum" value="${unum }">
 			<input type="hidden" name="cnum" value="${cat.cnum }">
 			<div class="form-group">
-				<label for="input_mbId">등록자</label>
-				<input type="text" class="form-control" name="mbId" value="${mbId }" readonly>
+				<label for="input_writer">등록자</label>
+				<input type="text" class="form-control" name="writer" value="${writer }" readonly>
 			</div>
 			<div class="form-group">
 				<label for="input_name">길냥이 이름</label>
@@ -56,6 +56,11 @@
 		</form>
 	</div>
 	
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 	<!-- Kakao Map API 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js
@@ -154,24 +159,25 @@
 
 	<!-- functions -->
 	<script type="text/javascript">
-		//check inputs
-		function check(){
-			if(f.name.value==""){
-				alert("길냥이 이름을 입력해주세요!");
-				f.name.focus();
-				return false;
-			}
-			if(f.feature.value==""){
-				alert("길냥이 특징을 입력해주세요!");
-				f.feature.focus();
-				return false;
-			}
-			if (f.location.value==""){
-				alert("지도상에 출현 위치를 클릭해주세요!");
-				return false;
-			}
-			return true;
-		}
+		//myForm validation check
+		$(document).ready(function(){
+			$('#myForm').submit(function(){
+				if($("input[name='name']").val() == ""){
+					alert("길냥이 이름을 입력해주세요!");
+					$("input[name='name']").focus();
+					return false;
+				}
+				if($("input[name='feature']").val() == ""){
+					alert("길냥이 특징을 입력해주세요!");
+					$("input[name='feature']").focus();
+					return false;
+				}
+				if ($("input[name='location']").val() == ""){
+					alert("지도상에 출현 위치를 클릭해주세요!");
+					return false;
+				}
+			});
+		});
 	</script>
 
 <%@ include file="../bottom.jsp" %>

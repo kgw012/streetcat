@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    
+<!-- messageSendBox.jsp -->
 <%@ include file="../top.jsp" %>
 <%@ include file="../navbar.jsp" %>
 
@@ -7,8 +9,8 @@
 		<div class="jumbotron">
 			<h2>보 낸 쪽 지 함</h2>
 			<div align="right">
-			<button type="button" class="btn btn-default" onclick="window.location.href('messageWrite.do')">쪽지쓰기</button>
-			<button type="button" class="btn btn-default" onclick="window.location.href('messageBox.do')">받은쪽지함</button>
+			<button type="button" class="btn btn-default" onclick="window.location.href = 'messageWrite.do'">쪽지쓰기</button>
+			<button type="button" class="btn btn-default" onclick="window.location.href = 'messageBox.do'">받은쪽지함</button>
 			</div>
 			            <form name="f" action="messageSendDelete.do" method="post">
             <div align="left">
@@ -66,4 +68,11 @@
 		</div>
 	</div>
 
+
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+		
 <%@ include file="../bottom.jsp" %>

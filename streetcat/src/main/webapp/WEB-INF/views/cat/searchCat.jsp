@@ -26,6 +26,13 @@
 		</div>
 	</div>
 	
+	
+	<!-- load scripts -->
+		<!-- JQuery.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- bootstrap.js -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	
 	<!-- Kakao Map API 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js
 		?appkey=c545970a000c32aa58cb39d32c259bd4"></script>
