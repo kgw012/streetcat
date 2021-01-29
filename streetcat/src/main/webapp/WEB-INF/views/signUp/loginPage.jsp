@@ -4,20 +4,20 @@
 <!DOCTYPE script PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<script type="text/javascript">
-	var naver_id_login = new naver_id_login("TXRsLBcB5PaPMOai1R6O",
-			"http://localhost:8081/myhome/loginPage"); // Client ID, CallBack URL 삽입
-	// 단 'localhost'가 포함된 CallBack URL
-	var state = naver_id_login.getUniqState();
-
-	naver_id_login.setButton("white", 2, 40);
-	naver_id_login.setDomain("http://127.0.0.1:8081/myhome/loginPage"); //  URL
-	naver_id_login.setState(state);
-	naver_id_login.setPopup();
-	naver_id_login.init_naver_id_login();
-		</script>
-
 		<title>login page</title>
+		<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <style type="text/css">
+  html, div, body,h3{
+      margin: 0;
+      padding: 0;
+  }
+  h3{
+      display: inline-block;
+      padding: 0.6em;
+  }
+  </style>
+  
 	</head>
 			<body>
 
@@ -39,11 +39,14 @@
 		<br>
 		<button type="submit" class="btn btn-success">로그인</button>
 		<br>
-		<div id="naver_id_login"></div>
+		
+<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
+<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
+<div id="naver_id_login" style="text-align:center"><a href="${url}"><img width="223" src="${pageContext.request.contextPath}/resources/image/naver_Bn_Green.png"/></a></div>
+<br>
 	</form>
 
-	<!-- '네이버 아이디로 로그인하기' 버튼 -->
-	<!-- 원하는 곳에 넣습니다. -->
+
 
 			</body>
 </html>

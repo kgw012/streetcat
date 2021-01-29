@@ -1,6 +1,7 @@
 package com.ezen709.streetcat;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,12 @@ public class SignUpController {
 			
 			return "signUp/signUp";
 		}
-		
+		/*
 		@RequestMapping(value= "/loginPage.do")
 		public String loginPage() {
 			
 			return "signUp/loginPage";
-		}
+		}*/
 		
 		//produces는 ajax가 데이터 넘겨받을때 깨짐 방지
 		@RequestMapping(value = "/idCheck.do",method = RequestMethod.GET, produces = "application/text; charset=utf8")
@@ -49,5 +50,9 @@ public class SignUpController {
 			memberMapper.signUp(dto);
 			
 			return "home";
+		}
+		@RequestMapping(value="loginPostNaver", method=RequestMethod.GET)
+		public String loginPOSTNaver(HttpSession session) {
+			return "signUp/loginPostNaver";
 		}
 	}
