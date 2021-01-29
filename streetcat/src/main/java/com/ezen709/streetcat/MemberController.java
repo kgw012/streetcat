@@ -3,6 +3,7 @@ package com.ezen709.streetcat;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -40,7 +41,8 @@ public class MemberController {
 	private LoginMapper loginMapper;
 
 	@RequestMapping(value = "/chatting.do")
-	public String chatting() {
+	public String chatting(HttpServletRequest req) {
+		loginMapper.loginList(req.getParameter("mbId"));
 		return "chatting";
 	}
 	@RequestMapping(value = "/messageBox.do")
