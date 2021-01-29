@@ -92,6 +92,9 @@ public class CatBoardMapper {
 		public int boardLike(CatBoardLikeDTO dto) {
 			return sqlSession.insert("boardLike",dto);
 		}
+		public int boardLikeDelete(int bnum) {
+			return sqlSession.delete("boardLikeDelete",bnum);
+		}
 		public int boardUnLike(CatBoardLikeDTO dto) {
 			return sqlSession.delete("boardUnLike",dto);
 		}

@@ -323,6 +323,7 @@ public class CatBoardController {
 	public String catBoardDelete(HttpServletRequest req) {
 		String msg,url = null;
 		int bnum = Integer.parseInt(req.getParameter("bnum"));
+		catBoardMapper.boardLikeDelete(bnum);
 		int res =catBoardMapper.boardDelete(bnum);
 		if(res>0) {
 		    msg = "글삭제 성공 게시판페이지로 이동합니다";

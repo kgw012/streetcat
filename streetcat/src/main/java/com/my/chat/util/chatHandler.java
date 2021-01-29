@@ -32,8 +32,7 @@ public class chatHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
-		Map<String, Object> ss = session.getAttributes();
-		loginMapper.loginList((String)ss.get("mbId"));
+		
 		List<MemberDTO> list = loginMapper.loginListUp();
 		String loginList = "loginList";
 		for(int i = 0 ;i<list.size();i++) {
