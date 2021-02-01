@@ -4,13 +4,22 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/hunjeong93/streetcat.git
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import com.ezen709.streetcat.model.CatBoardCommentDTO;
 import com.ezen709.streetcat.model.CatBoardDTO;
 
+=======
+
+import com.ezen709.streetcat.model.CatBoardCommentDTO;
+import com.ezen709.streetcat.model.CatBoardDTO;
+>>>>>>> branch 'master' of https://github.com/hunjeong93/streetcat.git
 import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.model.MessageDTO;
 
@@ -106,6 +115,10 @@ public class MemberMapper {
 	public int getMessageCount(String mnum) {
 		return sqlSession.selectOne("getMessageCount",mnum);
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'master' of https://github.com/hunjeong93/streetcat.git
 	//myPage methods
 	public List<CatBoardDTO> getMemberBoardList(String writer){
 		return sqlSession.selectList("getMemberBoardList", writer);
