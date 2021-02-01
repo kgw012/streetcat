@@ -4,13 +4,12 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.ezen709.streetcat.model.CatBoardCommentDTO;
+import com.ezen709.streetcat.model.CatBoardDTO;
 import com.ezen709.streetcat.model.MemberDTO;
 import com.ezen709.streetcat.model.MessageDTO;
 
@@ -107,4 +106,11 @@ public class MemberMapper {
 		return sqlSession.selectOne("getMessageCount",mnum);
 	}
 	
+	//myPage methods
+	public List<CatBoardDTO> getMemberBoardList(String writer){
+		return sqlSession.selectList("getMemberBoardList", writer);
+	}
+	public List<CatBoardCommentDTO> getMemberCommentList(String writer){
+		return sqlSession.selectList("getMemberCommentList", writer);
+	}
 }

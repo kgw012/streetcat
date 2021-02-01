@@ -41,8 +41,8 @@ public class MemberController {
 	private LoginMapper loginMapper;
 
 	@RequestMapping(value = "/chatting.do")
-	public String chatting(HttpServletRequest req) {
-		loginMapper.loginList(req.getParameter("mbId"));
+	public String chatting(HttpSession session) {
+		loginMapper.loginList((String)session.getAttribute("mbId"));
 		return "chatting";
 	}
 	@RequestMapping(value = "/messageBox.do")

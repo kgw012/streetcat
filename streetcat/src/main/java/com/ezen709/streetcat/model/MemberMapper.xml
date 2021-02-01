@@ -105,4 +105,12 @@
     <select id="getMessageCount" parameterType="String" resultType="int">
        select count(*) from message where receiveId = #{mnum} and read = 0 and receiveSee = 1
     </select>
+    
+    <!-- mePage mappers -->
+    <select id="getMemberBoardList" parameterType="String" resultType="CatBoardDTO">
+    	select * from cat_board where writer = #{writer} order by bnum desc
+    </select>
+    <select id="getMemberCommentList" parameterType="String" resultType="CatBoardCommentDTO">
+    	select * from cat_board_comment where writer = #{writer} order by comment_num desc
+    </select>
 </mapper>

@@ -20,6 +20,7 @@
 	 		<h3>등록된 게시글이 없습니다.</h3>
 	 	</c:if>
 	 	
+	 	<!-- 게시글 목록 -->
 		<div class="row">
 			<c:forEach var="dto" items="${cat_listBoard}">
 				<div class="col-xs-6 col-sm-4 col-md-3">
@@ -55,6 +56,8 @@
 				</div>
 			</c:forEach>
 		</div>
+		
+		<!-- pagination -->
 		<div align="center">
 			<c:if test="${count>0}">
 				<nav>
@@ -89,6 +92,7 @@
 			</c:if>
 		</div>
 		
+		<!-- search -->
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
 				<form name="f" action="find_cat_board.do">

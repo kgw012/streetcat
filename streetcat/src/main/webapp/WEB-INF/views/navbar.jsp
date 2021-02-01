@@ -46,10 +46,11 @@
 					
 				<!-- login -->
 				<c:if test="${!empty mbId }">
-					<form class="navbar-form navbar-right" name="f" action="member_logout.do" method="get">
-                   		<button type="button" class="btn btn-success" onclick="window.location.href='messageBox.do?mbId=${mbId}'" id="count">쪽지함</button>
-						<button type="submit" class="btn btn-success">로그아웃</button>
-						<button type="button" class="btn btn-success" onclick="window.open('chatting.do?mbId=${mbId}','','width=700, height=350, resizable = no, scrollbars = yes')">채팅방 입장</button>
+					<form class="navbar-form navbar-right">
+                   		<button type="button" class="btn btn-success" onclick="window.location.href='messageBox.do'" id="count">쪽지함</button>
+						<button type="button" class="btn btn-success" onclick="window.location.href='member_logout.do'">로그아웃</button>
+						<button type="button" class="btn btn-success" onclick="window.open('chatting.do','','width=700, height=350, resizable = no, scrollbars = yes')">채팅방 입장</button>
+						<button type="button" class="btn btn-success" onclick="window.location.href='myPage.do'">myPage</button>
 					</form>
 					<p class="navbar-text navbar-right">
 						[${grade}] ${mbId}님 로그인 중..
