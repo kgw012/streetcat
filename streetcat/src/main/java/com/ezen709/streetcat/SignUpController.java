@@ -51,8 +51,5 @@ public class SignUpController {
 			
 			return "home";
 		}
-		@RequestMapping(value="loginPostNaver", method=RequestMethod.GET)
-		public String loginPOSTNaver(HttpSession session) {
-			return "signUp/loginPostNaver";
-		}
+		
 	}

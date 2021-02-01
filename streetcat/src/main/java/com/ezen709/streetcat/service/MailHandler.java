@@ -48,6 +48,7 @@ public class MailHandler {
     
     public void addInline(String contentId, DataSource dataSource) throws MessagingException {
         messageHelper.addInline(contentId, dataSource);
+        //이미지 파일 (삽입될 이미지 id, 파일 경로)
     }
     
     public void send() {
