@@ -41,10 +41,10 @@ public class MemberController {
 	private LoginMapper loginMapper;
 
 	@RequestMapping(value = "/chatting.do")
-	public String chatting(HttpSession session) {
-		loginMapper.loginList((String)session.getAttribute("mbId"));
-		return "chatting";
-	}
+    public String chatting(HttpSession session) {
+        loginMapper.loginList((String)session.getAttribute("mbId"));
+        return "chatting";
+    }
 	@RequestMapping(value = "/messageBox.do")
 	public String messageBox(HttpServletRequest req,HttpSession session) {
 		String userId = (String)session.getAttribute("mbId");

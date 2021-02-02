@@ -112,4 +112,5 @@
     <select id="getMemberCommentList" parameterType="String" resultType="CatBoardCommentDTO">
     	select * from cat_board_comment where writer = #{writer} order by comment_num desc
     </select>
+    
 </mapper>
