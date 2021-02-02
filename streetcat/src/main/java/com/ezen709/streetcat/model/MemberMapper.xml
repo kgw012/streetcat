@@ -105,13 +105,7 @@
     <select id="getMessageCount" parameterType="String" resultType="int">
        select count(*) from message where receiveId = #{mnum} and read = 0 and receiveSee = 1
     </select>
-<<<<<<< HEAD
-       
-       <!-- mePage mappers -->
-=======
-    
     <!-- mePage mappers -->
->>>>>>> branch 'master' of https://github.com/hunjeong93/streetcat.git
     <select id="getMemberBoardList" parameterType="String" resultType="CatBoardDTO">
     	select * from cat_board where writer = #{writer} order by bnum desc
     </select>
