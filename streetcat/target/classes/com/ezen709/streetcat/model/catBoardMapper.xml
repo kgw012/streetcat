@@ -70,6 +70,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="boardLike" parameterType="CatBoardLikeDTO">
 	  insert into cat_board_ulike values(#{bnum},#{userId})
 	</insert>
+	<delete id="boardLikeDelete" parameterType="int">
+	 delete cat_board_ulike where bnum = #{bnum}
+	</delete>
 	<delete id="boardUnLike" parameterType="CatBoardLikeDTO">
           delete from cat_board_ulike where bnum = #{bnum} and userId = #{userId}
     </delete>
