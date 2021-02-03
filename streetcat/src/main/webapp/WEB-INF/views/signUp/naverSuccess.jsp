@@ -24,13 +24,19 @@ h3 {
 }
 </style>
 <script type="text/javascript">
+   
 $(document).ready(function() {
+   
     var name = ${result}.response.name;
     var email = ${result}.response.email;
     $("#name").html("환영합니다. "+name+"님");
     $("#email").html(email);
-    
+    document.getElementById("name2").value=name
+    document.getElementById("userId").value=email
+    document.getElementById("email2").value=email
   });
+  
+ 
 </script>
 
 </head>
@@ -43,63 +49,27 @@ $(document).ready(function() {
     <h4 style="text-align: center" id="email"></h4>
  <div align="center">
  <form id="signFrm" name="signFrm" action="signUp.do" >
-			
-					<input type="hidden" id="userId" name="userId" value="${email}" readOnly>
-			<tr>
-					<td>패스워드</td>
-					<td colspan="2"><input id="passwd" name="passwd" type="password"></td>
-					<br>
-					<td id="pw_check"></td>
-				</tr>
-				<br>
-				<tr>
-					<td>패스워드 확인</td>
-					<td colspan="2"><input id="passwdCheck" name="passwdCheck" type="password"></td>
-				</tr>
-	
-				
-					<td>	<input type="hidden" id="name2" name="name" value="${name}" readOnly></td>
-					<td>	<input type="hidden" id="email2" name="email" value="${email}" readOnly ></td>
-					<br>
-					<input type="button" id="signUp" value="회원가입">
-			</form>
-			</div>
+         
+            
+         <tr>
+               <td>패스워드</td>
+               <td colspan="2"><input id="passwd" name="passwd" type="password"></td>
+               <br>
+               <td id="pw_check"></td>
+            </tr>
+            <br>
+            <tr>
+               <td>패스워드 확인</td>
+               <td colspan="2"><input id="passwdCheck" name="passwdCheck" type="password"></td>
+            </tr>
+                     <input type="hidden" id="userId" name="userId" >      
+                  <input type="hidden" id ="name2" name="name">
+                  <input type="hidden" id ="email2" name="email">
+               
+               <br>
+               <button type="submit" class="btn btn-success">회원가입</button>
+         </form>
+         </div>
 </body>
-<script type="text/javascript">
 
-var pwJ = /^[A-Za-z0-9]{4,12}$/;  // 비밀번호 정규식
-
-$(document).ready(function(e){
-	var passwd = $('#passwd').val();
-	$('#signUp').click(function(){
-		if(pwJ.test(passwd)){
-			
-			$("#pw_check").text("");
-			$("#signFrm").attr("disabled", false);
-
-		} else if(passwd == ""){
-			
-			$('#pw_check').text('패스워드를 입력해주세요 :)');
-			$('#pw_check').css('color', 'red');
-			$("#signFrm").attr("disabled", true);				
-			return;
-		} else if($('#passwd').val() != $('#passwdCheck').val()){
-			$("#pw_check").text("패스워드가 다릅니다.");
-			$('#passwd').focus();
-			return;
-		
-		}else if(pwJ.text(passwd)== false) {
-			$('#pw_check').text("패스워드는 영 대,소문자와 숫자를 이용하여 4~12자리만 가능합니다.");
-			$('#pw_check').css('color', 'red');
-			$("#signFrm").attr("disabled", true);
-			return;
-		}else{
-			$('#signFrm').submit();
-		}
-		
-	});
-	
-});
-
-	</script>
 </html>
